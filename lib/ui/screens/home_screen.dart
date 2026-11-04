@@ -21,28 +21,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  /// Set when a newer release was found; the version line then offers it.
+  AvailableUpdate? _update;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkOnStartup());
   }
 
-  /// Silent check on startup: offline or GitHub errors are ignored here
-  /// (the version line has a manual check that reports them).
+  /// Silent check on startup: offline or GitHub errors are ignored.
   Future<void> _checkOnStartup() async {
     final updates = widget.updates;
     if (updates == null || !updates.checkOnStartup) return;
     try {
       final update = await updates.checker.check();
       if (update == null || !mounted) return;
-      await showUpdateDialog(
-        context,
-        update: update,
-        installer: updates.installer,
-      );
+      setState(() => _update = update);
+      await _offerUpdate();
     } on UpdateCheckException {
       return;
     }
+  }
+
+  Future<void> _offerUpdate() async {
+    final updates = widget.updates;
+    final update = _update;
+    if (updates == null || update == null) return;
+    await showUpdateDialog(
+      context,
+      update: update,
+      installer: updates.installer,
+    );
   }
 
   void _play() {
@@ -80,7 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
               PlayButton(label: 'JOGAR', onPressed: _play),
               const Spacer(),
               const CreditsText(),
-              if (updates != null) _VersionLine(updates: updates),
+              if (updates != null)
+                _VersionLine(
+                  updates: updates,
+                  updateAvailable: _update != null,
+                  onUpdate: _offerUpdate,
+                ),
               const SizedBox(height: 16),
             ],
           ),
@@ -90,11 +105,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/// Installed version and the manual "procurar atualização".
+/// Installed version, plus "Atualização disponível!" when a newer release
+/// was found; tapping it opens the update dialog again.
 class _VersionLine extends StatefulWidget {
-  const _VersionLine({required this.updates});
+  const _VersionLine({
+    required this.updates,
+    required this.updateAvailable,
+    required this.onUpdate,
+  });
 
   final AppUpdates updates;
+  final bool updateAvailable;
+  final VoidCallback onUpdate;
 
   @override
   State<_VersionLine> createState() => _VersionLineState();
@@ -103,46 +125,38 @@ class _VersionLine extends StatefulWidget {
 class _VersionLineState extends State<_VersionLine> {
   late final Future<InstalledVersion> _installed = widget.updates.checker
       .installedVersion();
-  bool _checking = false;
-
-  Future<void> _check() async {
-    final messenger = ScaffoldMessenger.of(context);
-    setState(() => _checking = true);
-    try {
-      final update = await widget.updates.checker.check();
-      if (!mounted) return;
-      if (update == null) {
-        messenger.showSnackBar(
-          const SnackBar(content: Text('Você já está na versão mais recente.')),
-        );
-      } else {
-        await showUpdateDialog(
-          context,
-          update: update,
-          installer: widget.updates.installer,
-        );
-      }
-    } on UpdateCheckException catch (error) {
-      messenger.showSnackBar(SnackBar(content: Text(error.message)));
-    } finally {
-      if (mounted) setState(() => _checking = false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final style = AppTextStyles.credits.copyWith(fontSize: 11);
     return FutureBuilder<InstalledVersion>(
       future: _installed,
       builder: (context, snapshot) {
-        final version = snapshot.hasData ? 'v${snapshot.data!.name} · ' : '';
+        if (!snapshot.hasData) return const SizedBox(height: 32);
+        final version = 'v${snapshot.data!.name}';
+        if (!widget.updateAvailable) {
+          return SizedBox(
+            height: 32,
+            child: Center(child: Text(version, style: style)),
+          );
+        }
         return TextButton(
-          onPressed: _checking ? null : _check,
-          style: TextButton.styleFrom(foregroundColor: AppColors.ink),
-          child: Text(
-            _checking
-                ? 'Procurando atualização…'
-                : '${version}procurar atualização',
-            style: AppTextStyles.credits.copyWith(fontSize: 11),
+          onPressed: widget.onUpdate,
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.ink,
+            minimumSize: const Size(0, 32),
+          ),
+          child: Text.rich(
+            TextSpan(
+              text: '$version · ',
+              children: const [
+                TextSpan(
+                  text: 'Atualização disponível!',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ],
+            ),
+            style: style,
           ),
         );
       },
