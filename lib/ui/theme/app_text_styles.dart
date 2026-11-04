@@ -27,6 +27,14 @@ abstract final class AppTextStyles {
     color: AppColors.white,
   );
 
+  static const button = TextStyle(
+    fontFamily: _display,
+    fontSize: 32,
+    height: 1,
+    letterSpacing: 2,
+    color: AppColors.white,
+  );
+
   static const credits = TextStyle(
     fontFamily: _body,
     fontWeight: FontWeight.w700,

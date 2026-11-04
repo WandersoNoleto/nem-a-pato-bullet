@@ -25,7 +25,10 @@ class TrainProgressBar extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: CustomPaint(
-                  painter: _TrailPainter(tailX: trainLeft + trainWidth * 0.88),
+                  painter: _TrailPainter(
+                    frontX: trainLeft,
+                    tailX: trainLeft + trainWidth * 0.88,
+                  ),
                 ),
               ),
               Positioned(
@@ -48,9 +51,13 @@ class TrainProgressBar extends StatelessWidget {
 }
 
 class _TrailPainter extends CustomPainter {
-  _TrailPainter({required this.tailX});
+  _TrailPainter({required this.frontX, required this.tailX});
 
-  /// Where the back of the train is; the trail runs from here to the right.
+  /// Where the nose of the train is; the filled bar runs from here to the
+  /// right, so it is complete when the train reaches the left edge.
+  final double frontX;
+
+  /// Where the back of the train is; the speed lines start here.
   final double tailX;
 
   @override
@@ -67,13 +74,13 @@ class _TrailPainter extends CustomPainter {
       stroke..color = AppColors.ink.withValues(alpha: 0.15),
     );
 
-    if (tailX >= railEnd) return;
-
     canvas.drawLine(
-      Offset(tailX, railY),
+      Offset(frontX.clamp(2.0, railEnd), railY),
       Offset(railEnd, railY),
       stroke..color = AppColors.ink,
     );
+
+    if (tailX >= railEnd) return;
 
     final speedLine = Paint()
       ..strokeCap = StrokeCap.round
@@ -92,5 +99,6 @@ class _TrailPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_TrailPainter oldDelegate) => oldDelegate.tailX != tailX;
+  bool shouldRepaint(_TrailPainter oldDelegate) =>
+      oldDelegate.frontX != frontX || oldDelegate.tailX != tailX;
 }

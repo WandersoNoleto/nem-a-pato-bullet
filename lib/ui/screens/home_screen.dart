@@ -1,21 +1,57 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
+import '../theme/app_text_styles.dart';
 import '../widgets/game_title.dart';
+import '../widgets/play_button.dart';
+import 'game_screen.dart';
 
-/// Placeholder until the home screen step.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  void _play(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const GameScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.yellow,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: GameTitle(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Column(
+            children: [
+              const SizedBox(height: 32),
+              // Title and mascot are kept a bit smaller and high on the
+              // screen, leaving room to breathe around the play button.
+              const FractionallySizedBox(
+                widthFactor: 0.75,
+                child: GameTitle(),
+              ),
+              const SizedBox(height: 12),
+              Expanded(
+                flex: 5,
+                child: FractionallySizedBox(
+                  widthFactor: 0.7,
+                  child: Image.asset(
+                    'assets/images/mascot.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              const Spacer(flex: 2),
+              PlayButton(label: 'JOGAR', onPressed: () => _play(context)),
+              const Spacer(),
+              const Text(
+                'Inspired by "Nem a Pato!" by Rodrigo Rego · Grok Games',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.credits,
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
       ),
