@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../update/app_updates.dart';
 import '../theme/app_colors.dart';
 import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
@@ -7,9 +8,12 @@ import '../widgets/train_progress_bar.dart';
 import 'home_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+  const LoadingScreen({super.key, this.updates});
 
   static const duration = Duration(seconds: 5);
+
+  /// Passed on to the home screen.
+  final AppUpdates? updates;
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -46,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 400),
-        pageBuilder: (_, _, _) => const HomeScreen(),
+        pageBuilder: (_, _, _) => HomeScreen(updates: widget.updates),
         transitionsBuilder: (_, animation, _, child) =>
             FadeTransition(opacity: animation, child: child),
       ),
