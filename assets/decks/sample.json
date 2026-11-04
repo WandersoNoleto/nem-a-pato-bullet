@@ -1,0 +1,19 @@
+{
+  "id": "sample",
+  "name": "Sample deck",
+  "version": 1,
+  "cards": [
+    {
+      "theme": "Espaço",
+      "ducks": 2,
+      "questions": [
+        { "n": 1, "text": "Quantos planetas tem o Sistema Solar?", "answer": 8, "unit": "planetas", "fact": "Plutão foi reclassificado como planeta-anão em 2006." },
+        { "n": 2, "text": "Qual a distância média entre a Terra e a Lua?", "answer": 384, "unit": "mil km", "fact": "A Lua se afasta da Terra cerca de 3,8 cm por ano." },
+        { "n": 3, "text": "Quantos minutos a luz do Sol leva para chegar à Terra?", "answer": 8, "unit": "minutos", "fact": "São cerca de 8 minutos e 20 segundos." },
+        { "n": 4, "text": "Em que ano o ser humano pisou na Lua pela primeira vez?", "answer": 1969, "unit": "ano", "fact": "Neil Armstrong e Buzz Aldrin, na missão Apollo 11." },
+        { "n": 5, "text": "Quantas luas tem Marte?", "answer": 2, "unit": "luas", "fact": "Chamam-se Fobos e Deimos." },
+        { "n": 6, "text": "Quantos dias terrestres Marte leva para dar uma volta no Sol?", "answer": 687, "unit": "dias", "fact": "Quase o dobro de um ano na Terra." }
+      ]
+    }
+  ]
+}
