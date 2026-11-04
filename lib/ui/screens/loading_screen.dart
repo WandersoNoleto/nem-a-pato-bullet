@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+
+import '../theme/app_colors.dart';
+import '../theme/app_text_styles.dart';
+import '../widgets/game_title.dart';
+import '../widgets/train_progress_bar.dart';
+import 'home_screen.dart';
+
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({super.key});
+
+  static const duration = Duration(seconds: 5);
+
+  @override
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _progress;
+  late final Animation<double> _titleScale;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: LoadingScreen.duration,
+    );
+    // Linear: the train runs at a constant speed across the whole bar.
+    _progress = _controller;
+    _titleScale = Tween(begin: 0.6, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0, 0.12, curve: Curves.easeOutBack),
+      ),
+    );
+    _controller
+      ..addStatusListener(_onStatus)
+      ..forward();
+  }
+
+  void _onStatus(AnimationStatus status) {
+    if (status != AnimationStatus.completed || !mounted) return;
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (_, _, _) => const HomeScreen(),
+        transitionsBuilder: (_, animation, _, child) =>
+            FadeTransition(opacity: animation, child: child),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.yellow,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: ScaleTransition(
+                scale: _titleScale,
+                child: const GameTitle(),
+              ),
+            ),
+            const SizedBox(height: 32),
+            const Text(
+              'Inspired by "Nem a Pato!" by Rodrigo Rego · Grok Games',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.credits,
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: AnimatedBuilder(
+                animation: _progress,
+                builder: (context, _) =>
+                    TrainProgressBar(progress: _progress.value),
+              ),
+            ),
+            const SizedBox(height: 32),
+          ],
+        ),
+      ),
+    );
+  }
+}
