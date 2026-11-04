@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
+import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
 import '../widgets/train_progress_bar.dart';
 import 'home_screen.dart';
@@ -75,11 +75,7 @@ class _LoadingScreenState extends State<LoadingScreen>
               ),
             ),
             const SizedBox(height: 32),
-            const Text(
-              'Inspired by "Nem a Pato!" by Rodrigo Rego · Grok Games',
-              textAlign: TextAlign.center,
-              style: AppTextStyles.credits,
-            ),
+            const CreditsText(),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

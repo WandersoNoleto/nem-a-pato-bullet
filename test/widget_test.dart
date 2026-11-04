@@ -4,14 +4,22 @@ import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
 
-// The home screen's play button pulses forever, so these tests pump fixed
-// durations instead of pumpAndSettle, which would never settle.
+// The home screen's play button pulses forever, so these tests step frames
+// instead of using pumpAndSettle, which would never settle.
+const _frame = Duration(milliseconds: 100);
 const _transition = Duration(milliseconds: 500);
 
+/// Steps frames until the loading screen is gone, failing if that takes
+/// noticeably longer than its duration plus the fade to home.
 Future<void> _pastLoading(WidgetTester tester) async {
   await tester.pumpWidget(const NemAPatoApp());
-  await tester.pump(LoadingScreen.duration);
-  await tester.pump(_transition);
+  final limit = LoadingScreen.duration + const Duration(seconds: 1);
+  var elapsed = Duration.zero;
+  while (find.byType(LoadingScreen).evaluate().isNotEmpty) {
+    expect(elapsed, lessThan(limit), reason: 'loading screen never finished');
+    await tester.pump(_frame);
+    elapsed += _frame;
+  }
 }
 
 void main() {

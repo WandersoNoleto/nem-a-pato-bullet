@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
+import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
 import '../widgets/play_button.dart';
 import 'game_screen.dart';
@@ -45,11 +45,7 @@ class HomeScreen extends StatelessWidget {
               const Spacer(flex: 2),
               PlayButton(label: 'JOGAR', onPressed: () => _play(context)),
               const Spacer(),
-              const Text(
-                'Inspired by "Nem a Pato!" by Rodrigo Rego · Grok Games',
-                textAlign: TextAlign.center,
-                style: AppTextStyles.credits,
-              ),
+              const CreditsText(),
               const SizedBox(height: 16),
             ],
           ),
