@@ -4,12 +4,33 @@ import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
-/// A chunky, pulsing game button that sinks into its shadow when pressed.
+/// A chunky game button that sinks into its shadow when pressed.
+///
+/// By default it is the tilted, pulsing black JOGAR button; the game screen
+/// uses flat, full-width variants with other colors.
 class PlayButton extends StatefulWidget {
-  const PlayButton({super.key, required this.label, required this.onPressed});
+  const PlayButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.color = AppColors.ink,
+    this.textColor = AppColors.white,
+    this.pulse = true,
+    this.tilt = -0.04,
+    this.expand = false,
+  });
 
   final String label;
   final VoidCallback onPressed;
+  final Color color;
+  final Color textColor;
+  final bool pulse;
+
+  /// Rotation in radians.
+  final double tilt;
+
+  /// Fills the available width.
+  final bool expand;
 
   @override
   State<PlayButton> createState() => _PlayButtonState();
@@ -30,7 +51,8 @@ class _PlayButtonState extends State<PlayButton>
       duration: const Duration(milliseconds: 900),
       lowerBound: 1,
       upperBound: 1.06,
-    )..repeat(reverse: true);
+    );
+    if (widget.pulse) _pulse.repeat(reverse: true);
   }
 
   @override
@@ -60,22 +82,37 @@ class _PlayButtonState extends State<PlayButton>
         child: ScaleTransition(
           scale: _pulse,
           child: Transform.rotate(
-            angle: -0.04,
+            angle: widget.tilt,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 80),
+              width: widget.expand ? double.infinity : null,
               transform: Matrix4.translationValues(offset, offset, 0),
-              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 18),
+              padding: EdgeInsets.symmetric(
+                horizontal: widget.expand ? 16 : 48,
+                vertical: 18,
+              ),
               decoration: BoxDecoration(
-                color: AppColors.ink,
+                color: widget.color,
                 borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.ink, width: 3),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.orange,
-                    offset: Offset(_shadowOffset - offset, _shadowOffset - offset),
+                    offset: Offset(
+                      _shadowOffset - offset,
+                      _shadowOffset - offset,
+                    ),
                   ),
                 ],
               ),
-              child: Text(widget.label, style: AppTextStyles.button),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.label,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.button.copyWith(color: widget.textColor),
+                ),
+              ),
             ),
           ),
         ),

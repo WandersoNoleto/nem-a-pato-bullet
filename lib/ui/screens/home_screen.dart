@@ -10,9 +10,8 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void _play(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute<void>(builder: (_) => const GameScreen()));
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (_) => const GameScreen()));
   }
 
   @override
@@ -27,10 +26,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 32),
               // Title and mascot are kept a bit smaller and high on the
               // screen, leaving room to breathe around the play button.
-              const FractionallySizedBox(
-                widthFactor: 0.75,
-                child: GameTitle(),
-              ),
+              const FractionallySizedBox(widthFactor: 0.75, child: GameTitle()),
               const SizedBox(height: 12),
               Expanded(
                 flex: 5,
