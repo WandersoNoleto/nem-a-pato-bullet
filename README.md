@@ -1,5 +1,7 @@
 # Nem a Pato! Bullet
 
+![Nem a Pato! Bullet](docs/banner.webp)
+
 A simplified, fan-made digital version of the *Nem a Pato!* mechanic: everyone guesses a number, each guess higher than the last, without going over the real answer. If you think the last guess went too far, shout **"Nem a Pato!"** to challenge it, and whoever was wrong takes the card.
 
 A non-profit study project built with Flutter, made to play with friends.
