@@ -41,4 +41,58 @@ abstract final class AppTextStyles {
     fontSize: 12,
     color: AppColors.ink,
   );
+
+  static const pill = TextStyle(
+    fontFamily: _display,
+    fontSize: 14,
+    height: 1,
+    letterSpacing: 1,
+    color: AppColors.ink,
+  );
+
+  static const category = TextStyle(
+    fontFamily: _display,
+    fontSize: 18,
+    height: 1,
+    letterSpacing: 1,
+    color: AppColors.ink,
+  );
+
+  static const question = TextStyle(
+    fontFamily: _body,
+    fontWeight: FontWeight.w700,
+    fontSize: 22,
+    height: 1.35,
+    color: AppColors.ink,
+  );
+
+  static const cardLabel = TextStyle(
+    fontFamily: _body,
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+    letterSpacing: 1.5,
+    color: AppColors.cardMuted,
+  );
+
+  static const answer = TextStyle(
+    fontFamily: _display,
+    fontSize: 48,
+    height: 1.1,
+    color: AppColors.ink,
+  );
+
+  static const fact = TextStyle(
+    fontFamily: _body,
+    fontWeight: FontWeight.w700,
+    fontSize: 15,
+    height: 1.45,
+    color: AppColors.ink,
+  );
+
+  static const hint = TextStyle(
+    fontFamily: _body,
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+    color: AppColors.mutedOnBlack,
+  );
 }

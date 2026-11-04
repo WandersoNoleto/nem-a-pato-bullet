@@ -21,22 +21,26 @@ Deck format:
 
 ```json
 {
-  "id": "sample",
   "name": "Sample deck",
-  "version": 1,
-  "cards": [
+  "questions": [
     {
-      "theme": "Espaço",
-      "ducks": 2,
-      "questions": [
-        { "n": 1, "text": "Quantos planetas tem o Sistema Solar?", "answer": 8, "unit": "planetas", "fact": "Plutão virou planeta-anão em 2006." }
-      ]
+      "category": "Espaço",
+      "text": "Quantos planetas tem o Sistema Solar?",
+      "answer": "8 planetas",
+      "fact": "Plutão foi reclassificado como planeta-anão em 2006."
     }
   ]
 }
 ```
 
-Each card has a theme, a duck value (used as a tiebreaker) and 6 questions numbered 1 to 6, all with numeric answers. Deck content can be in any language; the sample deck is in Brazilian Portuguese.
+| Field | Required | Notes |
+| --- | --- | --- |
+| `category` | yes | Shown above the question |
+| `text` | yes | The question |
+| `answer` | yes | Shown exactly as written |
+| `fact` | no | Shown with the answer when present |
+
+Question ids are not part of the file: the app derives each one from the category and text, so a question is never repeated, even after re-importing its deck. Deck content can be in any language; the sample deck is in Brazilian Portuguese.
 
 ## Running
 
