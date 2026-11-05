@@ -50,3 +50,6 @@ app.*.map.json
 # Private decks (third-party content) - never commit
 decks/private/
 assets/decks/private/
+
+# Demo decks copied in by tool/build_demo.sh (source: decks/demo/)
+assets/decks/demo-*.json

@@ -1,0 +1,18 @@
+{
+  "name": "Curiosidades do Mundo",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#000' stroke-width='2'><circle cx='12' cy='12' r='10'/><ellipse cx='12' cy='12' rx='4' ry='10'/><path d='M2 12h20'/></svg>",
+  "questions": [
+    { "category": "Oceano", "text": "Qual a profundidade máxima da Fossa das Marianas?", "answer": "Cerca de 11 mil m", "fact": "O ponto mais fundo se chama Abismo Challenger, no Pacífico." },
+    { "category": "Oceano", "text": "Que porcentagem da superfície da Terra é coberta pelos oceanos?", "answer": "Cerca de 71%", "fact": "Quase 97% de toda a água do planeta está nos oceanos." },
+    { "category": "Oceano", "text": "Até quantos metros pode medir uma baleia-azul adulta?", "answer": "Cerca de 30 m", "fact": "É o maior animal que já existiu, maior que qualquer dinossauro conhecido." },
+    { "category": "Esportes", "text": "Qual a distância oficial de uma maratona?", "answer": "42,195 km", "fact": "A distância vem do percurso dos Jogos Olímpicos de Londres, em 1908." },
+    { "category": "Esportes", "text": "Qual o diâmetro do aro de uma cesta de basquete?", "answer": "45,7 cm", "fact": "É quase o dobro do diâmetro da bola." },
+    { "category": "Esportes", "text": "Quantos buracos tem um campo de golfe oficial?", "answer": "18 buracos", "fact": "O padrão se firmou em St Andrews, na Escócia, em 1764." },
+    { "category": "Invenções", "text": "Em que ano foi lançado o primeiro iPhone?", "answer": "2007", "fact": "Steve Jobs apresentou o aparelho em janeiro daquele ano." },
+    { "category": "Invenções", "text": "Em que ano os irmãos Lumière fizeram a primeira sessão de cinema paga?", "answer": "1895", "fact": "Foi em um café de Paris, no dia 28 de dezembro." },
+    { "category": "Invenções", "text": "Quantas teclas tem um piano padrão?", "answer": "88 teclas", "fact": "São 52 teclas brancas e 36 pretas." },
+    { "category": "Monumentos", "text": "Qual a altura da Torre Eiffel?", "answer": "330 m", "fact": "No inverno, o metal contrai com o frio e a torre encolhe alguns centímetros." },
+    { "category": "Monumentos", "text": "Qual a altura do Burj Khalifa, em Dubai?", "answer": "828 m", "fact": "É o prédio mais alto do mundo desde a inauguração, em 2010." },
+    { "category": "Monumentos", "text": "Em que ano a Estátua da Liberdade foi inaugurada?", "answer": "1886", "fact": "Foi um presente da França aos Estados Unidos." }
+  ]
+}

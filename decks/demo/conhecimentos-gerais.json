@@ -1,0 +1,19 @@
+{
+  "name": "Conhecimentos Gerais",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z'/><rect x='9' y='19' width='6' height='3' rx='1'/></svg>",
+  "questions": [
+    { "category": "Corpo humano", "text": "Quantos ossos tem o corpo humano adulto?", "answer": "206 ossos", "fact": "Bebês nascem com cerca de 300 ossos; vários se fundem durante o crescimento." },
+    { "category": "Corpo humano", "text": "Quantos dentes tem um adulto com a dentição completa?", "answer": "32 dentes", "fact": "A conta inclui os quatro dentes do siso, que muita gente nem chega a ter." },
+    { "category": "Corpo humano", "text": "Quantos litros de sangue tem, em média, um adulto?", "answer": "5 litros", "fact": "O sangue representa cerca de 7% do peso do corpo." },
+    { "category": "Animais", "text": "Quantos dentes tem um cachorro adulto?", "answer": "42 dentes", "fact": "Os filhotes têm 28 dentes de leite, que caem por volta dos 6 meses." },
+    { "category": "Animais", "text": "Quantos corações tem um polvo?", "answer": "3 corações", "fact": "Dois bombeiam sangue para as brânquias e um para o resto do corpo." },
+    { "category": "Animais", "text": "Quantos dias dura, em média, a gestação de uma elefanta-africana?", "answer": "Cerca de 650 dias", "fact": "É a gestação mais longa entre os mamíferos terrestres: quase 22 meses." },
+    { "category": "Animais", "text": "Até quantos km/h um guepardo chega em uma arrancada?", "answer": "Cerca de 110 km/h", "fact": "Ele só consegue manter essa velocidade por poucos segundos." },
+    { "category": "Ciência", "text": "A quantos graus Fahrenheit a água ferve ao nível do mar?", "answer": "212 °F", "fact": "É o equivalente aos 100 °C da escala Celsius." },
+    { "category": "Ciência", "text": "Quantos elementos químicos tem a tabela periódica?", "answer": "118 elementos", "fact": "Os quatro últimos receberam seus nomes oficiais em 2016." },
+    { "category": "Ciência", "text": "A que velocidade a luz viaja no vácuo, em km por segundo?", "answer": "Cerca de 300 mil km/s", "fact": "O valor exato é 299.792,458 km/s." },
+    { "category": "Geografia", "text": "Qual a altura do Monte Everest?", "answer": "8.849 m", "fact": "A medida vem de uma medição conjunta de China e Nepal, divulgada em 2020." },
+    { "category": "Geografia", "text": "Quantos países existem na África?", "answer": "54 países", "fact": "É o continente com mais países reconhecidos pela ONU." },
+    { "category": "Geografia", "text": "Qual o comprimento do Rio Nilo?", "answer": "Cerca de 6.650 km", "fact": "Ele disputa com o Amazonas o título de rio mais longo do mundo." }
+  ]
+}
