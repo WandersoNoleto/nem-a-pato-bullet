@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../../domain/deck.dart';
+import '../../domain/question.dart';
 import '../../state/game_controller.dart';
+import '../../state/seen_questions.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/play_button.dart';
 import '../widgets/question_card.dart';
 
-const _sampleDeckAsset = 'assets/decks/sample.json';
-
-Future<Deck> _loadSampleDeck() async =>
-    Deck.fromJsonString(await rootBundle.loadString(_sampleDeckAsset));
-
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+  const GameScreen({
+    super.key,
+    required this.questions,
+    required this.seen,
+    this.rounds,
+  });
+
+  /// The questions the game draws from, already filtered by the setup.
+  final List<Question> questions;
+  final SeenQuestions seen;
+
+  /// Null means infinite.
+  final int? rounds;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final _controller = GameController(loadDeck: _loadSampleDeck);
+  late final _controller = GameController(
+    questions: widget.questions,
+    seen: widget.seen,
+    rounds: widget.rounds,
+  );
 
   @override
   void initState() {
@@ -46,7 +57,7 @@ class _GameScreenState extends State<GameScreen> {
             listenable: _controller,
             builder: (context, _) => Column(
               children: [
-                _TopBar(round: _controller.round),
+                _TopBar(round: _controller.round, rounds: _controller.rounds),
                 Expanded(child: Center(child: _buildCenter())),
                 _buildActions(),
               ],
@@ -60,16 +71,14 @@ class _GameScreenState extends State<GameScreen> {
   Widget _buildCenter() {
     final question = _controller.current;
     return switch (_controller.status) {
-      GameStatus.loading => const CircularProgressIndicator(
-        color: AppColors.yellow,
-      ),
-      GameStatus.error => const _Message(
-        title: 'Não deu para carregar as perguntas',
-        body: 'Confira o arquivo do baralho e tente de novo.',
-      ),
       GameStatus.outOfQuestions => const _Message(
         title: 'Acabaram as perguntas!',
-        body: 'Todas as perguntas deste baralho já saíram.',
+        body: 'Todas as perguntas escolhidas para esta partida já saíram.',
+      ),
+      GameStatus.finished => _Message(
+        title: 'Fim da partida!',
+        body: '${_controller.round} rodadas jogadas. Quem ficou com mais '
+            'cartas é o pato da mesa.',
       ),
       GameStatus.question || GameStatus.revealed => AnimatedSwitcher(
         duration: const Duration(milliseconds: 350),
@@ -90,51 +99,68 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Widget _buildActions() {
-    final (button, hint) = switch (_controller.status) {
+    final back = PlayButton(
+      key: const ValueKey('back'),
+      label: 'VOLTAR',
+      color: AppColors.cream,
+      textColor: AppColors.ink,
+      pulse: false,
+      tilt: 0,
+      expand: true,
+      onPressed: () => Navigator.of(context).pop(),
+    );
+    final (buttons, hint) = switch (_controller.status) {
       GameStatus.question => (
-        PlayButton(
-          key: const ValueKey('reveal'),
-          label: 'NEM A PATO!',
-          color: AppColors.yellow,
-          textColor: AppColors.ink,
-          tilt: 0,
-          expand: true,
-          onPressed: _controller.reveal,
-        ),
+        [
+          PlayButton(
+            key: const ValueKey('reveal'),
+            label: 'NEM A PATO!',
+            color: AppColors.yellow,
+            textColor: AppColors.ink,
+            tilt: 0,
+            expand: true,
+            onPressed: _controller.reveal,
+          ),
+        ],
         'Gritou? Toque para revelar',
       ),
       GameStatus.revealed => (
-        PlayButton(
-          key: const ValueKey('next'),
-          label: 'PRÓXIMA',
-          color: AppColors.cream,
-          textColor: AppColors.ink,
-          pulse: false,
-          tilt: 0,
-          expand: true,
-          onPressed: _controller.nextQuestion,
-        ),
+        [
+          PlayButton(
+            key: const ValueKey('next'),
+            label: 'PRÓXIMA',
+            color: AppColors.cream,
+            textColor: AppColors.ink,
+            pulse: false,
+            tilt: 0,
+            expand: true,
+            onPressed: _controller.nextQuestion,
+          ),
+        ],
         'Quem errou fica com a carta',
       ),
-      GameStatus.outOfQuestions || GameStatus.error => (
-        PlayButton(
-          key: const ValueKey('back'),
-          label: 'VOLTAR',
-          color: AppColors.cream,
-          textColor: AppColors.ink,
-          pulse: false,
-          tilt: 0,
-          expand: true,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        '',
+      GameStatus.finished => (
+        [
+          PlayButton(
+            key: const ValueKey('again'),
+            label: 'JOGAR DE NOVO',
+            color: AppColors.yellow,
+            textColor: AppColors.ink,
+            tilt: 0,
+            expand: true,
+            onPressed: _controller.start,
+          ),
+          const SizedBox(height: 16),
+          back,
+        ],
+        'Mesmas escolhas, perguntas novas',
       ),
-      GameStatus.loading => (const SizedBox.shrink(), ''),
+      GameStatus.outOfQuestions => ([back], ''),
     };
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        button,
+        ...buttons,
         const SizedBox(height: 14),
         Text(hint, style: AppTextStyles.hint),
       ],
@@ -143,12 +169,14 @@ class _GameScreenState extends State<GameScreen> {
 }
 
 class _TopBar extends StatelessWidget {
-  const _TopBar({required this.round});
+  const _TopBar({required this.round, required this.rounds});
 
   final int round;
+  final int? rounds;
 
   @override
   Widget build(BuildContext context) {
+    final total = rounds;
     return Row(
       children: [
         IconButton(
@@ -169,7 +197,10 @@ class _TopBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(999),
               border: Border.all(color: AppColors.ink, width: 2),
             ),
-            child: Text('RODADA $round', style: AppTextStyles.pill),
+            child: Text(
+              total == null ? 'RODADA $round' : 'RODADA $round DE $total',
+              style: AppTextStyles.pill,
+            ),
           ),
         const Spacer(),
         // Balances the back button so the round pill stays centered.
