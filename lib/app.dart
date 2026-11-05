@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'app_dependencies.dart';
 import 'ui/screens/loading_screen.dart';
 import 'ui/theme/app_colors.dart';
-import 'update/app_updates.dart';
 
 class NemAPatoApp extends StatelessWidget {
-  const NemAPatoApp({super.key, this.updates});
+  const NemAPatoApp({super.key, required this.dependencies});
 
-  /// Null disables update checks (tests).
-  final AppUpdates? updates;
+  final AppDependencies dependencies;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class NemAPatoApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.yellow,
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellow),
       ),
-      home: LoadingScreen(updates: updates),
+      home: LoadingScreen(dependencies: dependencies),
     );
   }
 }

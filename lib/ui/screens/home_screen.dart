@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../app_dependencies.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
 import '../../update/update_prompt.dart';
@@ -8,13 +9,12 @@ import '../theme/app_text_styles.dart';
 import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
 import '../widgets/play_button.dart';
-import 'game_screen.dart';
+import 'game_setup_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.updates});
+  const HomeScreen({super.key, required this.dependencies});
 
-  /// Null hides the version line and skips update checks (tests).
-  final AppUpdates? updates;
+  final AppDependencies dependencies;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Silent check on startup: offline or GitHub errors are ignored.
   Future<void> _checkOnStartup() async {
-    final updates = widget.updates;
+    final updates = widget.dependencies.updates;
     if (updates == null || !updates.checkOnStartup) return;
     try {
       final update = await updates.checker.check();
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _offerUpdate() async {
-    final updates = widget.updates;
+    final updates = widget.dependencies.updates;
     final update = _update;
     if (updates == null || update == null) return;
     await showUpdateDialog(
@@ -56,14 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _play() {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute<void>(builder: (_) => const GameScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => GameSetupScreen(dependencies: widget.dependencies),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final updates = widget.updates;
+    final updates = widget.dependencies.updates;
     return Scaffold(
       backgroundColor: AppColors.yellow,
       body: SafeArea(

@@ -1,34 +1,37 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
 import 'package:nem_a_pato_bullet/state/game_controller.dart';
+import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 
-GameController _controllerWith(int questionCount) {
-  final deck = Deck(
-    name: 'Teste',
-    questions: [
-      for (var i = 0; i < questionCount; i++)
-        Question.create(category: 'Teste', text: 'Pergunta $i', answer: '$i'),
-    ],
-  );
-  return GameController(loadDeck: () async => deck, random: Random(1));
-}
+List<Question> _questions(int count) => [
+  for (var i = 0; i < count; i++)
+    Question.create(category: 'Teste', text: 'Pergunta $i', answer: '$i'),
+];
+
+GameController _controllerWith(
+  int questionCount, {
+  int? rounds,
+  SeenQuestions? seen,
+}) => GameController(
+  questions: _questions(questionCount),
+  seen: seen ?? SeenQuestions(),
+  rounds: rounds,
+  random: Random(1),
+);
 
 void main() {
-  test('starts on round 1 with a question', () async {
-    final controller = _controllerWith(3);
-    await controller.start();
+  test('starts on round 1 with a question', () {
+    final controller = _controllerWith(3)..start();
 
     expect(controller.status, GameStatus.question);
     expect(controller.round, 1);
     expect(controller.current, isNotNull);
   });
 
-  test('reveal shows the answer of the current question', () async {
-    final controller = _controllerWith(3);
-    await controller.start();
+  test('reveal shows the answer of the current question', () {
+    final controller = _controllerWith(3)..start();
     final question = controller.current;
 
     controller.reveal();
@@ -37,9 +40,8 @@ void main() {
     expect(controller.current, same(question));
   });
 
-  test('next question advances the round without repeating', () async {
-    final controller = _controllerWith(3);
-    await controller.start();
+  test('next question advances the round without repeating', () {
+    final controller = _controllerWith(3)..start();
     final seen = {controller.current!.id};
 
     controller
@@ -50,10 +52,10 @@ void main() {
     expect(seen.add(controller.current!.id), isTrue);
   });
 
-  test('runs out after every question was shown', () async {
-    final controller = _controllerWith(2);
-    await controller.start();
-    controller.nextQuestion();
+  test('runs out after every question was shown', () {
+    final controller = _controllerWith(2)
+      ..start()
+      ..nextQuestion();
 
     controller.nextQuestion();
 
@@ -61,12 +63,40 @@ void main() {
     expect(controller.round, 2);
   });
 
-  test('reports an error when the deck cannot be loaded', () async {
-    final controller = GameController(
-      loadDeck: () async => throw const FormatException('bad deck'),
-    );
-    await controller.start();
+  test('finishes after the chosen number of rounds', () {
+    final controller = _controllerWith(10, rounds: 2)
+      ..start()
+      ..nextQuestion();
 
-    expect(controller.status, GameStatus.error);
+    controller.nextQuestion();
+
+    expect(controller.status, GameStatus.finished);
+    expect(controller.round, 2);
+  });
+
+  test('playing again restarts the rounds with new questions', () {
+    final seen = SeenQuestions();
+    final controller = _controllerWith(10, rounds: 2, seen: seen)
+      ..start()
+      ..nextQuestion()
+      ..nextQuestion();
+    final firstGame = Set.of(seen.ids);
+
+    controller.start();
+
+    expect(controller.status, GameStatus.question);
+    expect(controller.round, 1);
+    expect(firstGame, isNot(contains(controller.current!.id)));
+  });
+
+  test('never repeats questions seen in an earlier game', () {
+    final seen = SeenQuestions();
+    _controllerWith(2, seen: seen)
+      ..start()
+      ..nextQuestion();
+
+    final secondGame = _controllerWith(2, seen: seen)..start();
+
+    expect(secondGame.status, GameStatus.outOfQuestions);
   });
 }

@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 
+import 'text_key.dart';
+
 /// A single trivia question whose answer is shown as written in the deck.
 class Question {
   const Question({
@@ -33,15 +35,15 @@ class Question {
   /// re-importing a deck keeps the history of seen questions. Editing the
   /// answer or the fact keeps the id; editing the question text changes it.
   static String idFor({required String category, required String text}) {
-    final key = '${_normalize(category)}\n${_normalize(text)}';
+    final key = '${textKey(category)}\n${textKey(text)}';
     return sha1.convert(utf8.encode(key)).toString().substring(0, 16);
   }
 
-  static String _normalize(String value) =>
-      value.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
-
   final String id;
   final String category;
+
+  /// [category] as a comparison key; see [textKey].
+  String get categoryKey => textKey(category);
   final String text;
 
   /// Shown exactly as written in the deck, e.g. "24 m" or "1.200.000".

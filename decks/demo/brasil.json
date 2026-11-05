@@ -1,0 +1,18 @@
+{
+  "name": "Brasil",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M12 3 22 12 12 21 2 12z M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8z'/></svg>",
+  "questions": [
+    { "category": "Geografia do Brasil", "text": "Quantos estados tem o Brasil?", "answer": "26 estados", "fact": "Além deles, há o Distrito Federal, onde fica Brasília." },
+    { "category": "Geografia do Brasil", "text": "Qual a extensão do litoral brasileiro?", "answer": "Cerca de 7.400 km", "fact": "Todo ele é banhado pelo Oceano Atlântico." },
+    { "category": "Geografia do Brasil", "text": "Qual a altura do Pico da Neblina?", "answer": "2.995 m", "fact": "É o ponto mais alto do Brasil, no Amazonas, na fronteira com a Venezuela." },
+    { "category": "Geografia do Brasil", "text": "Com quantos países o Brasil faz fronteira?", "answer": "10 países", "fact": "Na América do Sul, só Chile e Equador não fazem fronteira com o Brasil." },
+    { "category": "História do Brasil", "text": "Em que ano Brasília foi inaugurada?", "answer": "1960", "fact": "Foi inaugurada em 21 de abril, construída em menos de quatro anos." },
+    { "category": "História do Brasil", "text": "Em que ano foi assinada a Lei Áurea?", "answer": "1888", "fact": "Assinada em 13 de maio, aboliu a escravidão no Brasil." },
+    { "category": "História do Brasil", "text": "Por quantos anos Dom Pedro II governou o Brasil?", "answer": "49 anos", "fact": "Assumiu aos 14 anos, em 1840, e governou até a Proclamação da República." },
+    { "category": "Futebol", "text": "Quantas Copas do Mundo masculinas o Brasil venceu?", "answer": "5 Copas", "fact": "Em 1958, 1962, 1970, 1994 e 2002." },
+    { "category": "Futebol", "text": "Quantos gols Pelé marcou em Copas do Mundo?", "answer": "12 gols", "fact": "Ele jogou quatro Copas, de 1958 a 1970, e venceu três." },
+    { "category": "Futebol", "text": "Quantos gols a Alemanha marcou no Brasil na semifinal da Copa de 2014?", "answer": "7 gols", "fact": "Cinco deles saíram nos primeiros 29 minutos de jogo." },
+    { "category": "Cultura", "text": "Qual a altura do Cristo Redentor, sem contar o pedestal?", "answer": "30 m", "fact": "Com o pedestal, o monumento chega a 38 m." },
+    { "category": "Cultura", "text": "Quantos anos tinha Machado de Assis quando a Academia Brasileira de Letras foi fundada?", "answer": "58 anos", "fact": "Ele foi o primeiro presidente da Academia, fundada em 1897." }
+  ]
+}

@@ -2,43 +2,41 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
-import '../domain/deck.dart';
 import '../domain/question.dart';
 import '../domain/question_draw.dart';
+import 'seen_questions.dart';
 
-enum GameStatus { loading, question, revealed, outOfQuestions, error }
+enum GameStatus { question, revealed, outOfQuestions, finished }
 
 /// Drives a game session: draws unseen questions, counts rounds and reveals
 /// answers. Who takes the card is decided at the table, not here.
 class GameController extends ChangeNotifier {
-  GameController({required Future<Deck> Function() loadDeck, Random? random})
-    : _loadDeck = loadDeck,
-      _random = random ?? Random();
+  GameController({
+    required List<Question> questions,
+    required SeenQuestions seen,
+    this.rounds,
+    Random? random,
+  }) : _questions = questions,
+       _seen = seen,
+       _random = random ?? Random();
 
-  final Future<Deck> Function() _loadDeck;
+  final List<Question> _questions;
+  final SeenQuestions _seen;
   final Random _random;
 
-  // Kept in memory for now; persisted on the device in a later step.
-  final Set<String> _seenIds = {};
+  /// Number of rounds in the game; null means infinite.
+  final int? rounds;
 
-  Deck? _deck;
   Question? _current;
   int _round = 0;
-  GameStatus _status = GameStatus.loading;
+  GameStatus _status = GameStatus.question;
 
   GameStatus get status => _status;
   Question? get current => _current;
   int get round => _round;
 
-  Future<void> start() async {
-    try {
-      _deck = await _loadDeck();
-    } on Exception catch (error) {
-      debugPrint('Could not load deck: $error');
-      _status = GameStatus.error;
-      notifyListeners();
-      return;
-    }
+  void start() {
+    _round = 0;
     nextQuestion();
   }
 
@@ -49,17 +47,21 @@ class GameController extends ChangeNotifier {
   }
 
   void nextQuestion() {
-    final deck = _deck;
-    if (deck == null) return;
+    final limit = rounds;
+    if (limit != null && _round >= limit) {
+      _status = GameStatus.finished;
+      notifyListeners();
+      return;
+    }
     final question = drawUnseenQuestion(
-      deck.questions,
-      _seenIds,
+      _questions,
+      _seen.ids,
       random: _random,
     );
     if (question == null) {
       _status = GameStatus.outOfQuestions;
     } else {
-      _seenIds.add(question.id);
+      _seen.add(question.id);
       _current = question;
       _round++;
       _status = GameStatus.question;

@@ -47,6 +47,30 @@ void main() {
       expect(deck.questions.single.answer, '206');
     });
 
+    test('reads an optional inline SVG icon', () {
+      const svg = '<svg viewBox="0 0 24 24"><circle r="4"/></svg>';
+      final withIcon = Deck.fromJson({
+        'name': 'Teste',
+        'icon': svg,
+        'questions': [],
+      });
+      final withoutIcon = Deck.fromJson({'name': 'Teste', 'questions': []});
+
+      expect(withIcon.iconSvg, svg);
+      expect(withoutIcon.iconSvg, isNull);
+    });
+
+    test('rejects an icon that is not an SVG', () {
+      expect(
+        () => Deck.fromJson({
+          'name': 'Teste',
+          'icon': 'rocket.png',
+          'questions': [],
+        }),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
     test('rejects a deck without a name', () {
       expect(
         () => Deck.fromJson({'questions': []}),
@@ -78,5 +102,17 @@ void main() {
     final source = File('assets/decks/sample.json').readAsStringSync();
     final deck = Deck.fromJsonString(source);
     expect(deck.questions, isNotEmpty);
+  });
+
+  test('the demo decks are valid and complete', () {
+    final files = Directory('decks/demo').listSync().whereType<File>();
+    expect(files, isNotEmpty);
+    for (final file in files) {
+      final deck = Deck.fromJsonString(file.readAsStringSync());
+      expect(deck.iconSvg, isNotNull, reason: '${file.path} has no icon');
+      for (final question in deck.questions) {
+        expect(question.fact, isNotNull, reason: question.text);
+      }
+    }
   });
 }
