@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app.dart';
+import 'app_dependencies.dart';
+import 'data/bundled_decks.dart';
+import 'state/seen_questions.dart';
 import 'update/app_updates.dart';
 import 'update/update_checker.dart';
 import 'update/update_installer.dart';
@@ -12,13 +15,17 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
     NemAPatoApp(
-      updates: AppUpdates(
-        checker: UpdateChecker(),
-        installer: UpdateInstaller(),
-        // Debug builds take their version from pubspec.yaml and are often
-        // behind the latest release, so the prompt would show on every
-        // `flutter run`.
-        checkOnStartup: !kDebugMode,
+      dependencies: AppDependencies(
+        loadDecks: loadBundledDecks,
+        seen: SeenQuestions(),
+        updates: AppUpdates(
+          checker: UpdateChecker(),
+          installer: UpdateInstaller(),
+          // Debug builds take their version from pubspec.yaml and are often
+          // behind the latest release, so the prompt would show on every
+          // `flutter run`.
+          checkOnStartup: !kDebugMode,
+        ),
       ),
     ),
   );
