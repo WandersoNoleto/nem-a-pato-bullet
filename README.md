@@ -22,6 +22,7 @@ Deck format:
 ```json
 {
   "name": "Sample deck",
+  "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">...</svg>",
   "questions": [
     {
       "category": "Espaço",
@@ -35,6 +36,9 @@ Deck format:
 
 | Field | Required | Notes |
 | --- | --- | --- |
+| `name` | yes | Deck name shown in the game setup |
+| `icon` | no | Deck symbol as inline SVG, painted in the app's ink color; a playing-card symbol is shown when missing |
+| `questions` | yes | List of questions, fields below |
 | `category` | yes | Shown above the question |
 | `text` | yes | The question |
 | `answer` | yes | Shown exactly as written |

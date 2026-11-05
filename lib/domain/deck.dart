@@ -4,20 +4,22 @@ import 'question.dart';
 
 /// A named list of questions loaded from a JSON deck file.
 class Deck {
-  const Deck({required this.name, required this.questions});
+  const Deck({required this.name, required this.questions, this.iconSvg});
 
   /// Parses a deck in the format:
   ///
   /// ```json
   /// {
   ///   "name": "Sample deck",
+  ///   "icon": "<svg ...>...</svg>",
   ///   "questions": [
   ///     { "category": "Oceano", "text": "...", "answer": "24 m", "fact": "..." }
   ///   ]
   /// }
   /// ```
   ///
-  /// `fact` is optional. A numeric `answer` is accepted and shown as text.
+  /// `icon` (an inline SVG) and `fact` are optional. A numeric `answer` is
+  /// accepted and shown as text.
   /// Questions with the same id as an earlier one are dropped.
   /// Throws a [FormatException] naming the first invalid question.
   factory Deck.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,10 @@ class Deck {
     if (rawQuestions is! List) {
       throw const FormatException('Deck is missing a "questions" list');
     }
+    final icon = json['icon'];
+    if (icon != null && (icon is! String || !icon.contains('<svg'))) {
+      throw const FormatException('Deck "icon" must be an inline SVG');
+    }
 
     final seenIds = <String>{};
     final questions = <Question>[];
@@ -36,7 +42,11 @@ class Deck {
       final question = _parseQuestion(raw, index);
       if (seenIds.add(question.id)) questions.add(question);
     }
-    return Deck(name: name.trim(), questions: List.unmodifiable(questions));
+    return Deck(
+      name: name.trim(),
+      questions: List.unmodifiable(questions),
+      iconSvg: icon as String?,
+    );
   }
 
   factory Deck.fromJsonString(String source) {
@@ -74,4 +84,7 @@ class Deck {
 
   final String name;
   final List<Question> questions;
+
+  /// The deck's symbol as inline SVG; null shows the default card symbol.
+  final String? iconSvg;
 }
