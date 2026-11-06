@@ -10,6 +10,7 @@ import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
 import '../widgets/play_button.dart';
 import 'game_setup_screen.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.dependencies});
@@ -63,44 +64,70 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _openSettings() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => SettingsScreen(dependencies: widget.dependencies),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final updates = widget.dependencies.updates;
     return Scaffold(
       backgroundColor: AppColors.yellow,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            children: [
-              const SizedBox(height: 32),
-              // Title and mascot are kept a bit smaller and high on the
-              // screen, leaving room to breathe around the play button.
-              const FractionallySizedBox(widthFactor: 0.75, child: GameTitle()),
-              const SizedBox(height: 12),
-              Expanded(
-                flex: 5,
-                child: FractionallySizedBox(
-                  widthFactor: 0.7,
-                  child: Image.asset(
-                    'assets/images/mascot.png',
-                    fit: BoxFit.contain,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                children: [
+                  const SizedBox(height: 32),
+                  // Title and mascot are kept a bit smaller and high on the
+                  // screen, leaving room to breathe around the play button.
+                  const FractionallySizedBox(
+                    widthFactor: 0.75,
+                    child: GameTitle(),
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  Expanded(
+                    flex: 5,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.7,
+                      child: Image.asset(
+                        'assets/images/mascot.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  const Spacer(flex: 2),
+                  PlayButton(label: 'JOGAR', onPressed: _play),
+                  const Spacer(),
+                  const CreditsText(),
+                  if (updates != null)
+                    _VersionLine(
+                      updates: updates,
+                      updateAvailable: _update != null,
+                      onUpdate: _offerUpdate,
+                    ),
+                  const SizedBox(height: 16),
+                ],
               ),
-              const Spacer(flex: 2),
-              PlayButton(label: 'JOGAR', onPressed: _play),
-              const Spacer(),
-              const CreditsText(),
-              if (updates != null)
-                _VersionLine(
-                  updates: updates,
-                  updateAvailable: _update != null,
-                  onUpdate: _offerUpdate,
-                ),
-              const SizedBox(height: 16),
-            ],
-          ),
+            ),
+            Positioned(
+              top: 4,
+              right: 8,
+              child: IconButton(
+                onPressed: _openSettings,
+                tooltip: 'Configurações',
+                color: AppColors.ink,
+                iconSize: 30,
+                icon: const Icon(Icons.settings),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -9,6 +9,8 @@ import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_setup_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
+import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/choice_pill.dart';
 
 // The home screen's play button pulses forever, so these tests step frames
 // instead of using pumpAndSettle, which would never settle.
@@ -120,5 +122,34 @@ void main() {
 
     expect(find.byType(GameScreen), findsOneWidget);
     expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('the gear on home opens the settings', (tester) async {
+    await _pastLoading(tester);
+
+    await tester.tap(find.byTooltip('Configurações'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    expect(find.byType(SettingsScreen), findsOneWidget);
+    expect(find.text('Procurar atualização'), findsOneWidget);
+    expect(find.text('Importar baralho'), findsOneWidget);
+    expect(find.text('Espaço'), findsOneWidget);
+    expect(find.text('Mar'), findsOneWidget);
+  });
+
+  testWidgets('choosing a language marks it as selected', (tester) async {
+    await _pastLoading(tester);
+    await tester.tap(find.byTooltip('Configurações'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    await tester.tap(find.text('English'));
+    await tester.pump();
+
+    final pill = tester.widget<ChoicePill>(
+      find.widgetWithText(ChoicePill, 'English'),
+    );
+    expect(pill.selected, isTrue);
   });
 }

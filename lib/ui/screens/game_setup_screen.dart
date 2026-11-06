@@ -7,8 +7,11 @@ import '../../domain/deck.dart';
 import '../../state/game_setup_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/play_button.dart';
+import '../widgets/screen_header.dart';
+import '../widgets/section_label.dart';
 import 'game_screen.dart';
 
 /// "Preparar partida": rounds, decks and categories, before the game.
@@ -71,7 +74,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
             children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
-                child: _Header(),
+                child: ScreenHeader(title: 'PREPARAR PARTIDA'),
               ),
               Expanded(child: _buildBody()),
               if (_controller.status == SetupStatus.ready)
@@ -107,13 +110,13 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
       SetupStatus.ready => ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
         children: [
-          const _SectionLabel('RODADAS'),
+          const SectionLabel('RODADAS'),
           _RoundsPicker(
             rounds: _controller.rounds,
             onChanged: _controller.setRounds,
           ),
           const SizedBox(height: 28),
-          const _SectionLabel('BARALHOS'),
+          const SectionLabel('BARALHOS'),
           Wrap(
             spacing: 12,
             runSpacing: 12,
@@ -127,7 +130,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
             ],
           ),
           const SizedBox(height: 28),
-          _SectionLabel(
+          SectionLabel(
             'CATEGORIAS',
             detail:
                 '${_controller.selectedCategories.length} de '
@@ -137,60 +140,6 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
         ],
       ),
     };
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () => Navigator.of(context).maybePop(),
-          tooltip: 'Voltar',
-          style: IconButton.styleFrom(
-            foregroundColor: AppColors.cream,
-            side: const BorderSide(color: AppColors.cream, width: 2),
-          ),
-          icon: const Icon(Icons.arrow_back),
-        ),
-        const SizedBox(width: 14),
-        Text(
-          'PREPARAR PARTIDA',
-          style: AppTextStyles.category.copyWith(
-            color: AppColors.yellow,
-            fontSize: 20,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SectionLabel extends StatelessWidget {
-  const _SectionLabel(this.text, {this.detail});
-
-  final String text;
-  final String? detail;
-
-  @override
-  Widget build(BuildContext context) {
-    final detail = this.detail;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Text.rich(
-        TextSpan(
-          text: text,
-          children: [
-            if (detail != null)
-              TextSpan(text: '  ·  $detail', style: AppTextStyles.hint),
-          ],
-        ),
-        style: AppTextStyles.pill.copyWith(color: AppColors.cream),
-      ),
-    );
   }
 }
 
@@ -219,19 +168,19 @@ class _RoundsPicker extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: [
-        _Choice(
+        ChoicePill(
           label: '∞',
           semanticLabel: 'Infinitas',
           selected: rounds == null,
           onTap: () => onChanged(null),
         ),
         for (final preset in GameSetupController.roundPresets)
-          _Choice(
+          ChoicePill(
             label: '$preset',
             selected: rounds == preset,
             onTap: () => onChanged(preset),
           ),
-        _Choice(
+        ChoicePill(
           label: _isCustom ? '$rounds' : '+',
           semanticLabel: 'Outra quantidade',
           icon: _isCustom ? Icons.edit : null,
@@ -239,57 +188,6 @@ class _RoundsPicker extends StatelessWidget {
           onTap: () => _pickCustom(context),
         ),
       ],
-    );
-  }
-}
-
-class _Choice extends StatelessWidget {
-  const _Choice({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-    this.semanticLabel,
-    this.icon,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-  final String? semanticLabel;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    final icon = this.icon;
-    return Semantics(
-      button: true,
-      selected: selected,
-      label: semanticLabel ?? label,
-      excludeSemantics: true,
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          constraints: const BoxConstraints(minWidth: 48),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: selected ? AppColors.yellow : AppColors.cream,
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: AppColors.ink, width: 2),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(label, style: AppTextStyles.pill.copyWith(fontSize: 16)),
-              if (icon != null) ...[
-                const SizedBox(width: 4),
-                Icon(icon, size: 14, color: AppColors.ink),
-              ],
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
