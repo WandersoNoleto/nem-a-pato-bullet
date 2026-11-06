@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'app.dart';
 import 'app_dependencies.dart';
-import 'data/bundled_decks.dart';
+import 'data/all_decks.dart';
+import 'data/deck_files.dart';
+import 'data/imported_decks.dart';
 import 'state/seen_questions.dart';
 import 'update/app_updates.dart';
 import 'update/update_checker.dart';
@@ -13,10 +15,13 @@ import 'update/update_installer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  final imported = ImportedDecks();
   runApp(
     NemAPatoApp(
       dependencies: AppDependencies(
-        loadDecks: loadBundledDecks,
+        loadDecks: () => loadAllDecks(imported),
+        importDeck: imported.save,
+        deckFiles: const DeckFiles(),
         seen: SeenQuestions(),
         updates: AppUpdates(
           checker: UpdateChecker(),

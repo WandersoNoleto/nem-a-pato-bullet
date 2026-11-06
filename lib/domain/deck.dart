@@ -57,6 +57,23 @@ class Deck {
     return Deck.fromJson(decoded);
   }
 
+  /// The deck in the same format [Deck.fromJson] reads.
+  String toJsonString() {
+    return const JsonEncoder.withIndent('  ').convert({
+      'name': name,
+      if (iconSvg != null) 'icon': iconSvg,
+      'questions': [
+        for (final question in questions)
+          {
+            'category': question.category,
+            'text': question.text,
+            'answer': question.answer,
+            if (question.fact != null) 'fact': question.fact,
+          },
+      ],
+    });
+  }
+
   static Question _parseQuestion(Object? raw, int index) {
     if (raw is! Map<String, dynamic>) {
       throw FormatException('Question $index is not an object');

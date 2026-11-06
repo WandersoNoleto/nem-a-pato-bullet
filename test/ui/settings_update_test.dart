@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:nem_a_pato_bullet/app_dependencies.dart';
+import 'package:nem_a_pato_bullet/data/deck_files.dart';
+import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
@@ -27,6 +29,8 @@ Widget _settings(http.Client client) {
     home: SettingsScreen(
       dependencies: AppDependencies(
         loadDecks: () async => const [],
+        importDeck: (source) async => Deck.fromJsonString(source),
+        deckFiles: const DeckFiles(),
         seen: SeenQuestions(),
         updates: AppUpdates(
           checker: UpdateChecker(

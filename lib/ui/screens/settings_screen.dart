@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_dependencies.dart';
+import '../../data/deck_files.dart';
 import '../../domain/deck.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
@@ -16,8 +17,8 @@ import '../widgets/table_scaffold.dart';
 
 /// App settings: updates, language and deck import/export.
 ///
-/// Updates are real. Language and deck actions only show what they will do
-/// for now and get wired up one feature at a time.
+/// Updates and decks are real. The language choice only marks the option for
+/// now and gets wired up later.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.dependencies});
 
@@ -33,13 +34,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
     (code: 'en', name: 'English', flag: '🇺🇸'),
   ];
 
-  late final Future<List<Deck>> _decks = widget.dependencies.loadDecks();
+  late Future<List<Deck>> _decks = widget.dependencies.loadDecks();
   String _language = 'pt';
+  bool _importing = false;
 
   void _showMessage(String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _importDeck() async {
+    setState(() => _importing = true);
+    try {
+      final source = await widget.dependencies.deckFiles.pick();
+      if (source == null) return;
+      final deck = await widget.dependencies.importDeck(source);
+      if (!mounted) return;
+      final count = deck.questions.length;
+      _showMessage(
+        count == 1
+            ? 'Baralho "${deck.name}" importado com 1 pergunta.'
+            : 'Baralho "${deck.name}" importado com $count perguntas.',
+      );
+      setState(() {
+        _decks = widget.dependencies.loadDecks();
+      });
+    } on FormatException catch (error) {
+      debugPrint('Invalid deck file: ${error.message}');
+      if (mounted) _showMessage('Esse arquivo não é um baralho válido.');
+    } on Exception catch (error) {
+      debugPrint('Could not import deck: $error');
+      if (mounted) _showMessage('Não deu para importar esse arquivo.');
+    } finally {
+      if (mounted) setState(() => _importing = false);
+    }
+  }
+
+  Future<void> _exportDeck(Deck deck) async {
+    try {
+      final saved = await widget.dependencies.deckFiles.save(
+        fileName: deckFileName(deck.name),
+        content: deck.toJsonString(),
+      );
+      if (saved && mounted) _showMessage('Baralho "${deck.name}" exportado.');
+    } on Exception catch (error) {
+      debugPrint('Could not export deck: $error');
+      if (mounted) _showMessage('Não deu para exportar esse baralho.');
+    }
   }
 
   @override
@@ -86,16 +128,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: Icons.file_download_outlined,
                       title: 'Importar baralho',
                       subtitle: 'Adicionar de um arquivo JSON',
-                      onTap: () => _showMessage('Baralho importado.'),
+                      busy: _importing,
+                      onTap: _importDeck,
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                _ExportPanel(
-                  decks: _decks,
-                  onExport: (deck) =>
-                      _showMessage('Baralho "${deck.name}" exportado.'),
-                ),
+                _ExportPanel(decks: _decks, onExport: _exportDeck),
               ],
             ),
           ),

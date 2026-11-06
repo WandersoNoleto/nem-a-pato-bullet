@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nem_a_pato_bullet/app.dart';
 import 'package:nem_a_pato_bullet/app_dependencies.dart';
+import 'package:nem_a_pato_bullet/data/deck_files.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
@@ -33,8 +34,12 @@ final _decks = [
   ),
 ];
 
-AppDependencies _dependencies() =>
-    AppDependencies(loadDecks: () async => _decks, seen: SeenQuestions());
+AppDependencies _dependencies() => AppDependencies(
+  loadDecks: () async => _decks,
+  importDeck: (source) async => Deck.fromJsonString(source),
+  deckFiles: const DeckFiles(),
+  seen: SeenQuestions(),
+);
 
 /// Steps frames until the loading screen is gone, failing if that takes
 /// noticeably longer than its duration plus the fade to home.
