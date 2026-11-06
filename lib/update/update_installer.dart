@@ -20,9 +20,17 @@ class InstallerOpened extends InstallProgress {
 }
 
 class InstallFailed extends InstallProgress {
-  const InstallFailed(this.message);
+  const InstallFailed(this.reason);
 
-  final String message;
+  final InstallFailure reason;
+}
+
+enum InstallFailure {
+  permissionNeeded,
+  downloadFailed,
+  canceled,
+  alreadyRunning,
+  unknown,
 }
 
 /// Downloads the update and opens the Android installer.
@@ -45,18 +53,16 @@ class UpdateInstaller {
       OtaStatus.INSTALLING ||
       OtaStatus.INSTALLATION_DONE => const InstallerOpened(),
       OtaStatus.PERMISSION_NOT_GRANTED_ERROR => const InstallFailed(
-        'Permita que este app instale atualizações: Configurações do '
-        'Android > Apps > Nem a Pato! Bullet > Instalar apps desconhecidos. '
-        'Depois tente de novo.',
+        InstallFailure.permissionNeeded,
       ),
       OtaStatus.DOWNLOAD_ERROR => const InstallFailed(
-        'Falha ao baixar a atualização. Verifique a internet e tente de novo.',
+        InstallFailure.downloadFailed,
       ),
-      OtaStatus.CANCELED => const InstallFailed('Atualização cancelada.'),
+      OtaStatus.CANCELED => const InstallFailed(InstallFailure.canceled),
       OtaStatus.ALREADY_RUNNING_ERROR => const InstallFailed(
-        'Uma atualização já está em andamento.',
+        InstallFailure.alreadyRunning,
       ),
-      _ => InstallFailed('Erro ao instalar a atualização (${event.value}).'),
+      _ => const InstallFailed(InstallFailure.unknown),
     };
   }
 }

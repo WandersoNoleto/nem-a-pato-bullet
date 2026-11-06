@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_dependencies.dart';
+import '../../l10n/l10n.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
 import '../../update/update_prompt.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const Spacer(flex: 2),
-                  PlayButton(label: 'JOGAR', onPressed: _play),
+                  PlayButton(label: context.l10n.playButton, onPressed: _play),
                   const Spacer(),
                   const CreditsText(),
                   if (updates != null)
@@ -121,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               right: 8,
               child: IconButton(
                 onPressed: _openSettings,
-                tooltip: 'Configurações',
+                tooltip: context.l10n.settingsTooltip,
                 color: AppColors.ink,
                 iconSize: 30,
                 icon: const Icon(Icons.settings),
@@ -178,10 +179,10 @@ class _VersionLineState extends State<_VersionLine> {
           child: Text.rich(
             TextSpan(
               text: '$version · ',
-              children: const [
+              children: [
                 TextSpan(
-                  text: 'Atualização disponível!',
-                  style: TextStyle(decoration: TextDecoration.underline),
+                  text: context.l10n.updateAvailable,
+                  style: const TextStyle(decoration: TextDecoration.underline),
                 ),
               ],
             ),

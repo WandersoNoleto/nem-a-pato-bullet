@@ -5,6 +5,7 @@ import 'package:nem_a_pato_bullet/app_dependencies.dart';
 import 'package:nem_a_pato_bullet/data/deck_files.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
+import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_setup_screen.dart';
@@ -38,6 +39,7 @@ AppDependencies _dependencies() => AppDependencies(
   loadDecks: () async => _decks,
   importDeck: (source) async => Deck.fromJsonString(source),
   deckFiles: const DeckFiles(),
+  language: LanguageController(code: 'pt', save: (_) async {}),
   seen: SeenQuestions(),
 );
 

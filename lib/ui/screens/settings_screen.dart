@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app_dependencies.dart';
 import '../../data/deck_files.dart';
 import '../../domain/deck.dart';
+import '../../l10n/l10n.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
 import '../../update/update_prompt.dart';
@@ -16,9 +17,6 @@ import '../widgets/section_label.dart';
 import '../widgets/table_scaffold.dart';
 
 /// App settings: updates, language and deck import/export.
-///
-/// Updates and decks are real. The language choice only marks the option for
-/// now and gets wired up later.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.dependencies});
 
@@ -35,7 +33,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   ];
 
   late Future<List<Deck>> _decks = widget.dependencies.loadDecks();
-  String _language = 'pt';
   bool _importing = false;
 
   void _showMessage(String message) {
@@ -51,21 +48,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (source == null) return;
       final deck = await widget.dependencies.importDeck(source);
       if (!mounted) return;
-      final count = deck.questions.length;
-      _showMessage(
-        count == 1
-            ? 'Baralho "${deck.name}" importado com 1 pergunta.'
-            : 'Baralho "${deck.name}" importado com $count perguntas.',
-      );
+      _showMessage(context.l10n.deckImported(deck.name, deck.questions.length));
       setState(() {
         _decks = widget.dependencies.loadDecks();
       });
     } on FormatException catch (error) {
       debugPrint('Invalid deck file: ${error.message}');
-      if (mounted) _showMessage('Esse arquivo não é um baralho válido.');
+      if (mounted) _showMessage(context.l10n.invalidDeckFile);
     } on Exception catch (error) {
       debugPrint('Could not import deck: $error');
-      if (mounted) _showMessage('Não deu para importar esse arquivo.');
+      if (mounted) _showMessage(context.l10n.importFailed);
     } finally {
       if (mounted) setState(() => _importing = false);
     }
@@ -77,33 +69,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
         fileName: deckFileName(deck.name),
         content: deck.toJsonString(),
       );
-      if (saved && mounted) _showMessage('Baralho "${deck.name}" exportado.');
+      if (saved && mounted) _showMessage(context.l10n.deckExported(deck.name));
     } on Exception catch (error) {
       debugPrint('Could not export deck: $error');
-      if (mounted) _showMessage('Não deu para exportar esse baralho.');
+      if (mounted) _showMessage(context.l10n.exportFailed);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final updates = widget.dependencies.updates;
+    final selectedLanguage = Localizations.localeOf(context).languageCode;
     return TableScaffold(
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
-            child: ScreenHeader(title: 'CONFIGURAÇÕES'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
+            child: ScreenHeader(title: context.l10n.settingsTitle),
           ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               children: [
                 if (updates != null) ...[
-                  const SectionLabel('ATUALIZAÇÕES'),
+                  SectionLabel(context.l10n.updatesSection),
                   _UpdatePanel(updates: updates, onMessage: _showMessage),
                   const SizedBox(height: 28),
                 ],
-                const SectionLabel('IDIOMA'),
+                SectionLabel(context.l10n.languageSection),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -115,19 +108,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           language.flag,
                           style: const TextStyle(fontSize: 18, height: 1),
                         ),
-                        selected: _language == language.code,
-                        onTap: () => setState(() => _language = language.code),
+                        selected: selectedLanguage == language.code,
+                        onTap: () =>
+                            widget.dependencies.language.setCode(language.code),
                       ),
                   ],
                 ),
                 const SizedBox(height: 28),
-                const SectionLabel('BARALHOS'),
+                SectionLabel(context.l10n.decksSection),
                 _Panel(
                   children: [
                     _ActionRow(
                       icon: Icons.file_download_outlined,
-                      title: 'Importar baralho',
-                      subtitle: 'Adicionar de um arquivo JSON',
+                      title: context.l10n.importDeck,
+                      subtitle: context.l10n.importDeckHint,
                       busy: _importing,
                       onTap: _importDeck,
                     ),
@@ -166,7 +160,7 @@ class _UpdatePanelState extends State<_UpdatePanel> {
       final update = await widget.updates.checker.check();
       if (!mounted) return;
       if (update == null) {
-        widget.onMessage('Você já está na versão mais recente.');
+        widget.onMessage(context.l10n.upToDate);
       } else {
         await showUpdateDialog(
           context,
@@ -176,10 +170,7 @@ class _UpdatePanelState extends State<_UpdatePanel> {
       }
     } on UpdateCheckException {
       if (mounted) {
-        widget.onMessage(
-          'Não deu para procurar atualização. '
-          'Verifique a internet e tente de novo.',
-        );
+        widget.onMessage(context.l10n.updateCheckFailed);
       }
     } finally {
       if (mounted) setState(() => _checking = false);
@@ -196,12 +187,12 @@ class _UpdatePanelState extends State<_UpdatePanel> {
           children: [
             _ActionRow(
               icon: Icons.system_update_outlined,
-              title: 'Procurar atualização',
+              title: context.l10n.checkForUpdates,
               subtitle: _checking
-                  ? 'Procurando…'
+                  ? context.l10n.checkingForUpdates
                   : version == null
                   ? null
-                  : 'Versão $version',
+                  : context.l10n.versionLabel(version),
               busy: _checking,
               onTap: _check,
             ),
@@ -356,9 +347,7 @@ class _ExportPanel extends StatelessWidget {
               _Row(
                 leading: DeckIcon(deck: deck, size: 28),
                 title: deck.name,
-                subtitle: deck.questions.length == 1
-                    ? '1 pergunta'
-                    : '${deck.questions.length} perguntas',
+                subtitle: context.l10n.questionCount(deck.questions.length),
                 trailing: const Icon(
                   Icons.ios_share,
                   size: 22,

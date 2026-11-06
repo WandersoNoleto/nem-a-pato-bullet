@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../domain/question.dart';
+import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import 'raised_box.dart';
@@ -163,8 +164,8 @@ class _AnswerFace extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'RESPOSTA',
+          Text(
+            context.l10n.answerLabel,
             textAlign: TextAlign.center,
             style: AppTextStyles.cardLabel,
           ),
@@ -179,7 +180,7 @@ class _AnswerFace extends StatelessWidget {
             Container(height: 2, color: AppColors.cardDivider),
             const SizedBox(height: 16),
             Text(
-              'CURIOSIDADE',
+              context.l10n.factLabel,
               style: AppTextStyles.cardLabel.copyWith(color: AppColors.orange),
             ),
             const SizedBox(height: 6),

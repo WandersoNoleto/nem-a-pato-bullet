@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
@@ -43,7 +44,7 @@ class RaisedBackButton extends StatelessWidget {
       softShadow: false,
       child: IconButton(
         onPressed: () => Navigator.of(context).maybePop(),
-        tooltip: 'Voltar',
+        tooltip: context.l10n.back,
         color: AppColors.ink,
         visualDensity: VisualDensity.compact,
         icon: const Icon(Icons.arrow_back),

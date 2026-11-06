@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/question.dart';
+import '../../l10n/l10n.dart';
 import '../../state/game_controller.dart';
 import '../../state/seen_questions.dart';
 import '../theme/app_colors.dart';
@@ -72,15 +73,13 @@ class _GameScreenState extends State<GameScreen> {
   Widget _buildCenter() {
     final question = _controller.current;
     return switch (_controller.status) {
-      GameStatus.outOfQuestions => const _Message(
-        title: 'Acabaram as perguntas!',
-        body: 'Todas as perguntas escolhidas para esta partida já saíram.',
+      GameStatus.outOfQuestions => _Message(
+        title: context.l10n.outOfQuestionsTitle,
+        body: context.l10n.outOfQuestionsBody,
       ),
       GameStatus.finished => _Message(
-        title: 'Fim da partida!',
-        body:
-            '${_controller.round} rodadas jogadas. Quem ficou com mais '
-            'cartas é o pato da mesa.',
+        title: context.l10n.gameOverTitle,
+        body: context.l10n.gameOverBody(_controller.round),
       ),
       GameStatus.question || GameStatus.revealed => AnimatedSwitcher(
         duration: const Duration(milliseconds: 350),
@@ -103,7 +102,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget _buildActions() {
     final back = PlayButton(
       key: const ValueKey('back'),
-      label: 'VOLTAR',
+      label: context.l10n.backButton,
       gradient: AppColors.paperGradient,
       textColor: AppColors.ink,
       pulse: false,
@@ -124,13 +123,13 @@ class _GameScreenState extends State<GameScreen> {
             onPressed: _controller.reveal,
           ),
         ],
-        'Gritou? Toque para revelar',
+        context.l10n.revealHint,
       ),
       GameStatus.revealed => (
         [
           PlayButton(
             key: const ValueKey('next'),
-            label: 'PRÓXIMA',
+            label: context.l10n.nextButton,
             gradient: AppColors.paperGradient,
             textColor: AppColors.ink,
             pulse: false,
@@ -139,13 +138,13 @@ class _GameScreenState extends State<GameScreen> {
             onPressed: _controller.nextQuestion,
           ),
         ],
-        'Quem errou fica com a carta',
+        context.l10n.nextHint,
       ),
       GameStatus.finished => (
         [
           PlayButton(
             key: const ValueKey('again'),
-            label: 'JOGAR DE NOVO',
+            label: context.l10n.playAgainButton,
             gradient: AppColors.actionGradient,
             textColor: AppColors.white,
             tilt: 0,
@@ -155,7 +154,7 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(height: 16),
           back,
         ],
-        'Mesmas escolhas, perguntas novas',
+        context.l10n.playAgainHint,
       ),
       GameStatus.outOfQuestions => ([back], ''),
     };
@@ -194,7 +193,9 @@ class _TopBar extends StatelessWidget {
             softShadow: false,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              total == null ? 'RODADA $round' : 'RODADA $round DE $total',
+              total == null
+                  ? context.l10n.round(round)
+                  : context.l10n.roundOfTotal(round, total),
               style: AppTextStyles.pill.copyWith(color: theme.onPill),
             ),
           ),

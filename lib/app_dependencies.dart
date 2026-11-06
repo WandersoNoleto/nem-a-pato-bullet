@@ -1,5 +1,6 @@
 import 'data/deck_files.dart';
 import 'domain/deck.dart';
+import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
 import 'update/app_updates.dart';
 
@@ -11,6 +12,7 @@ class AppDependencies {
     required this.loadDecks,
     required this.importDeck,
     required this.deckFiles,
+    required this.language,
     required this.seen,
     this.updates,
   });
@@ -20,6 +22,7 @@ class AppDependencies {
   /// Stores a deck from its JSON text. Throws a [FormatException] if invalid.
   final Future<Deck> Function(String source) importDeck;
   final DeckFiles deckFiles;
+  final LanguageController language;
   final SeenQuestions seen;
 
   /// Null hides the version line and skips update checks.

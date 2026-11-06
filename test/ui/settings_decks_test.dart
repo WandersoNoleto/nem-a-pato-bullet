@@ -4,6 +4,8 @@ import 'package:nem_a_pato_bullet/app_dependencies.dart';
 import 'package:nem_a_pato_bullet/data/deck_files.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
+import 'package:nem_a_pato_bullet/l10n/l10n.dart';
+import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
@@ -39,6 +41,9 @@ Future<void> _pumpSettings(
   final library = decks ?? <Deck>[];
   await tester.pumpWidget(
     MaterialApp(
+      locale: const Locale('pt'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(extensions: const [TableTheme.dark]),
       home: SettingsScreen(
         dependencies: AppDependencies(
@@ -49,6 +54,7 @@ Future<void> _pumpSettings(
             return deck;
           },
           deckFiles: files,
+          language: LanguageController(code: 'pt', save: (_) async {}),
           seen: SeenQuestions(),
         ),
       ),

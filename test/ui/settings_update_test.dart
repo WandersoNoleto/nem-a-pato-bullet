@@ -7,6 +7,8 @@ import 'package:http/testing.dart';
 import 'package:nem_a_pato_bullet/app_dependencies.dart';
 import 'package:nem_a_pato_bullet/data/deck_files.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
+import 'package:nem_a_pato_bullet/l10n/l10n.dart';
+import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
@@ -25,12 +27,16 @@ Map<String, Object?> _release(String tag) => {
 
 Widget _settings(http.Client client) {
   return MaterialApp(
+    locale: const Locale('pt'),
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
     theme: ThemeData(extensions: const [TableTheme.dark]),
     home: SettingsScreen(
       dependencies: AppDependencies(
         loadDecks: () async => const [],
         importDeck: (source) async => Deck.fromJsonString(source),
         deckFiles: const DeckFiles(),
+        language: LanguageController(code: 'pt', save: (_) async {}),
         seen: SeenQuestions(),
         updates: AppUpdates(
           checker: UpdateChecker(

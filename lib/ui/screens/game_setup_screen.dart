@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../app_dependencies.dart';
 import '../../domain/categories.dart';
 import '../../domain/deck.dart';
+import '../../l10n/l10n.dart';
 import '../../state/game_setup_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -48,9 +49,8 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
   Future<void> _start() async {
     final questions = _controller.questions;
     if (questions.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Escolha pelo menos uma categoria.')),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(context.l10n.noCategoryChosen)));
       return;
     }
     await Navigator.of(context).push(
@@ -73,9 +73,9 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
         listenable: _controller,
         builder: (context, _) => Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
-              child: ScreenHeader(title: 'PREPARAR PARTIDA'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
+              child: ScreenHeader(title: context.l10n.setupTitle),
             ),
             Expanded(child: _buildBody()),
             if (_controller.status == SetupStatus.ready)
@@ -102,7 +102,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
         child: Padding(
           padding: const EdgeInsets.all(32),
           child: Text(
-            'Não deu para carregar os baralhos.',
+            context.l10n.decksLoadFailed,
             textAlign: TextAlign.center,
             style: theme.hintStyle.copyWith(fontSize: 15),
           ),
@@ -111,13 +111,13 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
       SetupStatus.ready => ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
         children: [
-          const SectionLabel('RODADAS'),
+          SectionLabel(context.l10n.roundsSection),
           _RoundsPicker(
             rounds: _controller.rounds,
             onChanged: _controller.setRounds,
           ),
           const SizedBox(height: 28),
-          const SectionLabel('BARALHOS'),
+          SectionLabel(context.l10n.decksSection),
           Wrap(
             spacing: 12,
             runSpacing: 12,
@@ -132,10 +132,11 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
           ),
           const SizedBox(height: 28),
           SectionLabel(
-            'CATEGORIAS',
-            detail:
-                '${_controller.selectedCategories.length} de '
-                '${_controller.categories.length}',
+            context.l10n.categoriesSection,
+            detail: context.l10n.categoriesDetail(
+              _controller.selectedCategories.length,
+              _controller.categories.length,
+            ),
           ),
           _CategoryPicker(controller: _controller),
         ],
@@ -171,7 +172,7 @@ class _RoundsPicker extends StatelessWidget {
       children: [
         ChoicePill(
           label: '∞',
-          semanticLabel: 'Infinitas',
+          semanticLabel: context.l10n.infiniteRounds,
           selected: rounds == null,
           onTap: () => onChanged(null),
         ),
@@ -183,7 +184,7 @@ class _RoundsPicker extends StatelessWidget {
           ),
         ChoicePill(
           label: _isCustom ? '$rounds' : '+',
-          semanticLabel: 'Outra quantidade',
+          semanticLabel: context.l10n.customRounds,
           icon: _isCustom ? Icons.edit : null,
           selected: _isCustom,
           onTap: () => _pickCustom(context),
@@ -213,7 +214,7 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
   void _submit() {
     final value = int.tryParse(_text.text);
     if (value == null || value < 1 || value > _max) {
-      setState(() => _error = 'Digite um número de 1 a $_max');
+      setState(() => _error = context.l10n.customRoundsError(_max));
       return;
     }
     Navigator.of(context).pop(value);
@@ -228,7 +229,7 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Quantas rodadas?'),
+      title: Text(context.l10n.customRoundsTitle),
       content: TextField(
         controller: _text,
         autofocus: true,
@@ -246,9 +247,9 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancelar'),
+          child: Text(context.l10n.cancel),
         ),
-        FilledButton(onPressed: _submit, child: const Text('OK')),
+        FilledButton(onPressed: _submit, child: Text(context.l10n.ok)),
       ],
     );
   }
@@ -273,7 +274,7 @@ class _DeckTile extends StatelessWidget {
     return Semantics(
       button: true,
       selected: selected,
-      label: 'Baralho ${deck.name}, $count perguntas',
+      label: context.l10n.deckTileLabel(deck.name, count),
       excludeSemantics: true,
       child: GestureDetector(
         onTap: onTap,
@@ -309,7 +310,7 @@ class _DeckTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    count == 1 ? '1 pergunta' : '$count perguntas',
+                    context.l10n.questionCount(count),
                     style: AppTextStyles.credits.copyWith(
                       fontSize: 10,
                       color: selected
@@ -404,7 +405,7 @@ class _CategoryPickerState extends State<_CategoryPicker> {
             children: [
               if (selected.isEmpty)
                 Text(
-                  'Nenhuma categoria escolhida',
+                  context.l10n.noCategories,
                   style: AppTextStyles.credits.copyWith(
                     color: AppColors.cardMuted,
                   ),
@@ -427,12 +428,15 @@ class _CategoryPickerState extends State<_CategoryPicker> {
                 focusNode: _focus,
                 onChanged: (_) => setState(() {}),
                 style: AppTextStyles.credits.copyWith(fontSize: 14),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
                   border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search, color: AppColors.cardMuted),
-                  prefixIconConstraints: BoxConstraints(minWidth: 32),
-                  hintText: 'Buscar categoria para adicionar',
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: AppColors.cardMuted,
+                  ),
+                  prefixIconConstraints: const BoxConstraints(minWidth: 32),
+                  hintText: context.l10n.searchCategory,
                 ),
               ),
               if (showSuggestions) ...[
@@ -441,8 +445,8 @@ class _CategoryPickerState extends State<_CategoryPicker> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Text(
                       removed.isEmpty
-                          ? 'Todas as categorias já estão na partida'
-                          : 'Nenhuma categoria encontrada',
+                          ? context.l10n.allCategoriesInGame
+                          : context.l10n.noCategoryFound,
                       style: AppTextStyles.credits.copyWith(
                         color: AppColors.cardMuted,
                       ),
@@ -485,7 +489,7 @@ class _CategoryPickerState extends State<_CategoryPicker> {
               onPressed: controller.selectAllCategories,
               style: TextButton.styleFrom(foregroundColor: theme.hint),
               child: Text(
-                'Selecionar todas',
+                context.l10n.selectAll,
                 style: theme.hintStyle.copyWith(
                   decoration: TextDecoration.underline,
                   decorationColor: theme.hint,
@@ -508,7 +512,7 @@ class _CategoryTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      label: 'Remover ${category.label}',
+      label: context.l10n.removeCategory(category.label),
       excludeSemantics: true,
       child: GestureDetector(
         onTap: onRemove,
@@ -543,16 +547,12 @@ class _StartArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hint = switch (unseenCount) {
-      0 => 'Nenhuma pergunta inédita com essas escolhas',
-      1 => '1 pergunta inédita',
-      _ => '$unseenCount perguntas inéditas',
-    };
+    final hint = context.l10n.unseenCount(unseenCount);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         PlayButton(
-          label: 'COMEÇAR',
+          label: context.l10n.startButton,
           gradient: AppColors.actionGradient,
           textColor: AppColors.white,
           pulse: false,

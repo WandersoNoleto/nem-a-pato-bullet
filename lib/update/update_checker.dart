@@ -64,14 +64,12 @@ class UpdateChecker {
           )
           .timeout(const Duration(seconds: 15));
     } on Exception catch (error) {
-      throw UpdateCheckException(
-        'Sem conexão com o servidor de atualizações ($error)',
-      );
+      throw UpdateCheckException('Could not reach the update server ($error)');
     }
 
     if (response.statusCode != 200) {
       throw UpdateCheckException(
-        'Servidor de atualizações respondeu ${response.statusCode}',
+        'The update server answered ${response.statusCode}',
       );
     }
 
