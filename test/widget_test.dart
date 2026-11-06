@@ -132,7 +132,6 @@ void main() {
     await tester.pump(_transition);
 
     expect(find.byType(SettingsScreen), findsOneWidget);
-    expect(find.text('Procurar atualização'), findsOneWidget);
     expect(find.text('Importar baralho'), findsOneWidget);
     expect(find.text('Espaço'), findsOneWidget);
     expect(find.text('Mar'), findsOneWidget);

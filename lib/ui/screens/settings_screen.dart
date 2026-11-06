@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../app_dependencies.dart';
 import '../../domain/deck.dart';
+import '../../update/app_updates.dart';
+import '../../update/update_checker.dart';
+import '../../update/update_prompt.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/choice_pill.dart';
@@ -13,8 +16,8 @@ import '../widgets/table_scaffold.dart';
 
 /// App settings: updates, language and deck import/export.
 ///
-/// For now only the layout is real: the actions show what they will do and
-/// get wired up one feature at a time.
+/// Updates are real. Language and deck actions only show what they will do
+/// for now and get wired up one feature at a time.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.dependencies});
 
@@ -41,6 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final updates = widget.dependencies.updates;
     return TableScaffold(
       child: Column(
         children: [
@@ -52,19 +56,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               children: [
-                const SectionLabel('ATUALIZAÇÕES'),
-                _Panel(
-                  children: [
-                    _ActionRow(
-                      icon: Icons.system_update_outlined,
-                      title: 'Procurar atualização',
-                      subtitle: 'Versão 1.0.0',
-                      onTap: () =>
-                          _showMessage('Você já está na versão mais recente.'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 28),
+                if (updates != null) ...[
+                  const SectionLabel('ATUALIZAÇÕES'),
+                  _UpdatePanel(updates: updates, onMessage: _showMessage),
+                  const SizedBox(height: 28),
+                ],
                 const SectionLabel('IDIOMA'),
                 Wrap(
                   spacing: 8,
@@ -109,6 +105,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
+/// Installed version and the manual check for a newer release.
+class _UpdatePanel extends StatefulWidget {
+  const _UpdatePanel({required this.updates, required this.onMessage});
+
+  final AppUpdates updates;
+  final ValueChanged<String> onMessage;
+
+  @override
+  State<_UpdatePanel> createState() => _UpdatePanelState();
+}
+
+class _UpdatePanelState extends State<_UpdatePanel> {
+  late final Future<InstalledVersion> _installed = widget.updates.checker
+      .installedVersion();
+  bool _checking = false;
+
+  Future<void> _check() async {
+    setState(() => _checking = true);
+    try {
+      final update = await widget.updates.checker.check();
+      if (!mounted) return;
+      if (update == null) {
+        widget.onMessage('Você já está na versão mais recente.');
+      } else {
+        await showUpdateDialog(
+          context,
+          update: update,
+          installer: widget.updates.installer,
+        );
+      }
+    } on UpdateCheckException {
+      if (mounted) {
+        widget.onMessage(
+          'Não deu para procurar atualização. '
+          'Verifique a internet e tente de novo.',
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _checking = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<InstalledVersion>(
+      future: _installed,
+      builder: (context, snapshot) {
+        final version = snapshot.data?.name;
+        return _Panel(
+          children: [
+            _ActionRow(
+              icon: Icons.system_update_outlined,
+              title: 'Procurar atualização',
+              subtitle: _checking
+                  ? 'Procurando…'
+                  : version == null
+                  ? null
+                  : 'Versão $version',
+              busy: _checking,
+              onTap: _check,
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 /// Cream box that groups rows, like a card on the table.
 class _Panel extends StatelessWidget {
   const _Panel({required this.children});
@@ -149,6 +213,7 @@ class _ActionRow extends StatelessWidget {
     required this.title,
     required this.onTap,
     this.subtitle,
+    this.busy = false,
   });
 
   final IconData icon;
@@ -156,14 +221,25 @@ class _ActionRow extends StatelessWidget {
   final String? subtitle;
   final VoidCallback onTap;
 
+  /// Shows a spinner and ignores taps while the action runs.
+  final bool busy;
+
   @override
   Widget build(BuildContext context) {
     return _Row(
       leading: Icon(icon, size: 28, color: AppColors.ink),
       title: title,
       subtitle: subtitle,
-      trailing: const Icon(Icons.chevron_right, color: AppColors.ink),
-      onTap: onTap,
+      trailing: busy
+          ? const SizedBox.square(
+              dimension: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                color: AppColors.ink,
+              ),
+            )
+          : const Icon(Icons.chevron_right, color: AppColors.ink),
+      onTap: busy ? null : onTap,
     );
   }
 }
@@ -181,7 +257,7 @@ class _Row extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Widget trailing;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
