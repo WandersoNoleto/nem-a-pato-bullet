@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/l10n.dart';
 import '../theme/app_text_styles.dart';
 
 /// Credits to the original game, shown on the loading and home screens.
@@ -8,8 +9,8 @@ class CreditsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Inspirado em "Nem a Pato!", de Rodrigo Rego · Grok Games',
+    return Text(
+      context.l10n.credits,
       textAlign: TextAlign.center,
       style: AppTextStyles.credits,
     );

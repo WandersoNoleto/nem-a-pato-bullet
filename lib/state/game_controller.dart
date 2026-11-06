@@ -53,11 +53,7 @@ class GameController extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    final question = drawUnseenQuestion(
-      _questions,
-      _seen.ids,
-      random: _random,
-    );
+    final question = drawUnseenQuestion(_questions, _seen.ids, random: _random);
     if (question == null) {
       _status = GameStatus.outOfQuestions;
     } else {

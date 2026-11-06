@@ -6,6 +6,11 @@ abstract final class AppTextStyles {
   static const _display = 'ArchivoBlack';
   static const _body = 'Poppins';
 
+  /// Outlines light text on orange pieces.
+  static const raisedTextShadow = [
+    Shadow(color: AppColors.ink, offset: Offset(0, 2)),
+  ];
+
   static const titleLarge = TextStyle(
     fontFamily: _display,
     fontSize: 96,
@@ -93,6 +98,6 @@ abstract final class AppTextStyles {
     fontFamily: _body,
     fontWeight: FontWeight.w700,
     fontSize: 12,
-    color: AppColors.mutedOnBlack,
+    color: AppColors.ink,
   );
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n.dart';
 import 'update_checker.dart';
 import 'update_installer.dart';
 
@@ -15,17 +16,13 @@ Future<void> showUpdateDialog(
   final accepted = await showDialog<bool>(
     context: context,
     builder: (context) => AlertDialog(
-      title: const Text('Nova versão disponível'),
+      title: Text(context.l10n.updateDialogTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'A versão v${update.version.label} do Nem a Pato! Bullet está '
-              'disponível.\n\nToque em "Atualizar" para instalar as '
-              'novidades.',
-            ),
+            Text(context.l10n.updateDialogBody(update.version.label)),
             // GitHub release notes are written in English, so they stay
             // collapsed; the text above is what the players read.
             if (update.notes.isNotEmpty) _ReleaseNotes(notes: update.notes),
@@ -35,11 +32,11 @@ Future<void> showUpdateDialog(
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('Depois'),
+          child: Text(context.l10n.later),
         ),
         FilledButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Atualizar'),
+          child: Text(context.l10n.update),
         ),
       ],
     ),
@@ -84,7 +81,7 @@ class _ReleaseNotesState extends State<_ReleaseNotes> {
           onPressed: () => setState(() => _expanded = !_expanded),
           iconAlignment: IconAlignment.end,
           icon: Icon(_expanded ? Icons.expand_less : Icons.chevron_right),
-          label: const Text('Release notes'),
+          label: Text(context.l10n.releaseNotes),
         ),
         if (_expanded)
           Container(
@@ -125,12 +122,25 @@ class _DownloadDialogState extends State<_DownloadDialog> {
             setState(() => _percent = percent);
           case InstallerOpened():
             _close(null);
-          case InstallFailed(:final message):
-            _close(message);
+          case InstallFailed(:final reason):
+            _close(_failureMessage(reason));
         }
       },
-      onError: (Object error) => _close('Erro ao baixar a atualização: $error'),
+      onError: (Object _) {
+        if (mounted) _close(context.l10n.updateDownloadFailed);
+      },
     );
+  }
+
+  String _failureMessage(InstallFailure reason) {
+    final l10n = context.l10n;
+    return switch (reason) {
+      InstallFailure.permissionNeeded => l10n.installPermissionNeeded,
+      InstallFailure.downloadFailed => l10n.updateDownloadFailed,
+      InstallFailure.canceled => l10n.updateCanceled,
+      InstallFailure.alreadyRunning => l10n.updateAlreadyRunning,
+      InstallFailure.unknown => l10n.updateInstallFailed,
+    };
   }
 
   void _close(String? failure) {
@@ -150,7 +160,7 @@ class _DownloadDialogState extends State<_DownloadDialog> {
     final percent = _percent;
 
     return AlertDialog(
-      title: const Text('Baixando atualização'),
+      title: Text(context.l10n.downloadingUpdate),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: 12,
@@ -158,7 +168,7 @@ class _DownloadDialogState extends State<_DownloadDialog> {
           LinearProgressIndicator(
             value: percent == null ? null : percent / 100,
           ),
-          Text(percent == null ? 'Iniciando…' : '$percent%'),
+          Text(percent == null ? context.l10n.startingDownload : '$percent%'),
         ],
       ),
     );

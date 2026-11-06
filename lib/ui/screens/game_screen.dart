@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/question.dart';
+import '../../l10n/l10n.dart';
 import '../../state/game_controller.dart';
 import '../../state/seen_questions.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/table_theme.dart';
 import '../widgets/play_button.dart';
 import '../widgets/question_card.dart';
+import '../widgets/raised_box.dart';
+import '../widgets/screen_header.dart';
+import '../widgets/table_scaffold.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({
@@ -48,20 +53,17 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-          child: ListenableBuilder(
-            listenable: _controller,
-            builder: (context, _) => Column(
-              children: [
-                _TopBar(round: _controller.round, rounds: _controller.rounds),
-                Expanded(child: Center(child: _buildCenter())),
-                _buildActions(),
-              ],
-            ),
+    return TableScaffold(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+        child: ListenableBuilder(
+          listenable: _controller,
+          builder: (context, _) => Column(
+            children: [
+              _TopBar(round: _controller.round, rounds: _controller.rounds),
+              Expanded(child: Center(child: _buildCenter())),
+              _buildActions(),
+            ],
           ),
         ),
       ),
@@ -71,14 +73,13 @@ class _GameScreenState extends State<GameScreen> {
   Widget _buildCenter() {
     final question = _controller.current;
     return switch (_controller.status) {
-      GameStatus.outOfQuestions => const _Message(
-        title: 'Acabaram as perguntas!',
-        body: 'Todas as perguntas escolhidas para esta partida já saíram.',
+      GameStatus.outOfQuestions => _Message(
+        title: context.l10n.outOfQuestionsTitle,
+        body: context.l10n.outOfQuestionsBody,
       ),
       GameStatus.finished => _Message(
-        title: 'Fim da partida!',
-        body: '${_controller.round} rodadas jogadas. Quem ficou com mais '
-            'cartas é o pato da mesa.',
+        title: context.l10n.gameOverTitle,
+        body: context.l10n.gameOverBody(_controller.round),
       ),
       GameStatus.question || GameStatus.revealed => AnimatedSwitcher(
         duration: const Duration(milliseconds: 350),
@@ -101,8 +102,8 @@ class _GameScreenState extends State<GameScreen> {
   Widget _buildActions() {
     final back = PlayButton(
       key: const ValueKey('back'),
-      label: 'VOLTAR',
-      color: AppColors.cream,
+      label: context.l10n.backButton,
+      gradient: AppColors.paperGradient,
       textColor: AppColors.ink,
       pulse: false,
       tilt: 0,
@@ -115,21 +116,21 @@ class _GameScreenState extends State<GameScreen> {
           PlayButton(
             key: const ValueKey('reveal'),
             label: 'NEM A PATO!',
-            color: AppColors.yellow,
-            textColor: AppColors.ink,
+            gradient: AppColors.actionGradient,
+            textColor: AppColors.white,
             tilt: 0,
             expand: true,
             onPressed: _controller.reveal,
           ),
         ],
-        'Gritou? Toque para revelar',
+        context.l10n.revealHint,
       ),
       GameStatus.revealed => (
         [
           PlayButton(
             key: const ValueKey('next'),
-            label: 'PRÓXIMA',
-            color: AppColors.cream,
+            label: context.l10n.nextButton,
+            gradient: AppColors.paperGradient,
             textColor: AppColors.ink,
             pulse: false,
             tilt: 0,
@@ -137,15 +138,15 @@ class _GameScreenState extends State<GameScreen> {
             onPressed: _controller.nextQuestion,
           ),
         ],
-        'Quem errou fica com a carta',
+        context.l10n.nextHint,
       ),
       GameStatus.finished => (
         [
           PlayButton(
             key: const ValueKey('again'),
-            label: 'JOGAR DE NOVO',
-            color: AppColors.yellow,
-            textColor: AppColors.ink,
+            label: context.l10n.playAgainButton,
+            gradient: AppColors.actionGradient,
+            textColor: AppColors.white,
             tilt: 0,
             expand: true,
             onPressed: _controller.start,
@@ -153,7 +154,7 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(height: 16),
           back,
         ],
-        'Mesmas escolhas, perguntas novas',
+        context.l10n.playAgainHint,
       ),
       GameStatus.outOfQuestions => ([back], ''),
     };
@@ -162,7 +163,7 @@ class _GameScreenState extends State<GameScreen> {
       children: [
         ...buttons,
         const SizedBox(height: 14),
-        Text(hint, style: AppTextStyles.hint),
+        Text(hint, style: TableTheme.of(context).hintStyle),
       ],
     );
   }
@@ -177,29 +178,25 @@ class _TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final total = rounds;
+    final theme = TableTheme.of(context);
     return Row(
       children: [
-        IconButton(
-          onPressed: () => Navigator.of(context).maybePop(),
-          tooltip: 'Voltar',
-          style: IconButton.styleFrom(
-            foregroundColor: AppColors.cream,
-            side: const BorderSide(color: AppColors.cream, width: 2),
-          ),
-          icon: const Icon(Icons.arrow_back),
-        ),
+        const RaisedBackButton(),
         const Spacer(),
         if (round > 0)
-          Container(
+          RaisedBox(
+            colors: theme.pill,
+            radius: 999,
+            borderWidth: 2,
+            lipHeight: 3,
+            lipColor: theme.pillLip,
+            softShadow: false,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: AppColors.yellow,
-              borderRadius: BorderRadius.circular(999),
-              border: Border.all(color: AppColors.ink, width: 2),
-            ),
             child: Text(
-              total == null ? 'RODADA $round' : 'RODADA $round DE $total',
-              style: AppTextStyles.pill,
+              total == null
+                  ? context.l10n.round(round)
+                  : context.l10n.roundOfTotal(round, total),
+              style: AppTextStyles.pill.copyWith(color: theme.onPill),
             ),
           ),
         const Spacer(),
@@ -218,6 +215,7 @@ class _Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = TableTheme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -225,7 +223,7 @@ class _Message extends StatelessWidget {
           title,
           textAlign: TextAlign.center,
           style: AppTextStyles.category.copyWith(
-            color: AppColors.yellow,
+            color: theme.onTable,
             fontSize: 26,
             height: 1.2,
           ),
@@ -234,7 +232,7 @@ class _Message extends StatelessWidget {
         Text(
           body,
           textAlign: TextAlign.center,
-          style: AppTextStyles.hint.copyWith(fontSize: 15),
+          style: theme.hintStyle.copyWith(fontSize: 15),
         ),
       ],
     );

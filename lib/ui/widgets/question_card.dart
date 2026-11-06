@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../domain/question.dart';
+import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import 'raised_box.dart';
 
 /// The question card; flips in 3D to show the answer when [revealed].
 class QuestionCard extends StatefulWidget {
@@ -75,13 +77,13 @@ class _QuestionCardState extends State<QuestionCard>
 class _CardFrame extends StatelessWidget {
   const _CardFrame({
     required this.category,
-    required this.headerColor,
+    required this.headerColors,
     required this.headerTextColor,
     required this.child,
   });
 
   final String category;
-  final Color headerColor;
+  final List<Color> headerColors;
   final Color headerTextColor;
   final Widget child;
 
@@ -89,16 +91,12 @@ class _CardFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return RaisedBox(
+      colors: AppColors.paperGradient,
+      radius: _radius,
+      borderWidth: 3,
+      lipHeight: 6,
       constraints: const BoxConstraints(minHeight: 300),
-      decoration: BoxDecoration(
-        color: AppColors.cream,
-        borderRadius: BorderRadius.circular(_radius),
-        border: Border.all(color: AppColors.ink, width: 3),
-        boxShadow: const [
-          BoxShadow(color: AppColors.orange, offset: Offset(6, 6)),
-        ],
-      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(_radius - 3),
         child: Column(
@@ -106,7 +104,13 @@ class _CardFrame extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              color: headerColor,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: headerColors,
+                ),
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
               child: Text(
                 category.toUpperCase(),
@@ -131,7 +135,7 @@ class _QuestionFace extends StatelessWidget {
   Widget build(BuildContext context) {
     return _CardFrame(
       category: question.category,
-      headerColor: AppColors.yellow,
+      headerColors: AppColors.headerGradient,
       headerTextColor: AppColors.ink,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
@@ -155,13 +159,13 @@ class _AnswerFace extends StatelessWidget {
     final fact = question.fact;
     return _CardFrame(
       category: question.category,
-      headerColor: AppColors.ink,
+      headerColors: const [AppColors.ink, AppColors.ink],
       headerTextColor: AppColors.yellow,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'RESPOSTA',
+          Text(
+            context.l10n.answerLabel,
             textAlign: TextAlign.center,
             style: AppTextStyles.cardLabel,
           ),
@@ -176,7 +180,7 @@ class _AnswerFace extends StatelessWidget {
             Container(height: 2, color: AppColors.cardDivider),
             const SizedBox(height: 16),
             Text(
-              'CURIOSIDADE',
+              context.l10n.factLabel,
               style: AppTextStyles.cardLabel.copyWith(color: AppColors.orange),
             ),
             const SizedBox(height: 6),

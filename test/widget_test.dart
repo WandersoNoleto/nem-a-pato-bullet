@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nem_a_pato_bullet/app.dart';
 import 'package:nem_a_pato_bullet/app_dependencies.dart';
+import 'package:nem_a_pato_bullet/data/deck_files.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
+import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_setup_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
+import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/choice_pill.dart';
 
 // The home screen's play button pulses forever, so these tests step frames
 // instead of using pumpAndSettle, which would never settle.
@@ -31,8 +35,13 @@ final _decks = [
   ),
 ];
 
-AppDependencies _dependencies() =>
-    AppDependencies(loadDecks: () async => _decks, seen: SeenQuestions());
+AppDependencies _dependencies() => AppDependencies(
+  loadDecks: () async => _decks,
+  importDeck: (source) async => Deck.fromJsonString(source),
+  deckFiles: const DeckFiles(),
+  language: LanguageController(code: 'pt', save: (_) async {}),
+  seen: SeenQuestions(),
+);
 
 /// Steps frames until the loading screen is gone, failing if that takes
 /// noticeably longer than its duration plus the fade to home.
@@ -120,5 +129,33 @@ void main() {
 
     expect(find.byType(GameScreen), findsOneWidget);
     expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('the gear on home opens the settings', (tester) async {
+    await _pastLoading(tester);
+
+    await tester.tap(find.byTooltip('Configurações'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    expect(find.byType(SettingsScreen), findsOneWidget);
+    expect(find.text('Importar baralho'), findsOneWidget);
+    expect(find.text('Espaço'), findsOneWidget);
+    expect(find.text('Mar'), findsOneWidget);
+  });
+
+  testWidgets('choosing a language marks it as selected', (tester) async {
+    await _pastLoading(tester);
+    await tester.tap(find.byTooltip('Configurações'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    await tester.tap(find.text('English'));
+    await tester.pump();
+
+    final pill = tester.widget<ChoicePill>(
+      find.widgetWithText(ChoicePill, 'English'),
+    );
+    expect(pill.selected, isTrue);
   });
 }

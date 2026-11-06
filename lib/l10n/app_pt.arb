@@ -1,0 +1,175 @@
+{
+  "@@locale": "pt",
+  "back": "Voltar",
+  "settingsTooltip": "Configurações",
+  "playButton": "JOGAR",
+  "credits": "Inspirado em \"Nem a Pato!\", de Rodrigo Rego · Grok Games",
+  "updateAvailable": "Atualização disponível!",
+  "outOfQuestionsTitle": "Acabaram as perguntas!",
+  "outOfQuestionsBody": "Todas as perguntas escolhidas para esta partida já saíram.",
+  "gameOverTitle": "Fim da partida!",
+  "gameOverBody": "{count, plural, =1{1 rodada jogada} other{{count} rodadas jogadas}}. Quem ficou com mais cartas é o pato da mesa.",
+  "@gameOverBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "backButton": "VOLTAR",
+  "revealHint": "Gritou? Toque para revelar",
+  "nextButton": "PRÓXIMA",
+  "nextHint": "Quem errou fica com a carta",
+  "playAgainButton": "JOGAR DE NOVO",
+  "playAgainHint": "Mesmas escolhas, perguntas novas",
+  "round": "RODADA {round}",
+  "@round": {
+    "placeholders": {
+      "round": {
+        "type": "int"
+      }
+    }
+  },
+  "roundOfTotal": "RODADA {round} DE {total}",
+  "@roundOfTotal": {
+    "placeholders": {
+      "round": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "answerLabel": "RESPOSTA",
+  "factLabel": "CURIOSIDADE",
+  "settingsTitle": "CONFIGURAÇÕES",
+  "updatesSection": "ATUALIZAÇÕES",
+  "languageSection": "IDIOMA",
+  "decksSection": "BARALHOS",
+  "checkForUpdates": "Procurar atualização",
+  "checkingForUpdates": "Procurando…",
+  "versionLabel": "Versão {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "upToDate": "Você já está na versão mais recente.",
+  "updateCheckFailed": "Não deu para procurar atualização. Verifique a internet e tente de novo.",
+  "importDeck": "Importar baralho",
+  "importDeckHint": "Adicionar de um arquivo JSON",
+  "deckImported": "Baralho \"{name}\" importado com {count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}.",
+  "@deckImported": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "invalidDeckFile": "Esse arquivo não é um baralho válido.",
+  "importFailed": "Não deu para importar esse arquivo.",
+  "deckExported": "Baralho \"{name}\" exportado.",
+  "@deckExported": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "exportFailed": "Não deu para exportar esse baralho.",
+  "questionCount": "{count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}",
+  "@questionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "setupTitle": "PREPARAR PARTIDA",
+  "noCategoryChosen": "Escolha pelo menos uma categoria.",
+  "decksLoadFailed": "Não deu para carregar os baralhos.",
+  "roundsSection": "RODADAS",
+  "categoriesSection": "CATEGORIAS",
+  "categoriesDetail": "{selected} de {total}",
+  "@categoriesDetail": {
+    "placeholders": {
+      "selected": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "infiniteRounds": "Infinitas",
+  "customRounds": "Outra quantidade",
+  "customRoundsTitle": "Quantas rodadas?",
+  "customRoundsError": "Digite um número de 1 a {max}",
+  "@customRoundsError": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "cancel": "Cancelar",
+  "ok": "OK",
+  "deckTileLabel": "Baralho {name}, {count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}",
+  "@deckTileLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noCategories": "Nenhuma categoria escolhida",
+  "searchCategory": "Buscar categoria para adicionar",
+  "allCategoriesInGame": "Todas as categorias já estão na partida",
+  "noCategoryFound": "Nenhuma categoria encontrada",
+  "selectAll": "Selecionar todas",
+  "removeCategory": "Remover {name}",
+  "@removeCategory": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unseenCount": "{count, plural, =0{Nenhuma pergunta inédita com essas escolhas} =1{1 pergunta inédita} other{{count} perguntas inéditas}}",
+  "@unseenCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "startButton": "COMEÇAR",
+  "updateDialogTitle": "Nova versão disponível",
+  "updateDialogBody": "A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.",
+  "@updateDialogBody": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "later": "Depois",
+  "update": "Atualizar",
+  "releaseNotes": "Release notes",
+  "downloadingUpdate": "Baixando atualização",
+  "startingDownload": "Iniciando…",
+  "installPermissionNeeded": "Permita que este app instale atualizações: Configurações do Android > Apps > Nem a Pato! Bullet > Instalar apps desconhecidos. Depois tente de novo.",
+  "updateDownloadFailed": "Falha ao baixar a atualização. Verifique a internet e tente de novo.",
+  "updateCanceled": "Atualização cancelada.",
+  "updateAlreadyRunning": "Uma atualização já está em andamento.",
+  "updateInstallFailed": "Erro ao instalar a atualização."
+}
