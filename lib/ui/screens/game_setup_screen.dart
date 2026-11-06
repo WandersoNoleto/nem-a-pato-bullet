@@ -7,11 +7,14 @@ import '../../domain/deck.dart';
 import '../../state/game_setup_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/table_theme.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/play_button.dart';
+import '../widgets/raised_box.dart';
 import '../widgets/screen_header.dart';
 import '../widgets/section_label.dart';
+import '../widgets/table_scaffold.dart';
 import 'game_screen.dart';
 
 /// "Preparar partida": rounds, decks and categories, before the game.
@@ -65,37 +68,35 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: ListenableBuilder(
-          listenable: _controller,
-          builder: (context, _) => Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
-                child: ScreenHeader(title: 'PREPARAR PARTIDA'),
-              ),
-              Expanded(child: _buildBody()),
-              if (_controller.status == SetupStatus.ready)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
-                  child: _StartArea(
-                    unseenCount: _controller.unseenCount,
-                    onStart: _start,
-                  ),
+    return TableScaffold(
+      child: ListenableBuilder(
+        listenable: _controller,
+        builder: (context, _) => Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
+              child: ScreenHeader(title: 'PREPARAR PARTIDA'),
+            ),
+            Expanded(child: _buildBody()),
+            if (_controller.status == SetupStatus.ready)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+                child: _StartArea(
+                  unseenCount: _controller.unseenCount,
+                  onStart: _start,
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildBody() {
+    final theme = TableTheme.of(context);
     return switch (_controller.status) {
-      SetupStatus.loading => const Center(
-        child: CircularProgressIndicator(color: AppColors.yellow),
+      SetupStatus.loading => Center(
+        child: CircularProgressIndicator(color: theme.onTable),
       ),
       SetupStatus.error => Center(
         child: Padding(
@@ -103,7 +104,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
           child: Text(
             'Não deu para carregar os baralhos.',
             textAlign: TextAlign.center,
-            style: AppTextStyles.hint.copyWith(fontSize: 15),
+            style: theme.hintStyle.copyWith(fontSize: 15),
           ),
         ),
       ),
@@ -279,31 +280,41 @@ class _DeckTile extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              width: 100,
-              padding: const EdgeInsets.fromLTRB(8, 14, 8, 10),
-              decoration: BoxDecoration(
-                color: selected ? AppColors.yellow : AppColors.cream,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.ink, width: 2),
-              ),
+            RaisedBox(
+              colors: selected
+                  ? AppColors.actionGradient
+                  : AppColors.paperGradient,
+              width: 118,
+              lipHeight: 4,
+              softShadow: false,
+              padding: const EdgeInsets.fromLTRB(6, 14, 6, 10),
               child: Column(
                 children: [
                   DeckIcon(deck: deck, size: 36),
                   const SizedBox(height: 8),
-                  Text(
-                    deck.name,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.credits.copyWith(fontSize: 12),
+                  // Room for two lines, so every tile has the same height.
+                  SizedBox(
+                    height: 34,
+                    child: Center(
+                      child: Text(
+                        deck.name,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.credits.copyWith(
+                          fontSize: 11,
+                          color: selected ? AppColors.white : AppColors.ink,
+                        ),
+                      ),
+                    ),
                   ),
                   Text(
                     count == 1 ? '1 pergunta' : '$count perguntas',
                     style: AppTextStyles.credits.copyWith(
                       fontSize: 10,
-                      color: AppColors.cardMuted,
+                      color: selected
+                          ? AppColors.mutedOnAction
+                          : AppColors.cardMuted,
                     ),
                   ),
                 ],
@@ -371,6 +382,7 @@ class _CategoryPickerState extends State<_CategoryPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = TableTheme.of(context);
     final controller = widget.controller;
     final selected = controller.selectedCategories;
     final removed = controller.removedCategories;
@@ -384,13 +396,9 @@ class _CategoryPickerState extends State<_CategoryPicker> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Container(
+        RaisedBox(
+          colors: AppColors.paperGradient,
           padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: AppColors.cream,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.ink, width: 2),
-          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -475,14 +483,12 @@ class _CategoryPickerState extends State<_CategoryPicker> {
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: controller.selectAllCategories,
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.mutedOnBlack,
-              ),
+              style: TextButton.styleFrom(foregroundColor: theme.hint),
               child: Text(
                 'Selecionar todas',
-                style: AppTextStyles.hint.copyWith(
+                style: theme.hintStyle.copyWith(
                   decoration: TextDecoration.underline,
-                  decorationColor: AppColors.mutedOnBlack,
+                  decorationColor: theme.hint,
                 ),
               ),
             ),
@@ -506,13 +512,13 @@ class _CategoryTag extends StatelessWidget {
       excludeSemantics: true,
       child: GestureDetector(
         onTap: onRemove,
-        child: Container(
+        child: RaisedBox(
+          colors: AppColors.headerGradient,
+          radius: 999,
+          borderWidth: 2,
+          lipHeight: 2,
+          softShadow: false,
           padding: const EdgeInsets.fromLTRB(12, 6, 8, 6),
-          decoration: BoxDecoration(
-            color: AppColors.yellow,
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: AppColors.ink, width: 2),
-          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -547,15 +553,15 @@ class _StartArea extends StatelessWidget {
       children: [
         PlayButton(
           label: 'COMEÇAR',
-          color: AppColors.yellow,
-          textColor: AppColors.ink,
+          gradient: AppColors.actionGradient,
+          textColor: AppColors.white,
           pulse: false,
           tilt: 0,
           expand: true,
           onPressed: onStart,
         ),
         const SizedBox(height: 12),
-        Text(hint, style: AppTextStyles.hint),
+        Text(hint, style: TableTheme.of(context).hintStyle),
       ],
     );
   }

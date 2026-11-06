@@ -7,7 +7,9 @@ import '../theme/app_text_styles.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/screen_header.dart';
+import '../widgets/raised_box.dart';
 import '../widgets/section_label.dart';
+import '../widgets/table_scaffold.dart';
 
 /// App settings: updates, language and deck import/export.
 ///
@@ -39,74 +41,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
-              child: ScreenHeader(title: 'CONFIGURAÇÕES'),
-            ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-                children: [
-                  const SectionLabel('ATUALIZAÇÕES'),
-                  _Panel(
-                    children: [
-                      _ActionRow(
-                        icon: Icons.system_update_outlined,
-                        title: 'Procurar atualização',
-                        subtitle: 'Versão 1.0.0',
-                        onTap: () => _showMessage(
-                          'Você já está na versão mais recente.',
+    return TableScaffold(
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 12, 20, 8),
+            child: ScreenHeader(title: 'CONFIGURAÇÕES'),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+              children: [
+                const SectionLabel('ATUALIZAÇÕES'),
+                _Panel(
+                  children: [
+                    _ActionRow(
+                      icon: Icons.system_update_outlined,
+                      title: 'Procurar atualização',
+                      subtitle: 'Versão 1.0.0',
+                      onTap: () =>
+                          _showMessage('Você já está na versão mais recente.'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 28),
+                const SectionLabel('IDIOMA'),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final language in _languages)
+                      ChoicePill(
+                        label: language.name,
+                        leading: Text(
+                          language.flag,
+                          style: const TextStyle(fontSize: 18, height: 1),
                         ),
+                        selected: _language == language.code,
+                        onTap: () => setState(() => _language = language.code),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 28),
-                  const SectionLabel('IDIOMA'),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      for (final language in _languages)
-                        ChoicePill(
-                          label: language.name,
-                          leading: Text(
-                            language.flag,
-                            style: const TextStyle(fontSize: 18, height: 1),
-                          ),
-                          selected: _language == language.code,
-                          onTap: () =>
-                              setState(() => _language = language.code),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 28),
-                  const SectionLabel('BARALHOS'),
-                  _Panel(
-                    children: [
-                      _ActionRow(
-                        icon: Icons.file_download_outlined,
-                        title: 'Importar baralho',
-                        subtitle: 'Adicionar de um arquivo JSON',
-                        onTap: () => _showMessage('Baralho importado.'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  _ExportPanel(
-                    decks: _decks,
-                    onExport: (deck) =>
-                        _showMessage('Baralho "${deck.name}" exportado.'),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+                const SizedBox(height: 28),
+                const SectionLabel('BARALHOS'),
+                _Panel(
+                  children: [
+                    _ActionRow(
+                      icon: Icons.file_download_outlined,
+                      title: 'Importar baralho',
+                      subtitle: 'Adicionar de um arquivo JSON',
+                      onTap: () => _showMessage('Baralho importado.'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                _ExportPanel(
+                  decks: _decks,
+                  onExport: (deck) =>
+                      _showMessage('Baralho "${deck.name}" exportado.'),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -120,28 +117,26 @@ class _Panel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: AppColors.cream,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.ink, width: 2),
-      ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (final (index, child) in children.indexed) ...[
-              if (index > 0)
-                const Divider(
-                  height: 1.5,
-                  thickness: 1.5,
-                  color: AppColors.cardDivider,
-                ),
-              child,
+    return RaisedBox(
+      colors: AppColors.paperGradient,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Material(
+          type: MaterialType.transparency,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final (index, child) in children.indexed) ...[
+                if (index > 0)
+                  const Divider(
+                    height: 1.5,
+                    thickness: 1.5,
+                    color: AppColors.cardDivider,
+                  ),
+                child,
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

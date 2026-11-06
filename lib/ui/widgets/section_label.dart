@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/table_theme.dart';
 
-/// Title of a section on the black screens, with an optional muted detail.
+/// Title of a section on the table screens, with an optional muted detail.
 class SectionLabel extends StatelessWidget {
   const SectionLabel(this.text, {super.key, this.detail});
 
@@ -13,6 +13,7 @@ class SectionLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final detail = this.detail;
+    final theme = TableTheme.of(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Text.rich(
@@ -20,10 +21,10 @@ class SectionLabel extends StatelessWidget {
           text: text,
           children: [
             if (detail != null)
-              TextSpan(text: '  ·  $detail', style: AppTextStyles.hint),
+              TextSpan(text: '  ·  $detail', style: theme.hintStyle),
           ],
         ),
-        style: AppTextStyles.pill.copyWith(color: AppColors.cream),
+        style: AppTextStyles.pill.copyWith(color: theme.onTable),
       ),
     );
   }
