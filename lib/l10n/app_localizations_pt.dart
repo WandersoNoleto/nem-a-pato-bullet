@@ -30,7 +30,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get outOfQuestionsBody =>
-      'Todas as perguntas escolhidas para esta partida já saíram.';
+      'Todas as perguntas escolhidas para esta partida já saíram. Devolva as cartas ao baralho nas configurações para jogar com elas de novo.';
 
   @override
   String get gameOverTitle => 'Fim da partida!';
@@ -231,9 +231,9 @@ class AppLocalizationsPt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count perguntas inéditas',
-      one: '1 pergunta inédita',
-      zero: 'Nenhuma pergunta inédita com essas escolhas',
+      other: '$count cartas no baralho',
+      one: '1 carta no baralho',
+      zero: 'Nenhuma carta no baralho. Devolva as cartas nas configurações',
     );
     return '$_temp0';
   }
@@ -280,4 +280,46 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get updateInstallFailed => 'Erro ao instalar a atualização.';
+
+  @override
+  String get historySection => 'HISTÓRICO';
+
+  @override
+  String get resetHistory => 'Devolver cartas ao baralho';
+
+  @override
+  String seenCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cartas fora do baralho por uso',
+      one: '1 carta fora do baralho por uso',
+      zero: 'Nenhuma carta fora do baralho',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryTitle => 'Devolver cartas ao baralho?';
+
+  @override
+  String resetHistoryBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'As $count cartas que já saíram voltam ao baralho e podem aparecer de novo.',
+      one: 'A carta que já saiu volta ao baralho e pode aparecer de novo.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryConfirm => 'Devolver';
+
+  @override
+  String get historyReset => 'Cartas devolvidas. Todas podem aparecer de novo.';
+
+  @override
+  String get historyEmpty => 'Nenhuma carta fora do baralho.';
 }

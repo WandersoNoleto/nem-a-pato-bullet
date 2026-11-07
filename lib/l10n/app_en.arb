@@ -6,7 +6,7 @@
   "credits": "Inspired by \"Nem a Pato!\" by Rodrigo Rego · Grok Games",
   "updateAvailable": "Update available!",
   "outOfQuestionsTitle": "Out of questions!",
-  "outOfQuestionsBody": "Every question chosen for this game has already come up.",
+  "outOfQuestionsBody": "Every question chosen for this game has already come up. Return the cards to the deck in settings to play them again.",
   "gameOverTitle": "Game over!",
   "gameOverBody": "{count, plural, =1{1 round played} other{{count} rounds played}}. Whoever has the most cards is the duck of the table.",
   "backButton": "BACK",
@@ -55,7 +55,7 @@
   "noCategoryFound": "No category found",
   "selectAll": "Select all",
   "removeCategory": "Remove {name}",
-  "unseenCount": "{count, plural, =0{No new questions with these choices} =1{1 new question} other{{count} new questions}}",
+  "unseenCount": "{count, plural, =0{No cards in the deck. Return the cards in settings} =1{1 card in the deck} other{{count} cards in the deck}}",
   "startButton": "START",
   "updateDialogTitle": "New version available",
   "updateDialogBody": "Version v{version} of Nem a Pato! Bullet is available.\n\nTap \"Update\" to install what's new.",
@@ -68,5 +68,13 @@
   "updateDownloadFailed": "Could not download the update. Check your connection and try again.",
   "updateCanceled": "Update canceled.",
   "updateAlreadyRunning": "An update is already in progress.",
-  "updateInstallFailed": "Could not install the update."
+  "updateInstallFailed": "Could not install the update.",
+  "historySection": "HISTORY",
+  "resetHistory": "Return cards to the deck",
+  "seenCount": "{count, plural, =0{No cards out of the deck} =1{1 card out of the deck from use} other{{count} cards out of the deck from use}}",
+  "resetHistoryTitle": "Return cards to the deck?",
+  "resetHistoryBody": "{count, plural, =1{The card that came up goes back to the deck and can appear again.} other{The {count} cards that came up go back to the deck and can appear again.}}",
+  "resetHistoryConfirm": "Return",
+  "historyReset": "Cards returned. Every card can come up again.",
+  "historyEmpty": "No cards are out of the deck."
 }

@@ -6,7 +6,7 @@
   "credits": "Inspirado em \"Nem a Pato!\", de Rodrigo Rego · Grok Games",
   "updateAvailable": "Atualização disponível!",
   "outOfQuestionsTitle": "Acabaram as perguntas!",
-  "outOfQuestionsBody": "Todas as perguntas escolhidas para esta partida já saíram.",
+  "outOfQuestionsBody": "Todas as perguntas escolhidas para esta partida já saíram. Devolva as cartas ao baralho nas configurações para jogar com elas de novo.",
   "gameOverTitle": "Fim da partida!",
   "gameOverBody": "{count, plural, =1{1 rodada jogada} other{{count} rodadas jogadas}}. Quem ficou com mais cartas é o pato da mesa.",
   "@gameOverBody": {
@@ -144,7 +144,7 @@
       }
     }
   },
-  "unseenCount": "{count, plural, =0{Nenhuma pergunta inédita com essas escolhas} =1{1 pergunta inédita} other{{count} perguntas inéditas}}",
+  "unseenCount": "{count, plural, =0{Nenhuma carta no baralho. Devolva as cartas nas configurações} =1{1 carta no baralho} other{{count} cartas no baralho}}",
   "@unseenCount": {
     "placeholders": {
       "count": {
@@ -171,5 +171,27 @@
   "updateDownloadFailed": "Falha ao baixar a atualização. Verifique a internet e tente de novo.",
   "updateCanceled": "Atualização cancelada.",
   "updateAlreadyRunning": "Uma atualização já está em andamento.",
-  "updateInstallFailed": "Erro ao instalar a atualização."
+  "updateInstallFailed": "Erro ao instalar a atualização.",
+  "historySection": "HISTÓRICO",
+  "resetHistory": "Devolver cartas ao baralho",
+  "seenCount": "{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta fora do baralho por uso} other{{count} cartas fora do baralho por uso}}",
+  "@seenCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resetHistoryTitle": "Devolver cartas ao baralho?",
+  "resetHistoryBody": "{count, plural, =1{A carta que já saiu volta ao baralho e pode aparecer de novo.} other{As {count} cartas que já saíram voltam ao baralho e podem aparecer de novo.}}",
+  "@resetHistoryBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resetHistoryConfirm": "Devolver",
+  "historyReset": "Cartas devolvidas. Todas podem aparecer de novo.",
+  "historyEmpty": "Nenhuma carta fora do baralho."
 }

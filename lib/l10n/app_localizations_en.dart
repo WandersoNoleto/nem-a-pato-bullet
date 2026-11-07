@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get outOfQuestionsBody =>
-      'Every question chosen for this game has already come up.';
+      'Every question chosen for this game has already come up. Return the cards to the deck in settings to play them again.';
 
   @override
   String get gameOverTitle => 'Game over!';
@@ -231,9 +231,9 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count new questions',
-      one: '1 new question',
-      zero: 'No new questions with these choices',
+      other: '$count cards in the deck',
+      one: '1 card in the deck',
+      zero: 'No cards in the deck. Return the cards in settings',
     );
     return '$_temp0';
   }
@@ -280,4 +280,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateInstallFailed => 'Could not install the update.';
+
+  @override
+  String get historySection => 'HISTORY';
+
+  @override
+  String get resetHistory => 'Return cards to the deck';
+
+  @override
+  String seenCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cards out of the deck from use',
+      one: '1 card out of the deck from use',
+      zero: 'No cards out of the deck',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryTitle => 'Return cards to the deck?';
+
+  @override
+  String resetHistoryBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'The $count cards that came up go back to the deck and can appear again.',
+      one: 'The card that came up goes back to the deck and can appear again.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryConfirm => 'Return';
+
+  @override
+  String get historyReset => 'Cards returned. Every card can come up again.';
+
+  @override
+  String get historyEmpty => 'No cards are out of the deck.';
 }

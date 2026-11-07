@@ -16,7 +16,7 @@ import '../widgets/raised_box.dart';
 import '../widgets/section_label.dart';
 import '../widgets/table_scaffold.dart';
 
-/// App settings: updates, language and deck import/export.
+/// App settings: updates, language, question history and decks.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.dependencies});
 
@@ -61,6 +61,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } finally {
       if (mounted) setState(() => _importing = false);
     }
+  }
+
+  Future<void> _resetHistory() async {
+    final seen = widget.dependencies.seen;
+    if (seen.count == 0) {
+      _showMessage(context.l10n.historyEmpty);
+      return;
+    }
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.resetHistoryTitle),
+        content: Text(context.l10n.resetHistoryBody(seen.count)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(context.l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(context.l10n.resetHistoryConfirm),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    setState(seen.clear);
+    _showMessage(context.l10n.historyReset);
   }
 
   Future<void> _exportDeck(Deck deck) async {
@@ -112,6 +140,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onTap: () =>
                             widget.dependencies.language.setCode(language.code),
                       ),
+                  ],
+                ),
+                const SizedBox(height: 28),
+                SectionLabel(context.l10n.historySection),
+                _Panel(
+                  children: [
+                    _ActionRow(
+                      icon: Icons.restart_alt,
+                      title: context.l10n.resetHistory,
+                      subtitle: context.l10n.seenCount(
+                        widget.dependencies.seen.count,
+                      ),
+                      onTap: _resetHistory,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 28),
