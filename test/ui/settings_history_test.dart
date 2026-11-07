@@ -40,7 +40,7 @@ void main() {
   testWidgets('shows how many questions came up', (tester) async {
     await _pumpSettings(tester, SeenQuestions(initial: ['a', 'b', 'c']));
 
-    expect(find.text('3 cartas fora do baralho por uso'), findsOneWidget);
+    expect(find.text('3 cartas usadas fora do baralho'), findsOneWidget);
   });
 
   testWidgets('resetting after confirming clears the history', (tester) async {

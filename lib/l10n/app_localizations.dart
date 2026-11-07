@@ -527,7 +527,7 @@ abstract class AppLocalizations {
   /// No description provided for @seenCount.
   ///
   /// In pt, this message translates to:
-  /// **'{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta fora do baralho por uso} other{{count} cartas fora do baralho por uso}}'**
+  /// **'{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta usada fora do baralho} other{{count} cartas usadas fora do baralho}}'**
   String seenCount(int count);
 
   /// No description provided for @resetHistoryTitle.

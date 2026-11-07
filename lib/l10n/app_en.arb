@@ -71,7 +71,7 @@
   "updateInstallFailed": "Could not install the update.",
   "historySection": "HISTORY",
   "resetHistory": "Return all cards to the deck",
-  "seenCount": "{count, plural, =0{No cards out of the deck} =1{1 card out of the deck from use} other{{count} cards out of the deck from use}}",
+  "seenCount": "{count, plural, =0{No cards out of the deck} =1{1 used card out of the deck} other{{count} used cards out of the deck}}",
   "resetHistoryTitle": "Return all cards to the deck?",
   "resetHistoryBody": "{count, plural, =1{The card that came up goes back to the deck and can appear again, in any deck.} other{The {count} cards that came up go back to the deck and can appear again, in every deck.}}",
   "resetHistoryConfirm": "Return",

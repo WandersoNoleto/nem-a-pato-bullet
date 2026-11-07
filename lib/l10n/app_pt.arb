@@ -174,7 +174,7 @@
   "updateInstallFailed": "Erro ao instalar a atualização.",
   "historySection": "HISTÓRICO",
   "resetHistory": "Devolver todas as cartas ao baralho",
-  "seenCount": "{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta fora do baralho por uso} other{{count} cartas fora do baralho por uso}}",
+  "seenCount": "{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta usada fora do baralho} other{{count} cartas usadas fora do baralho}}",
   "@seenCount": {
     "placeholders": {
       "count": {

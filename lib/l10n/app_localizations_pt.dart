@@ -292,8 +292,8 @@ class AppLocalizationsPt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count cartas fora do baralho por uso',
-      one: '1 carta fora do baralho por uso',
+      other: '$count cartas usadas fora do baralho',
+      one: '1 carta usada fora do baralho',
       zero: 'Nenhuma carta fora do baralho',
     );
     return '$_temp0';
