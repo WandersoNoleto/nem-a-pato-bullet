@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get outOfQuestionsBody =>
-      'Every card chosen for this game has already come up. Return the cards to the deck to keep playing.';
+      'Every card chosen for this game has already come up. Return this game\'s cards to the deck to keep playing.';
 
   @override
   String get gameOverTitle => 'Game over!';
@@ -285,7 +285,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get historySection => 'HISTORY';
 
   @override
-  String get resetHistory => 'Return cards to the deck';
+  String get resetHistory => 'Return all cards to the deck';
 
   @override
   String seenCount(int count) {
@@ -300,7 +300,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get resetHistoryTitle => 'Return cards to the deck?';
+  String get resetHistoryTitle => 'Return all cards to the deck?';
 
   @override
   String resetHistoryBody(int count) {
@@ -308,8 +308,8 @@ class AppLocalizationsEn extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'The $count cards that came up go back to the deck and can appear again.',
-      one: 'The card that came up goes back to the deck and can appear again.',
+          'The $count cards that came up go back to the deck and can appear again, in every deck.',
+      one: 'The card that came up goes back to the deck and can appear again, in any deck.',
     );
     return '$_temp0';
   }
@@ -324,9 +324,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get historyEmpty => 'No cards are out of the deck.';
 
   @override
-  String get returnCardsButton => 'RETURN CARDS';
+  String get returnCardsButton => 'RETURN THIS GAME\'S CARDS';
 
   @override
   String get returnCardsHint =>
-      'Only the cards from this game go back to the deck';
+      'Cards from other decks and categories stay out';
 }

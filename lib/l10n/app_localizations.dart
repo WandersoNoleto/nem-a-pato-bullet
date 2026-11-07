@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @outOfQuestionsBody.
   ///
   /// In pt, this message translates to:
-  /// **'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas ao baralho para continuar jogando.'**
+  /// **'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas desta partida ao baralho para continuar jogando.'**
   String get outOfQuestionsBody;
 
   /// No description provided for @gameOverTitle.
@@ -521,7 +521,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetHistory.
   ///
   /// In pt, this message translates to:
-  /// **'Devolver cartas ao baralho'**
+  /// **'Devolver todas as cartas ao baralho'**
   String get resetHistory;
 
   /// No description provided for @seenCount.
@@ -533,13 +533,13 @@ abstract class AppLocalizations {
   /// No description provided for @resetHistoryTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Devolver cartas ao baralho?'**
+  /// **'Devolver todas as cartas ao baralho?'**
   String get resetHistoryTitle;
 
   /// No description provided for @resetHistoryBody.
   ///
   /// In pt, this message translates to:
-  /// **'{count, plural, =1{A carta que já saiu volta ao baralho e pode aparecer de novo.} other{As {count} cartas que já saíram voltam ao baralho e podem aparecer de novo.}}'**
+  /// **'{count, plural, =1{A carta que já saiu volta ao baralho e pode aparecer de novo, em qualquer baralho.} other{As {count} cartas que já saíram voltam ao baralho e podem aparecer de novo, em todos os baralhos.}}'**
   String resetHistoryBody(int count);
 
   /// No description provided for @resetHistoryConfirm.
@@ -563,13 +563,13 @@ abstract class AppLocalizations {
   /// No description provided for @returnCardsButton.
   ///
   /// In pt, this message translates to:
-  /// **'DEVOLVER CARTAS'**
+  /// **'DEVOLVER CARTAS DA PARTIDA'**
   String get returnCardsButton;
 
   /// No description provided for @returnCardsHint.
   ///
   /// In pt, this message translates to:
-  /// **'Só as cartas desta partida voltam ao baralho'**
+  /// **'Cartas de outros baralhos e categorias continuam fora'**
   String get returnCardsHint;
 }
 

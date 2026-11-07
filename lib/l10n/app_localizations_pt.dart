@@ -30,7 +30,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get outOfQuestionsBody =>
-      'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas ao baralho para continuar jogando.';
+      'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas desta partida ao baralho para continuar jogando.';
 
   @override
   String get gameOverTitle => 'Fim da partida!';
@@ -285,7 +285,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get historySection => 'HISTÓRICO';
 
   @override
-  String get resetHistory => 'Devolver cartas ao baralho';
+  String get resetHistory => 'Devolver todas as cartas ao baralho';
 
   @override
   String seenCount(int count) {
@@ -300,7 +300,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get resetHistoryTitle => 'Devolver cartas ao baralho?';
+  String get resetHistoryTitle => 'Devolver todas as cartas ao baralho?';
 
   @override
   String resetHistoryBody(int count) {
@@ -308,8 +308,8 @@ class AppLocalizationsPt extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'As $count cartas que já saíram voltam ao baralho e podem aparecer de novo.',
-      one: 'A carta que já saiu volta ao baralho e pode aparecer de novo.',
+          'As $count cartas que já saíram voltam ao baralho e podem aparecer de novo, em todos os baralhos.',
+      one: 'A carta que já saiu volta ao baralho e pode aparecer de novo, em qualquer baralho.',
     );
     return '$_temp0';
   }
@@ -324,8 +324,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get historyEmpty => 'Nenhuma carta fora do baralho.';
 
   @override
-  String get returnCardsButton => 'DEVOLVER CARTAS';
+  String get returnCardsButton => 'DEVOLVER CARTAS DA PARTIDA';
 
   @override
-  String get returnCardsHint => 'Só as cartas desta partida voltam ao baralho';
+  String get returnCardsHint =>
+      'Cartas de outros baralhos e categorias continuam fora';
 }

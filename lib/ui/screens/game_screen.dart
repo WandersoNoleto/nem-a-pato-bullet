@@ -168,10 +168,17 @@ class _GameScreenState extends State<GameScreen> {
             expand: true,
             onPressed: _controller.returnCards,
           ),
-          const SizedBox(height: 16),
+          // Right under its button, so it's clear which cards go back.
+          const SizedBox(height: 10),
+          Text(
+            context.l10n.returnCardsHint,
+            textAlign: TextAlign.center,
+            style: TableTheme.of(context).hintStyle,
+          ),
+          const SizedBox(height: 20),
           back,
         ],
-        context.l10n.returnCardsHint,
+        '',
       ),
     };
     return Column(

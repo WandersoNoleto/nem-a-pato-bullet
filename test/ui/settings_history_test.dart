@@ -47,8 +47,8 @@ void main() {
     final seen = SeenQuestions(initial: ['a', 'b']);
     await _pumpSettings(tester, seen);
 
-    await _tap(tester, 'Devolver cartas ao baralho');
-    expect(find.text('Devolver cartas ao baralho?'), findsOneWidget);
+    await _tap(tester, 'Devolver todas as cartas ao baralho');
+    expect(find.text('Devolver todas as cartas ao baralho?'), findsOneWidget);
     await _tap(tester, 'Devolver');
 
     expect(seen.count, 0);
@@ -63,7 +63,7 @@ void main() {
     final seen = SeenQuestions(initial: ['a', 'b']);
     await _pumpSettings(tester, seen);
 
-    await _tap(tester, 'Devolver cartas ao baralho');
+    await _tap(tester, 'Devolver todas as cartas ao baralho');
     await _tap(tester, 'Cancelar');
 
     expect(seen.count, 2);
@@ -72,9 +72,9 @@ void main() {
   testWidgets('says so when nothing came up yet', (tester) async {
     await _pumpSettings(tester, SeenQuestions());
 
-    await _tap(tester, 'Devolver cartas ao baralho');
+    await _tap(tester, 'Devolver todas as cartas ao baralho');
 
-    expect(find.text('Devolver cartas ao baralho?'), findsNothing);
+    expect(find.text('Devolver todas as cartas ao baralho?'), findsNothing);
     expect(find.text('Nenhuma carta fora do baralho.'), findsOneWidget);
   });
 }
