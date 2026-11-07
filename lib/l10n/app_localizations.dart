@@ -131,13 +131,13 @@ abstract class AppLocalizations {
   /// No description provided for @outOfQuestionsTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Acabaram as perguntas!'**
+  /// **'Acabaram as cartas!'**
   String get outOfQuestionsTitle;
 
   /// No description provided for @outOfQuestionsBody.
   ///
   /// In pt, this message translates to:
-  /// **'Todas as perguntas escolhidas para esta partida já saíram. Devolva as cartas ao baralho nas configurações para jogar com elas de novo.'**
+  /// **'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas ao baralho para continuar jogando.'**
   String get outOfQuestionsBody;
 
   /// No description provided for @gameOverTitle.
@@ -559,6 +559,18 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Nenhuma carta fora do baralho.'**
   String get historyEmpty;
+
+  /// No description provided for @returnCardsButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'DEVOLVER CARTAS'**
+  String get returnCardsButton;
+
+  /// No description provided for @returnCardsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só as cartas desta partida voltam ao baralho'**
+  String get returnCardsHint;
 }
 
 class _AppLocalizationsDelegate

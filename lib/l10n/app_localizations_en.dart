@@ -26,11 +26,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateAvailable => 'Update available!';
 
   @override
-  String get outOfQuestionsTitle => 'Out of questions!';
+  String get outOfQuestionsTitle => 'Out of cards!';
 
   @override
   String get outOfQuestionsBody =>
-      'Every question chosen for this game has already come up. Return the cards to the deck in settings to play them again.';
+      'Every card chosen for this game has already come up. Return the cards to the deck to keep playing.';
 
   @override
   String get gameOverTitle => 'Game over!';
@@ -322,4 +322,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyEmpty => 'No cards are out of the deck.';
+
+  @override
+  String get returnCardsButton => 'RETURN CARDS';
+
+  @override
+  String get returnCardsHint =>
+      'Only the cards from this game go back to the deck';
 }

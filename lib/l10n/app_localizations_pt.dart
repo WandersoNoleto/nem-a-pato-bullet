@@ -26,11 +26,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get updateAvailable => 'Atualização disponível!';
 
   @override
-  String get outOfQuestionsTitle => 'Acabaram as perguntas!';
+  String get outOfQuestionsTitle => 'Acabaram as cartas!';
 
   @override
   String get outOfQuestionsBody =>
-      'Todas as perguntas escolhidas para esta partida já saíram. Devolva as cartas ao baralho nas configurações para jogar com elas de novo.';
+      'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas ao baralho para continuar jogando.';
 
   @override
   String get gameOverTitle => 'Fim da partida!';
@@ -322,4 +322,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get historyEmpty => 'Nenhuma carta fora do baralho.';
+
+  @override
+  String get returnCardsButton => 'DEVOLVER CARTAS';
+
+  @override
+  String get returnCardsHint => 'Só as cartas desta partida voltam ao baralho';
 }

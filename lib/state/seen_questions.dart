@@ -22,6 +22,13 @@ class SeenQuestions {
     if (_ids.add(id)) _onChanged?.call(ids);
   }
 
+  /// Lets the questions with these [ids] come up again.
+  void removeAll(Iterable<String> ids) {
+    final before = _ids.length;
+    _ids.removeAll(ids);
+    if (_ids.length != before) _onChanged?.call(this.ids);
+  }
+
   /// Lets every question come up again.
   void clear() {
     if (_ids.isEmpty) return;

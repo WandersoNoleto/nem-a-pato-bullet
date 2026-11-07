@@ -42,4 +42,18 @@ void main() {
 
     expect(stored, isEmpty);
   });
+
+  test('removing some ids keeps the others and is stored', () {
+    final stored = <Set<String>>[];
+    final seen = SeenQuestions(initial: ['a', 'b', 'c'], onChanged: stored.add);
+
+    seen
+      ..removeAll(['a', 'c'])
+      ..removeAll(['x']);
+
+    expect(seen.ids, {'b'});
+    expect(stored, [
+      {'b'},
+    ]);
+  });
 }
