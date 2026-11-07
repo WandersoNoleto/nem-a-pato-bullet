@@ -91,7 +91,7 @@ void main() {
     for (final category in ['Luas', 'Oceano', 'Planetas']) {
       expect(find.text(category), findsOneWidget);
     }
-    expect(find.text('3 perguntas inéditas'), findsOneWidget);
+    expect(find.text('3 cartas no baralho'), findsOneWidget);
   });
 
   testWidgets('removing a category updates the available questions', (
@@ -102,7 +102,7 @@ void main() {
     await tester.tap(find.text('Oceano'));
     await tester.pump();
 
-    expect(find.text('2 perguntas inéditas'), findsOneWidget);
+    expect(find.text('2 cartas no baralho'), findsOneWidget);
     expect(find.text('Selecionar todas'), findsOneWidget);
   });
 

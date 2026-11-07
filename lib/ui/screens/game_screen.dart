@@ -156,7 +156,30 @@ class _GameScreenState extends State<GameScreen> {
         ],
         context.l10n.playAgainHint,
       ),
-      GameStatus.outOfQuestions => ([back], ''),
+      GameStatus.outOfQuestions => (
+        [
+          PlayButton(
+            key: const ValueKey('return'),
+            label: context.l10n.returnCardsButton,
+            gradient: AppColors.actionGradient,
+            textColor: AppColors.white,
+            pulse: false,
+            tilt: 0,
+            expand: true,
+            onPressed: _controller.returnCards,
+          ),
+          // Right under its button, so it's clear which cards go back.
+          const SizedBox(height: 10),
+          Text(
+            context.l10n.returnCardsHint,
+            textAlign: TextAlign.center,
+            style: TableTheme.of(context).hintStyle,
+          ),
+          const SizedBox(height: 20),
+          back,
+        ],
+        '',
+      ),
     };
     return Column(
       mainAxisSize: MainAxisSize.min,

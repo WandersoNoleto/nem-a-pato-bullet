@@ -131,13 +131,13 @@ abstract class AppLocalizations {
   /// No description provided for @outOfQuestionsTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Acabaram as perguntas!'**
+  /// **'Acabaram as cartas!'**
   String get outOfQuestionsTitle;
 
   /// No description provided for @outOfQuestionsBody.
   ///
   /// In pt, this message translates to:
-  /// **'Todas as perguntas escolhidas para esta partida já saíram.'**
+  /// **'Todas as cartas escolhidas para esta partida já saíram. Devolva as cartas desta partida ao baralho para continuar jogando.'**
   String get outOfQuestionsBody;
 
   /// No description provided for @gameOverTitle.
@@ -431,7 +431,7 @@ abstract class AppLocalizations {
   /// No description provided for @unseenCount.
   ///
   /// In pt, this message translates to:
-  /// **'{count, plural, =0{Nenhuma pergunta inédita com essas escolhas} =1{1 pergunta inédita} other{{count} perguntas inéditas}}'**
+  /// **'{count, plural, =0{Nenhuma carta no baralho. Devolva as cartas nas configurações} =1{1 carta no baralho} other{{count} cartas no baralho}}'**
   String unseenCount(int count);
 
   /// No description provided for @startButton.
@@ -511,6 +511,66 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Erro ao instalar a atualização.'**
   String get updateInstallFailed;
+
+  /// No description provided for @historySection.
+  ///
+  /// In pt, this message translates to:
+  /// **'HISTÓRICO'**
+  String get historySection;
+
+  /// No description provided for @resetHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devolver todas as cartas ao baralho'**
+  String get resetHistory;
+
+  /// No description provided for @seenCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Nenhuma carta fora do baralho} =1{1 carta usada fora do baralho} other{{count} cartas usadas fora do baralho}}'**
+  String seenCount(int count);
+
+  /// No description provided for @resetHistoryTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devolver todas as cartas ao baralho?'**
+  String get resetHistoryTitle;
+
+  /// No description provided for @resetHistoryBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{A carta que já saiu volta ao baralho e pode aparecer de novo, em qualquer baralho.} other{As {count} cartas que já saíram voltam ao baralho e podem aparecer de novo, em todos os baralhos.}}'**
+  String resetHistoryBody(int count);
+
+  /// No description provided for @resetHistoryConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devolver'**
+  String get resetHistoryConfirm;
+
+  /// No description provided for @historyReset.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartas devolvidas. Todas podem aparecer de novo.'**
+  String get historyReset;
+
+  /// No description provided for @historyEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma carta fora do baralho.'**
+  String get historyEmpty;
+
+  /// No description provided for @returnCardsButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'DEVOLVER CARTAS DA PARTIDA'**
+  String get returnCardsButton;
+
+  /// No description provided for @returnCardsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartas de outros baralhos e categorias continuam fora'**
+  String get returnCardsHint;
 }
 
 class _AppLocalizationsDelegate

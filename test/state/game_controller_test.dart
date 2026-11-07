@@ -99,4 +99,19 @@ void main() {
 
     expect(secondGame.status, GameStatus.outOfQuestions);
   });
+
+  test('returning the cards keeps playing from the next round', () {
+    final seen = SeenQuestions(initial: ['other-deck-question']);
+    final controller = _controllerWith(2, seen: seen)
+      ..start()
+      ..nextQuestion()
+      ..nextQuestion();
+    expect(controller.status, GameStatus.outOfQuestions);
+
+    controller.returnCards();
+
+    expect(controller.status, GameStatus.question);
+    expect(controller.round, 3);
+    expect(seen.contains('other-deck-question'), isTrue);
+  });
 }

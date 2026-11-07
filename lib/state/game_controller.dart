@@ -40,6 +40,13 @@ class GameController extends ChangeNotifier {
     nextQuestion();
   }
 
+  /// Puts this game's questions back in the deck and keeps playing from the
+  /// next round. Questions from other decks stay seen.
+  void returnCards() {
+    _seen.removeAll(_questions.map((question) => question.id));
+    nextQuestion();
+  }
+
   void reveal() {
     if (_status != GameStatus.question) return;
     _status = GameStatus.revealed;

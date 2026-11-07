@@ -26,11 +26,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateAvailable => 'Update available!';
 
   @override
-  String get outOfQuestionsTitle => 'Out of questions!';
+  String get outOfQuestionsTitle => 'Out of cards!';
 
   @override
   String get outOfQuestionsBody =>
-      'Every question chosen for this game has already come up.';
+      'Every card chosen for this game has already come up. Return this game\'s cards to the deck to keep playing.';
 
   @override
   String get gameOverTitle => 'Game over!';
@@ -231,9 +231,9 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count new questions',
-      one: '1 new question',
-      zero: 'No new questions with these choices',
+      other: '$count cards in the deck',
+      one: '1 card in the deck',
+      zero: 'No cards in the deck. Return the cards in settings',
     );
     return '$_temp0';
   }
@@ -280,4 +280,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateInstallFailed => 'Could not install the update.';
+
+  @override
+  String get historySection => 'HISTORY';
+
+  @override
+  String get resetHistory => 'Return all cards to the deck';
+
+  @override
+  String seenCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count used cards out of the deck',
+      one: '1 used card out of the deck',
+      zero: 'No cards out of the deck',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryTitle => 'Return all cards to the deck?';
+
+  @override
+  String resetHistoryBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'The $count cards that came up go back to the deck and can appear again, in every deck.',
+      one: 'The card that came up goes back to the deck and can appear again, in any deck.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get resetHistoryConfirm => 'Return';
+
+  @override
+  String get historyReset => 'Cards returned. Every card can come up again.';
+
+  @override
+  String get historyEmpty => 'No cards are out of the deck.';
+
+  @override
+  String get returnCardsButton => 'RETURN THIS GAME\'S CARDS';
+
+  @override
+  String get returnCardsHint =>
+      'Cards from other decks and categories stay out';
 }

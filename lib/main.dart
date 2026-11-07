@@ -16,6 +16,7 @@ import 'update/update_checker.dart';
 import 'update/update_installer.dart';
 
 const _languageKey = 'language';
+const _seenKey = 'seen_questions';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,10 @@ Future<void> main() async {
         importDeck: imported.save,
         deckFiles: const DeckFiles(),
         language: language,
-        seen: SeenQuestions(),
+        seen: SeenQuestions(
+          initial: preferences.getStringList(_seenKey) ?? const [],
+          onChanged: (ids) => preferences.setStringList(_seenKey, ids.toList()),
+        ),
         updates: AppUpdates(
           checker: UpdateChecker(),
           installer: UpdateInstaller(),

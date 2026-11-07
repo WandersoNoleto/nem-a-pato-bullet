@@ -62,7 +62,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
         ),
       ),
     );
-    // The game marked questions as seen; refresh the "inéditas" count.
+    // The game marked questions as seen; refresh the "cartas no baralho" count.
     if (mounted) setState(() {});
   }
 
