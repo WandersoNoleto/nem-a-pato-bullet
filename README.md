@@ -1,23 +1,79 @@
-# Nem a Pato! Bullet
-
 ![Nem a Pato! Bullet](docs/banner.webp)
 
-A simplified, fan-made digital version of the *Nem a Pato!* mechanic: everyone guesses a number, each guess higher than the last, without going over the real answer. If you think the last guess went too far, shout **"Nem a Pato!"** to challenge it, and whoever was wrong takes the card.
+# Nem a Pato! Bullet
 
-A non-profit study project built with Flutter, made to play with friends.
+[![Latest release](https://img.shields.io/github/v/release/WandersoNoleto/nem-a-pato-bullet?color=E8590F)](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/WandersoNoleto/nem-a-pato-bullet/total?color=FFC61A)](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases)
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)
+[![Languages](https://img.shields.io/badge/languages-PT%20%7C%20EN-111111)](#features)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Credits
+A fan-made, **offline** card deck for playing the trivia party game *Nem a Pato!* at the table. Everyone guesses a number, each guess higher than the last, without going over the real answer. Think the last guess went too far? Shout **"Nem a Pato!"**, flip the card and see who was wrong.
 
-Inspired by [*Nem a Pato!*](https://loja.grokgames.com.br/nem-a-pato), designed by **Rodrigo Rego** and published in Brazil by **Grok Games** (original edition: *How Dare You?*, Alion). This project is not affiliated with or endorsed by Grok Games or the designer.
+**[Download the APK](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** · **[How to play](#how-to-play)** · **[Features](#features)** · **[Decks](#decks)** · **[Build from source](#build-from-source)**
+
+<p align="center">
+  <img src=".github/assets/home.png" width="200" alt="Home screen with the duck mascot riding a bullet train and the PLAY button">
+  <img src=".github/assets/setup.png" width="200" alt="Game setup with rounds, decks and categories">
+  <img src=".github/assets/question.png" width="200" alt="A question card in the Ocean category with the NEM A PATO! button">
+  <img src=".github/assets/answer.png" width="200" alt="The card flipped, showing the answer and a fun fact">
+</p>
+
+## How to play
+
+The app is the deck; the game happens at the table.
+
+1. **Set up the game:** pick the number of rounds, the decks and the categories, then tap **START**.
+2. **Read the card** out loud. Every answer is a number.
+3. **Guess around the table:** each player says a number higher than the last one, trying not to go over the answer.
+4. **Challenge:** when someone thinks the last guess went too far, they shout "Nem a Pato!" and tap the button to flip the card.
+5. **Whoever was wrong takes the card.** At the end, the player with the most cards is the duck of the table.
+
+## Features
+
+- **Game setup:** infinite rounds or 5, 10, 15, 20 or a custom number; pick decks and categories, with search to add categories back.
+- **3D card flip:** the answer and a fun fact are revealed with a tap.
+- **No repeats:** cards that came up stay out of the deck, even after closing the app. Return them from the settings, or only the current game's cards when they run out.
+- **Your own decks:** import decks from JSON files and export any deck to share it.
+- **Deck symbols:** each deck can have its own SVG symbol.
+- **Portuguese and English:** the app's texts switch language; deck content always stays exactly as written.
+- **Auto-update:** the app checks GitHub Releases and offers new versions.
+- **Fully offline**, portrait, made for Android.
+
+<p align="center">
+  <img src=".github/assets/settings.png" width="200" alt="Settings with updates, language, card history and decks">
+</p>
+
+## Install
+
+Download `nem-a-pato-bullet-<version>.apk` from the **[latest release](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** and open it on your Android phone. Android will ask you to allow installs from this source.
+
+After that, the app offers new versions by itself when it opens.
 
 ## Decks
 
 The app does not ship the original game's questions. Questions live in JSON decks, kept separate from the code:
 
-- `assets/decks/sample.json`: a sample deck with original questions.
+- `assets/decks/sample.json`: a sample deck with original questions, bundled with the app.
+- `decks/demo/`: extra decks with original questions, used for demo builds.
 - `decks/private/`: personal decks; ignored by Git and never published.
 
-Deck format:
+Players can also import decks from the settings screen. A deck with the same name as an existing one replaces it.
+
+| Field | Required | Notes |
+| --- | --- | --- |
+| `name` | yes | Deck name shown in the game setup |
+| `icon` | no | Deck symbol as inline SVG, painted in the app's ink color; a playing-card symbol is shown when missing |
+| `questions` | yes | List of questions, fields below |
+| `category` | yes | Shown above the question |
+| `text` | yes | The question |
+| `answer` | yes | Shown exactly as written |
+| `fact` | no | Shown with the answer when present |
+
+<details>
+<summary>Example deck</summary>
 
 ```json
 {
@@ -34,24 +90,54 @@ Deck format:
 }
 ```
 
-| Field | Required | Notes |
-| --- | --- | --- |
-| `name` | yes | Deck name shown in the game setup |
-| `icon` | no | Deck symbol as inline SVG, painted in the app's ink color; a playing-card symbol is shown when missing |
-| `questions` | yes | List of questions, fields below |
-| `category` | yes | Shown above the question |
-| `text` | yes | The question |
-| `answer` | yes | Shown exactly as written |
-| `fact` | no | Shown with the answer when present |
+</details>
 
 Question ids are not part of the file: the app derives each one from the category and text, so a question is never repeated, even after re-importing its deck. Deck content can be in any language; the sample deck is in Brazilian Portuguese.
 
-## Running
+## Build from source
+
+Requires Flutter (stable).
 
 ```bash
 flutter pub get
 flutter run
 ```
+
+<details>
+<summary>Tests, screenshots and releases</summary>
+
+**Tests**
+
+```bash
+flutter analyze
+flutter test
+```
+
+**README screenshots**, rendered from the real screens in English:
+
+```bash
+UPDATE_SCREENSHOTS=1 flutter test test/screenshots
+```
+
+**Signed release APK.** Needs `android/key.properties` (see `android/key.properties.example`). The version comes from `pubspec.yaml`, as `X.Y.Z+code` with code = X×1000000 + Y×10000 + Z×100:
+
+```bash
+tool/build_release.sh
+```
+
+Then publish a GitHub release tagged `vX.Y.Z` with the APK attached, so the auto-update finds it.
+
+**Demo APK** with the decks in `decks/demo/`:
+
+```bash
+tool/build_demo.sh
+```
+
+</details>
+
+## Credits
+
+Inspired by [*Nem a Pato!*](https://loja.grokgames.com.br/nem-a-pato), designed by **Rodrigo Rego** and published in Brazil by **Grok Games** (original edition: *How Dare You?*, Alion). This is a non-profit study project, not affiliated with or endorsed by Grok Games or the designer.
 
 ## License
 
