@@ -12,7 +12,10 @@
 
 A fan-made, **offline** card deck for playing the trivia party game *Nem a Pato!* at the table. Everyone guesses a number, each guess higher than the last, without going over the real answer. Think the last guess went too far? Shout **"Nem a Pato!"**, flip the card and see who was wrong.
 
-**[Download the APK](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** · **[How to play](#how-to-play)** · **[Features](#features)** · **[Decks](#decks)** · **[Build from source](#build-from-source)**
+> [!NOTE]
+> Unofficial fan project based on the board game *Nem a Pato!*. See the [credits](#credits).
+
+**[Download the APK](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** · **[How to play](#how-to-play)** · **[Features](#features)** · **[Decks](#decks)** · **[Build from source](#build-from-source)** · **[Credits](#credits)**
 
 <p align="center">
   <img src=".github/assets/home.png" width="200" alt="Home screen with the duck mascot riding a bullet train and the PLAY button">
