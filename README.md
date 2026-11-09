@@ -41,12 +41,16 @@ The app is the deck; the game happens at the table.
 - **No repeats:** cards that came up stay out of the deck, even after closing the app. Return them from the settings, or only the current game's cards when they run out.
 - **Your own decks:** import decks from JSON files and export any deck to share it.
 - **Deck symbols:** each deck can have its own SVG symbol.
+- **Light and dark themes:** a yellow theme and a dark one, switched in the settings and remembered on the device.
 - **Portuguese and English:** the app's texts switch language; deck content always stays exactly as written.
 - **Auto-update:** the app checks GitHub Releases and offers new versions.
 - **Fully offline**, portrait, made for Android.
 
 <p align="center">
-  <img src=".github/assets/settings.png" width="200" alt="Settings with updates, language, card history and decks">
+  <img src=".github/assets/home-dark.png" width="200" alt="Home screen in the dark theme, with the yellow title and PLAY button">
+  <img src=".github/assets/question-dark.png" width="200" alt="A question card in the dark theme, over a subtle sunburst">
+  <img src=".github/assets/settings.png" width="200" alt="Settings in the light theme with updates, theme, language, card history and decks">
+  <img src=".github/assets/settings-dark.png" width="200" alt="Settings in the dark theme with the Dark option selected">
 </p>
 
 ## Install
