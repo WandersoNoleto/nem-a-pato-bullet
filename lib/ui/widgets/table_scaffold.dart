@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/table_theme.dart';
 
@@ -17,7 +18,7 @@ class TableScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = TableTheme.of(context);
-    return Scaffold(
+    final scaffold = Scaffold(
       backgroundColor: theme.background.last,
       body: Stack(
         children: [
@@ -29,6 +30,13 @@ class TableScaffold extends StatelessWidget {
           SafeArea(child: child),
         ],
       ),
+    );
+    // Status bar icons that stay readable on the background.
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: theme.brightness == Brightness.dark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
+      child: scaffold,
     );
   }
 }

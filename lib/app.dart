@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app_dependencies.dart';
 import 'l10n/l10n.dart';
+import 'state/theme_controller.dart';
 import 'ui/screens/loading_screen.dart';
 import 'ui/theme/app_colors.dart';
 import 'ui/theme/table_theme.dart';
@@ -14,7 +15,7 @@ class NemAPatoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: dependencies.language,
+      listenable: Listenable.merge([dependencies.language, dependencies.theme]),
       builder: (context, _) => MaterialApp(
         title: 'Nem a Pato! Bullet',
         debugShowCheckedModeBanner: false,
@@ -25,7 +26,11 @@ class NemAPatoApp extends StatelessWidget {
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: AppColors.yellow,
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellow),
-          extensions: const [TableTheme.light],
+          extensions: [
+            dependencies.theme.theme == AppTheme.dark
+                ? TableTheme.dark
+                : TableTheme.light,
+          ],
         ),
         home: LoadingScreen(dependencies: dependencies),
       ),

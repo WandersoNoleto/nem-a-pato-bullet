@@ -4,11 +4,13 @@ import '../../app_dependencies.dart';
 import '../../data/deck_files.dart';
 import '../../domain/deck.dart';
 import '../../l10n/l10n.dart';
+import '../../state/theme_controller.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
 import '../../update/update_prompt.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/table_theme.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/screen_header.dart';
@@ -16,7 +18,7 @@ import '../widgets/raised_box.dart';
 import '../widgets/section_label.dart';
 import '../widgets/table_scaffold.dart';
 
-/// App settings: updates, language, question history and decks.
+/// App settings: updates, theme, language, question history and decks.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.dependencies});
 
@@ -124,6 +126,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _UpdatePanel(updates: updates, onMessage: _showMessage),
                   const SizedBox(height: 28),
                 ],
+                SectionLabel(context.l10n.themeSection),
+                _ThemePicker(controller: widget.dependencies.theme),
+                const SizedBox(height: 28),
                 SectionLabel(context.l10n.languageSection),
                 Wrap(
                   spacing: 8,
@@ -400,6 +405,49 @@ class _ExportPanel extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+/// Light or dark, each with its icon.
+class _ThemePicker extends StatelessWidget {
+  const _ThemePicker({required this.controller});
+
+  final ThemeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final table = TableTheme.of(context);
+    final options = [
+      (
+        theme: AppTheme.light,
+        label: context.l10n.themeLight,
+        icon: Icons.light_mode,
+      ),
+      (
+        theme: AppTheme.dark,
+        label: context.l10n.themeDark,
+        icon: Icons.dark_mode,
+      ),
+    ];
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final option in options)
+          ChoicePill(
+            label: option.label,
+            leading: Icon(
+              option.icon,
+              size: 20,
+              color: controller.theme == option.theme
+                  ? table.onSelected
+                  : AppColors.ink,
+            ),
+            selected: controller.theme == option.theme,
+            onTap: () => controller.setTheme(option.theme),
+          ),
+      ],
     );
   }
 }

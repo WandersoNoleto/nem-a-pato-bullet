@@ -2,6 +2,7 @@ import 'data/deck_files.dart';
 import 'domain/deck.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
+import 'state/theme_controller.dart';
 import 'update/app_updates.dart';
 
 /// Everything the screens need, created once in main.dart and passed down.
@@ -13,6 +14,7 @@ class AppDependencies {
     required this.importDeck,
     required this.deckFiles,
     required this.language,
+    required this.theme,
     required this.seen,
     this.updates,
   });
@@ -23,6 +25,7 @@ class AppDependencies {
   final Future<Deck> Function(String source) importDeck;
   final DeckFiles deckFiles;
   final LanguageController language;
+  final ThemeController theme;
   final SeenQuestions seen;
 
   /// Null hides the version line and skips update checks.

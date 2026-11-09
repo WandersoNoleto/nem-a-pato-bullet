@@ -11,12 +11,14 @@ import 'data/imported_decks.dart';
 import 'l10n/l10n.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
+import 'state/theme_controller.dart';
 import 'update/app_updates.dart';
 import 'update/update_checker.dart';
 import 'update/update_installer.dart';
 
 const _languageKey = 'language';
 const _seenKey = 'seen_questions';
+const _themeKey = 'theme';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +35,14 @@ Future<void> main() async {
         : LanguageController.defaultCode,
     save: (code) => preferences.setString(_languageKey, code),
   );
+  final savedTheme = preferences.getString(_themeKey);
+  final theme = ThemeController(
+    theme: AppTheme.values.firstWhere(
+      (theme) => theme.name == savedTheme,
+      orElse: () => ThemeController.defaultTheme,
+    ),
+    save: (theme) => preferences.setString(_themeKey, theme.name),
+  );
   runApp(
     NemAPatoApp(
       dependencies: AppDependencies(
@@ -40,6 +50,7 @@ Future<void> main() async {
         importDeck: imported.save,
         deckFiles: const DeckFiles(),
         language: language,
+        theme: theme,
         seen: SeenQuestions(
           initial: preferences.getStringList(_seenKey) ?? const [],
           onChanged: (ids) => preferences.setStringList(_seenKey, ids.toList()),

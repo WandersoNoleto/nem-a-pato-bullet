@@ -9,6 +9,7 @@ import 'package:nem_a_pato_bullet/domain/deck.dart';
 import 'package:nem_a_pato_bullet/domain/question.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
+import 'package:nem_a_pato_bullet/state/theme_controller.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
 
 const _transition = Duration(milliseconds: 500);
@@ -33,6 +34,7 @@ Future<void> _openHome(WidgetTester tester, LanguageController language) async {
         importDeck: (source) async => Deck.fromJsonString(source),
         deckFiles: const DeckFiles(),
         language: language,
+        theme: ThemeController(theme: AppTheme.light, save: (_) async {}),
         seen: SeenQuestions(),
       ),
     ),

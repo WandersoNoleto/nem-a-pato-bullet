@@ -571,6 +571,24 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Cartas de outros baralhos e categorias continuam fora'**
   String get returnCardsHint;
+
+  /// No description provided for @themeSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'TEMA'**
+  String get themeSection;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In pt, this message translates to:
+  /// **'Claro'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escuro'**
+  String get themeDark;
 }
 
 class _AppLocalizationsDelegate

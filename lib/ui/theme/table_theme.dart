@@ -10,6 +10,7 @@ import 'app_text_styles.dart';
 /// pieces that can be tapped.
 class TableTheme extends ThemeExtension<TableTheme> {
   const TableTheme({
+    required this.brightness,
     required this.background,
     required this.rays,
     required this.title,
@@ -25,7 +26,8 @@ class TableTheme extends ThemeExtension<TableTheme> {
 
   /// Near-black table, with yellow for actions and selection.
   static const dark = TableTheme(
-    background: [Color(0xFF161616), Color(0xFF161616), Color(0xFF161616)],
+    brightness: Brightness.dark,
+    background: [Color(0xFF2C2A23), Color(0xFF16150F), Color(0xFF060605)],
     rays: Color(0x0FFDE004),
     title: AppColors.yellow,
     onTable: AppColors.white,
@@ -40,6 +42,7 @@ class TableTheme extends ThemeExtension<TableTheme> {
 
   /// Yellow table, with ink for actions and selection.
   static const light = TableTheme(
+    brightness: Brightness.light,
     background: [Color(0xFFFFE629), Color(0xFFFDD500), Color(0xFFEDB400)],
     rays: Color(0x26FFFFFF),
     title: AppColors.ink,
@@ -55,6 +58,9 @@ class TableTheme extends ThemeExtension<TableTheme> {
 
   static TableTheme of(BuildContext context) =>
       Theme.of(context).extension<TableTheme>()!;
+
+  /// Whether the background is light or dark, e.g. for the status bar icons.
+  final Brightness brightness;
 
   /// Top, middle and bottom colors of the screen background.
   final List<Color> background;
@@ -93,6 +99,7 @@ class TableTheme extends ThemeExtension<TableTheme> {
 
   @override
   TableTheme copyWith({
+    Brightness? brightness,
     List<Color>? background,
     Color? rays,
     Color? title,
@@ -106,6 +113,7 @@ class TableTheme extends ThemeExtension<TableTheme> {
     Color? actionLip,
   }) {
     return TableTheme(
+      brightness: brightness ?? this.brightness,
       background: background ?? this.background,
       rays: rays ?? this.rays,
       title: title ?? this.title,

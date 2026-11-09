@@ -18,6 +18,7 @@ import 'package:nem_a_pato_bullet/domain/question.dart';
 import 'package:nem_a_pato_bullet/l10n/l10n.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
+import 'package:nem_a_pato_bullet/state/theme_controller.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_setup_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
@@ -77,11 +78,15 @@ final _version = RegExp(
   multiLine: true,
 ).firstMatch(File('pubspec.yaml').readAsStringSync())!.group(1)!;
 
-AppDependencies _dependencies() => AppDependencies(
+AppDependencies _dependencies(TableTheme table) => AppDependencies(
   loadDecks: () async => _decks,
   importDeck: (source) async => Deck.fromJsonString(source),
   deckFiles: const DeckFiles(),
   language: LanguageController(code: 'en', save: (_) async {}),
+  theme: ThemeController(
+    theme: table == TableTheme.dark ? AppTheme.dark : AppTheme.light,
+    save: (_) async {},
+  ),
   seen: SeenQuestions(initial: ['x1', 'x2', 'x3', 'x4', 'x5']),
   // Shows the version without ever reaching GitHub.
   updates: AppUpdates(
@@ -93,12 +98,12 @@ AppDependencies _dependencies() => AppDependencies(
   ),
 );
 
-Widget _host(Widget screen) {
+Widget _host(Widget screen, TableTheme table) {
   final base = ThemeData(
     fontFamily: 'Poppins',
     scaffoldBackgroundColor: AppColors.yellow,
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellow),
-    extensions: const [TableTheme.light],
+    extensions: [table],
   );
   return RepaintBoundary(
     key: const Key('screenshot'),
@@ -134,8 +139,8 @@ String _materialIconsPath() {
   return '';
 }
 
-Future<void> _show(WidgetTester tester, Widget screen) async {
-  await tester.pumpWidget(_host(screen));
+Future<void> _show(WidgetTester tester, Widget screen, TableTheme table) async {
+  await tester.pumpWidget(_host(screen, table));
   await tester.runAsync(() async {
     final context = tester.element(find.byType(Scaffold).first);
     await precacheImage(const AssetImage('assets/images/mascot.png'), context);
@@ -170,24 +175,42 @@ void main() {
     addTearDown(tester.view.reset);
     Directory(_outDir).createSync(recursive: true);
 
-    await _show(tester, HomeScreen(dependencies: _dependencies()));
-    await _capture(tester, 'home');
+    for (final (table, suffix) in [
+      (TableTheme.light, ''),
+      (TableTheme.dark, '-dark'),
+    ]) {
+      await _show(
+        tester,
+        HomeScreen(dependencies: _dependencies(table)),
+        table,
+      );
+      await _capture(tester, 'home$suffix');
 
-    await _show(tester, GameSetupScreen(dependencies: _dependencies()));
-    await _capture(tester, 'setup');
+      await _show(
+        tester,
+        GameSetupScreen(dependencies: _dependencies(table)),
+        table,
+      );
+      await _capture(tester, 'setup$suffix');
 
-    await _show(
-      tester,
-      GameScreen(questions: [_wave], seen: SeenQuestions(), rounds: 10),
-    );
-    await _capture(tester, 'question');
-    await tester.tap(find.text('NEM A PATO!'));
-    for (var i = 0; i < 10; i++) {
-      await tester.pump(const Duration(milliseconds: 100));
+      await _show(
+        tester,
+        GameScreen(questions: [_wave], seen: SeenQuestions(), rounds: 10),
+        table,
+      );
+      await _capture(tester, 'question$suffix');
+      await tester.tap(find.text('NEM A PATO!'));
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      await _capture(tester, 'answer$suffix');
+
+      await _show(
+        tester,
+        SettingsScreen(dependencies: _dependencies(table)),
+        table,
+      );
+      await _capture(tester, 'settings$suffix');
     }
-    await _capture(tester, 'answer');
-
-    await _show(tester, SettingsScreen(dependencies: _dependencies()));
-    await _capture(tester, 'settings');
   });
 }

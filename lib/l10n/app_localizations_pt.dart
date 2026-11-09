@@ -329,4 +329,13 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get returnCardsHint =>
       'Cartas de outros baralhos e categorias continuam fora';
+
+  @override
+  String get themeSection => 'TEMA';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Escuro';
 }
