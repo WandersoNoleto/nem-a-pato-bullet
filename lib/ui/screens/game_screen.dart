@@ -100,6 +100,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Widget _buildActions() {
+    final theme = TableTheme.of(context);
     final back = PlayButton(
       key: const ValueKey('back'),
       label: context.l10n.backButton,
@@ -116,8 +117,9 @@ class _GameScreenState extends State<GameScreen> {
           PlayButton(
             key: const ValueKey('reveal'),
             label: 'NEM A PATO!',
-            gradient: AppColors.actionGradient,
-            textColor: AppColors.white,
+            gradient: theme.action,
+            textColor: theme.onAction,
+            lipColor: theme.actionLip,
             tilt: 0,
             expand: true,
             onPressed: _controller.reveal,
@@ -145,8 +147,9 @@ class _GameScreenState extends State<GameScreen> {
           PlayButton(
             key: const ValueKey('again'),
             label: context.l10n.playAgainButton,
-            gradient: AppColors.actionGradient,
-            textColor: AppColors.white,
+            gradient: theme.action,
+            textColor: theme.onAction,
+            lipColor: theme.actionLip,
             tilt: 0,
             expand: true,
             onPressed: _controller.start,
@@ -161,8 +164,9 @@ class _GameScreenState extends State<GameScreen> {
           PlayButton(
             key: const ValueKey('return'),
             label: context.l10n.returnCardsButton,
-            gradient: AppColors.actionGradient,
-            textColor: AppColors.white,
+            gradient: theme.action,
+            textColor: theme.onAction,
+            lipColor: theme.actionLip,
             pulse: false,
             tilt: 0,
             expand: true,
@@ -208,18 +212,18 @@ class _TopBar extends StatelessWidget {
         const Spacer(),
         if (round > 0)
           RaisedBox(
-            colors: theme.pill,
+            colors: theme.action,
             radius: 999,
             borderWidth: 2,
             lipHeight: 3,
-            lipColor: theme.pillLip,
+            lipColor: theme.actionLip,
             softShadow: false,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               total == null
                   ? context.l10n.round(round)
                   : context.l10n.roundOfTotal(round, total),
-              style: AppTextStyles.pill.copyWith(color: theme.onPill),
+              style: AppTextStyles.pill.copyWith(color: theme.onSelected),
             ),
           ),
         const Spacer(),
@@ -246,7 +250,7 @@ class _Message extends StatelessWidget {
           title,
           textAlign: TextAlign.center,
           style: AppTextStyles.category.copyWith(
-            color: theme.onTable,
+            color: theme.title,
             fontSize: 26,
             height: 1.2,
           ),

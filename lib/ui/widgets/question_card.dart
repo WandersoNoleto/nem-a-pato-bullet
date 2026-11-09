@@ -179,10 +179,7 @@ class _AnswerFace extends StatelessWidget {
             const SizedBox(height: 20),
             Container(height: 2, color: AppColors.cardDivider),
             const SizedBox(height: 16),
-            Text(
-              context.l10n.factLabel,
-              style: AppTextStyles.cardLabel.copyWith(color: AppColors.orange),
-            ),
+            Text(context.l10n.factLabel, style: AppTextStyles.cardLabel),
             const SizedBox(height: 6),
             Text(fact, style: AppTextStyles.fact),
           ],

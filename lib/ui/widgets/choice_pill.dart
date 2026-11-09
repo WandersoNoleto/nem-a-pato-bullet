@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/table_theme.dart';
 import 'raised_box.dart';
 
-/// A rounded option that turns orange when selected.
+/// A rounded option that takes the theme's action colors when selected.
 class ChoicePill extends StatelessWidget {
   const ChoicePill({
     super.key,
@@ -29,7 +30,8 @@ class ChoicePill extends StatelessWidget {
   Widget build(BuildContext context) {
     final icon = this.icon;
     final leading = this.leading;
-    final foreground = selected ? AppColors.white : AppColors.ink;
+    final theme = TableTheme.of(context);
+    final foreground = selected ? theme.onSelected : AppColors.ink;
     return Semantics(
       button: true,
       selected: selected,
@@ -38,7 +40,8 @@ class ChoicePill extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: RaisedBox(
-          colors: selected ? AppColors.actionGradient : AppColors.paperGradient,
+          colors: selected ? theme.action : AppColors.paperGradient,
+          lipColor: selected ? theme.actionLip : null,
           radius: 999,
           borderWidth: 2,
           lipHeight: 3,
@@ -55,7 +58,6 @@ class ChoicePill extends StatelessWidget {
                 style: AppTextStyles.pill.copyWith(
                   fontSize: 16,
                   color: foreground,
-                  shadows: selected ? AppTextStyles.raisedTextShadow : null,
                 ),
               ),
               if (icon != null) ...[

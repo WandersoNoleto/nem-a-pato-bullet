@@ -7,18 +7,16 @@ abstract final class AppColors {
   static const orange = Color(0xFFE8902A);
   static const white = Color(0xFFFFFFFF);
 
-  /// Card face, like paper on the table.
-  static const cream = Color(0xFFFFF6E0);
+  /// Labels and dividers on paper (cards and panels).
+  static const cardMuted = Color(0xFF7A6F55);
+  static const cardDivider = Color(0xFFE6E1D6);
 
-  /// Labels and dividers on the cream card.
-  static const cardMuted = Color(0xFF8A7A55);
-  static const cardDivider = Color(0xFFE3D3AA);
+  /// Top and bottom colors of paper pieces: white like the duck.
+  static const paperGradient = [Color(0xFFFFFFFF), Color(0xFFF3F0E9)];
 
-  /// Top and bottom colors of raised pieces.
-  static const paperGradient = [Color(0xFFFFFDF4), Color(0xFFFFF0CC)];
-  static const actionGradient = [Color(0xFFFF9B3D), Color(0xFFE8590F)];
+  /// Top and bottom colors of yellow pieces (card headers, selected decks).
   static const headerGradient = [Color(0xFFFFE964), Color(0xFFFFC61A)];
 
-  /// Secondary text on a selected (orange) piece.
-  static const mutedOnAction = Color(0xFFFFE9D0);
+  /// Secondary text on yellow pieces.
+  static const mutedOnYellow = Color(0xFF5A4500);
 }

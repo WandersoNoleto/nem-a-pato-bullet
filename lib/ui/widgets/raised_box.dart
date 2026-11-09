@@ -30,7 +30,7 @@ class RaisedBox extends StatelessWidget {
   final double borderWidth;
   final double lipHeight;
 
-  /// Defaults to the theme's lip color.
+  /// Defaults to the theme's paper lip.
   final Color? lipColor;
   final bool softShadow;
   final bool pressed;
@@ -61,14 +61,16 @@ class RaisedBox extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(radius),
         border: Border.all(color: AppColors.ink, width: borderWidth),
+        // Later shadows paint over earlier ones: the soft shadow goes first so
+        // it never darkens the lip.
         boxShadow: [
-          BoxShadow(color: lipColor ?? theme.pieceLip, offset: Offset(0, lip)),
           if (softShadow)
             BoxShadow(
               color: theme.pieceShadow,
               offset: Offset(0, lip + 7),
               blurRadius: 14,
             ),
+          BoxShadow(color: lipColor ?? theme.paperLip, offset: Offset(0, lip)),
         ],
       ),
       child: child,

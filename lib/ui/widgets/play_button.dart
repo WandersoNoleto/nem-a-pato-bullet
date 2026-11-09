@@ -16,6 +16,7 @@ class PlayButton extends StatefulWidget {
     required this.onPressed,
     this.color = AppColors.ink,
     this.gradient,
+    this.lipColor,
     this.textColor = AppColors.white,
     this.pulse = true,
     this.tilt = -0.04,
@@ -28,6 +29,9 @@ class PlayButton extends StatefulWidget {
 
   /// Top and bottom colors; makes the button a raised piece.
   final List<Color>? gradient;
+
+  /// The solid edge under a raised button; defaults to the paper lip.
+  final Color? lipColor;
   final Color textColor;
   final bool pulse;
 
@@ -106,6 +110,7 @@ class _PlayButtonState extends State<PlayButton>
                 ? _buildFlat(offset, label)
                 : RaisedBox(
                     colors: gradient,
+                    lipColor: widget.lipColor,
                     radius: 12,
                     width: widget.expand ? double.infinity : null,
                     pressed: _pressed,

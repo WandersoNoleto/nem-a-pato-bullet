@@ -35,26 +35,16 @@ class _TablePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final area = Offset.zero & size;
-    canvas
-      ..drawRect(
-        area,
-        Paint()
-          ..shader = LinearGradient(
-            begin: const Alignment(-0.17, -1),
-            end: const Alignment(0.17, 1),
-            colors: theme.background,
-            stops: const [0, 0.48, 1],
-          ).createShader(area),
-      )
-      ..drawOval(
-        Rect.fromLTWH(
-          -size.width * 0.2,
-          size.height * 0.74,
-          size.width * 1.4,
-          size.height * 0.42,
-        ),
-        Paint()..color = theme.horizon,
-      );
+    canvas.drawRect(
+      area,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: theme.background,
+          stops: const [0, 0.45, 1],
+        ).createShader(area),
+    );
   }
 
   @override
