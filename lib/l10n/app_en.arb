@@ -78,5 +78,8 @@
   "historyReset": "Cards returned. Every card can come up again.",
   "historyEmpty": "No cards are out of the deck.",
   "returnCardsButton": "RETURN THIS GAME'S CARDS",
-  "returnCardsHint": "Cards from other decks and categories stay out"
+  "returnCardsHint": "Cards from other decks and categories stay out",
+  "themeSection": "THEME",
+  "themeLight": "Light",
+  "themeDark": "Dark"
 }

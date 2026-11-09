@@ -21,7 +21,7 @@ class ScreenHeader extends StatelessWidget {
         Text(
           title,
           style: AppTextStyles.category.copyWith(
-            color: TableTheme.of(context).onTable,
+            color: TableTheme.of(context).title,
             fontSize: 20,
           ),
         ),

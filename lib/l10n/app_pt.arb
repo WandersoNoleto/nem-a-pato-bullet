@@ -195,5 +195,8 @@
   "historyReset": "Cartas devolvidas. Todas podem aparecer de novo.",
   "historyEmpty": "Nenhuma carta fora do baralho.",
   "returnCardsButton": "DEVOLVER CARTAS DA PARTIDA",
-  "returnCardsHint": "Cartas de outros baralhos e categorias continuam fora"
+  "returnCardsHint": "Cartas de outros baralhos e categorias continuam fora",
+  "themeSection": "TEMA",
+  "themeLight": "Claro",
+  "themeDark": "Escuro"
 }

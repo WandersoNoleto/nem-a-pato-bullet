@@ -329,4 +329,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get returnCardsHint =>
       'Cards from other decks and categories stay out';
+
+  @override
+  String get themeSection => 'THEME';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
 }

@@ -3,20 +3,19 @@ import 'package:flutter/services.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
-import 'raised_box.dart';
 
-/// A chunky game button that sinks into its shadow when pressed.
+/// A chunky "sticker" button, like the cover's JOGAR: solid color, thick ink
+/// outline and a hard offset shadow it sinks into when pressed.
 ///
-/// By default it is the tilted, pulsing black JOGAR button. With a [gradient]
-/// it becomes a raised piece, used on the table screens.
+/// By default it is the tilted, pulsing black JOGAR button.
 class PlayButton extends StatefulWidget {
   const PlayButton({
     super.key,
     required this.label,
     required this.onPressed,
     this.color = AppColors.ink,
-    this.gradient,
     this.textColor = AppColors.white,
+    this.shadowColor = AppColors.orange,
     this.pulse = true,
     this.tilt = -0.04,
     this.expand = false,
@@ -25,10 +24,10 @@ class PlayButton extends StatefulWidget {
   final String label;
   final VoidCallback onPressed;
   final Color color;
-
-  /// Top and bottom colors; makes the button a raised piece.
-  final List<Color>? gradient;
   final Color textColor;
+
+  /// Orange for actions; secondary buttons use the theme's paper lip.
+  final Color shadowColor;
   final bool pulse;
 
   /// Rotation in radians.
@@ -76,20 +75,6 @@ class _PlayButtonState extends State<PlayButton>
   @override
   Widget build(BuildContext context) {
     final offset = _pressed ? _shadowOffset : 0.0;
-    final gradient = widget.gradient;
-    final label = FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        widget.label,
-        textAlign: TextAlign.center,
-        style: AppTextStyles.button.copyWith(
-          color: widget.textColor,
-          shadows: widget.textColor == AppColors.white && gradient != null
-              ? AppTextStyles.raisedTextShadow
-              : null,
-        ),
-      ),
-    );
     return Semantics(
       button: true,
       label: widget.label,
@@ -102,46 +87,40 @@ class _PlayButtonState extends State<PlayButton>
           scale: _pulse,
           child: Transform.rotate(
             angle: widget.tilt,
-            child: gradient == null
-                ? _buildFlat(offset, label)
-                : RaisedBox(
-                    colors: gradient,
-                    radius: 12,
-                    width: widget.expand ? double.infinity : null,
-                    pressed: _pressed,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: widget.expand ? 16 : 48,
-                      vertical: 18,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 80),
+              width: widget.expand ? double.infinity : null,
+              transform: Matrix4.translationValues(offset, offset, 0),
+              padding: EdgeInsets.symmetric(
+                horizontal: widget.expand ? 16 : 48,
+                vertical: 18,
+              ),
+              decoration: BoxDecoration(
+                color: widget.color,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.ink, width: 3),
+                boxShadow: [
+                  BoxShadow(
+                    color: widget.shadowColor,
+                    offset: Offset(
+                      _shadowOffset - offset,
+                      _shadowOffset - offset,
                     ),
-                    child: label,
                   ),
+                ],
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.label,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.button.copyWith(color: widget.textColor),
+                ),
+              ),
+            ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildFlat(double offset, Widget label) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 80),
-      width: widget.expand ? double.infinity : null,
-      transform: Matrix4.translationValues(offset, offset, 0),
-      padding: EdgeInsets.symmetric(
-        horizontal: widget.expand ? 16 : 48,
-        vertical: 18,
-      ),
-      decoration: BoxDecoration(
-        color: widget.color,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.ink, width: 3),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.orange,
-            offset: Offset(_shadowOffset - offset, _shadowOffset - offset),
-          ),
-        ],
-      ),
-      child: label,
     );
   }
 }

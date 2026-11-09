@@ -7,6 +7,7 @@ import 'package:nem_a_pato_bullet/domain/question.dart';
 import 'package:nem_a_pato_bullet/l10n/l10n.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
+import 'package:nem_a_pato_bullet/state/theme_controller.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
 
@@ -55,6 +56,7 @@ Future<void> _pumpSettings(
           },
           deckFiles: files,
           language: LanguageController(code: 'pt', save: (_) async {}),
+          theme: ThemeController(theme: AppTheme.light, save: (_) async {}),
           seen: SeenQuestions(),
         ),
       ),

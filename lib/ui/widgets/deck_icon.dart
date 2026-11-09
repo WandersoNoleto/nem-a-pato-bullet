@@ -52,7 +52,7 @@ class _CardSymbolPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = s * 0.08
       ..strokeJoin = StrokeJoin.round;
-    final fill = Paint()..color = AppColors.cream;
+    final fill = Paint()..color = AppColors.white;
 
     void card(double angle, Offset center) {
       canvas

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
+import '../theme/table_theme.dart';
 
 /// A loading bar where the mascot train runs right to left, leaving a trail.
 class TrainProgressBar extends StatelessWidget {
@@ -26,6 +26,7 @@ class TrainProgressBar extends StatelessWidget {
               Positioned.fill(
                 child: CustomPaint(
                   painter: _TrailPainter(
+                    color: TableTheme.of(context).onTable,
                     frontX: trainLeft,
                     tailX: trainLeft + trainWidth * 0.88,
                   ),
@@ -51,7 +52,14 @@ class TrainProgressBar extends StatelessWidget {
 }
 
 class _TrailPainter extends CustomPainter {
-  _TrailPainter({required this.frontX, required this.tailX});
+  _TrailPainter({
+    required this.color,
+    required this.frontX,
+    required this.tailX,
+  });
+
+  /// The rail, trail and speed lines.
+  final Color color;
 
   /// Where the nose of the train is; the filled bar runs from here to the
   /// right, so it is complete when the train reaches the left edge.
@@ -71,13 +79,13 @@ class _TrailPainter extends CustomPainter {
     canvas.drawLine(
       Offset(2, railY),
       Offset(railEnd, railY),
-      stroke..color = AppColors.ink.withValues(alpha: 0.15),
+      stroke..color = color.withValues(alpha: 0.15),
     );
 
     canvas.drawLine(
       Offset(frontX.clamp(2.0, railEnd), railY),
       Offset(railEnd, railY),
-      stroke..color = AppColors.ink,
+      stroke..color = color,
     );
 
     if (tailX >= railEnd) return;
@@ -85,7 +93,7 @@ class _TrailPainter extends CustomPainter {
     final speedLine = Paint()
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 2
-      ..color = AppColors.ink.withValues(alpha: 0.6);
+      ..color = color.withValues(alpha: 0.6);
     const lines = [
       (y: 0.45, length: 32.0),
       (y: 0.6, length: 22.0),
@@ -100,5 +108,7 @@ class _TrailPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_TrailPainter oldDelegate) =>
-      oldDelegate.frontX != frontX || oldDelegate.tailX != tailX;
+      oldDelegate.color != color ||
+      oldDelegate.frontX != frontX ||
+      oldDelegate.tailX != tailX;
 }

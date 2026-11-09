@@ -96,7 +96,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
     final theme = TableTheme.of(context);
     return switch (_controller.status) {
       SetupStatus.loading => Center(
-        child: CircularProgressIndicator(color: theme.onTable),
+        child: CircularProgressIndicator(color: theme.title),
       ),
       SetupStatus.error => Center(
         child: Padding(
@@ -281,44 +281,49 @@ class _DeckTile extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            RaisedBox(
-              colors: selected
-                  ? AppColors.actionGradient
-                  : AppColors.paperGradient,
-              width: 118,
-              lipHeight: 4,
-              softShadow: false,
-              padding: const EdgeInsets.fromLTRB(6, 14, 6, 10),
-              child: Column(
-                children: [
-                  DeckIcon(deck: deck, size: 36),
-                  const SizedBox(height: 8),
-                  // Room for two lines, so every tile has the same height.
-                  SizedBox(
-                    height: 34,
-                    child: Center(
-                      child: Text(
-                        deck.name,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.credits.copyWith(
-                          fontSize: 11,
-                          color: selected ? AppColors.white : AppColors.ink,
+            // Unselected decks fade, so the selected ones stand out.
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 150),
+              opacity: selected ? 1 : 0.55,
+              child: RaisedBox(
+                colors: selected
+                    ? AppColors.headerGradient
+                    : AppColors.paperGradient,
+                width: 118,
+                lipHeight: 4,
+                softShadow: false,
+                padding: const EdgeInsets.fromLTRB(6, 14, 6, 10),
+                child: Column(
+                  children: [
+                    DeckIcon(deck: deck, size: 36),
+                    const SizedBox(height: 8),
+                    // Room for two lines, so every tile has the same height.
+                    SizedBox(
+                      height: 34,
+                      child: Center(
+                        child: Text(
+                          deck.name,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.credits.copyWith(
+                            fontSize: 11,
+                            color: AppColors.ink,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    context.l10n.questionCount(count),
-                    style: AppTextStyles.credits.copyWith(
-                      fontSize: 10,
-                      color: selected
-                          ? AppColors.mutedOnAction
-                          : AppColors.cardMuted,
+                    Text(
+                      context.l10n.questionCount(count),
+                      style: AppTextStyles.credits.copyWith(
+                        fontSize: 10,
+                        color: selected
+                            ? AppColors.mutedOnYellow
+                            : AppColors.cardMuted,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             if (selected)
@@ -548,20 +553,21 @@ class _StartArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hint = context.l10n.unseenCount(unseenCount);
+    final theme = TableTheme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         PlayButton(
           label: context.l10n.startButton,
-          gradient: AppColors.actionGradient,
-          textColor: AppColors.white,
+          color: theme.action.last,
+          textColor: theme.onAction,
           pulse: false,
           tilt: 0,
           expand: true,
           onPressed: onStart,
         ),
         const SizedBox(height: 12),
-        Text(hint, style: TableTheme.of(context).hintStyle),
+        Text(hint, style: theme.hintStyle),
       ],
     );
   }
