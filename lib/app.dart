@@ -25,7 +25,7 @@ class NemAPatoApp extends StatelessWidget {
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: AppColors.yellow,
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellow),
-          extensions: const [TableTheme.dark],
+          extensions: const [TableTheme.light],
         ),
         home: LoadingScreen(dependencies: dependencies),
       ),

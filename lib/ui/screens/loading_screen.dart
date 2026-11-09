@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../app_dependencies.dart';
-import '../theme/app_colors.dart';
 import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
+import '../widgets/table_scaffold.dart';
 import '../widgets/train_progress_bar.dart';
 import 'home_screen.dart';
 
@@ -65,33 +65,30 @@ class _LoadingScreenState extends State<LoadingScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.yellow,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: ScaleTransition(
-                scale: _titleScale,
-                child: const GameTitle(),
-              ),
+    return TableScaffold(
+      child: Column(
+        children: [
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: ScaleTransition(
+              scale: _titleScale,
+              child: const GameTitle(),
             ),
-            const SizedBox(height: 32),
-            const CreditsText(),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: AnimatedBuilder(
-                animation: _progress,
-                builder: (context, _) =>
-                    TrainProgressBar(progress: _progress.value),
-              ),
+          ),
+          const SizedBox(height: 32),
+          const CreditsText(),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: AnimatedBuilder(
+              animation: _progress,
+              builder: (context, _) =>
+                  TrainProgressBar(progress: _progress.value),
             ),
-            const SizedBox(height: 32),
-          ],
-        ),
+          ),
+          const SizedBox(height: 32),
+        ],
       ),
     );
   }

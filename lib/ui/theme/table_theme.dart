@@ -41,7 +41,7 @@ class TableTheme extends ThemeExtension<TableTheme> {
   /// Yellow table, with ink for actions and selection.
   static const light = TableTheme(
     background: [Color(0xFFFFE629), Color(0xFFFDD500), Color(0xFFEDB400)],
-    rays: Color(0x38FFFFFF),
+    rays: Color(0x26FFFFFF),
     title: AppColors.ink,
     onTable: AppColors.ink,
     hint: Color(0xFF5A4500),

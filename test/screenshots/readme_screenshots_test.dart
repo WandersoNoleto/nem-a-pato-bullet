@@ -98,7 +98,7 @@ Widget _host(Widget screen) {
     fontFamily: 'Poppins',
     scaffoldBackgroundColor: AppColors.yellow,
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellow),
-    extensions: const [TableTheme.dark],
+    extensions: const [TableTheme.light],
   );
   return RepaintBoundary(
     key: const Key('screenshot'),

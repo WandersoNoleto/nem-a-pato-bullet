@@ -54,6 +54,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return TableScaffold(
+      rays: true,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
         child: ListenableBuilder(
