@@ -559,9 +559,8 @@ class _StartArea extends StatelessWidget {
       children: [
         PlayButton(
           label: context.l10n.startButton,
-          gradient: theme.action,
+          color: theme.action.last,
           textColor: theme.onAction,
-          lipColor: theme.actionLip,
           pulse: false,
           tilt: 0,
           expand: true,
