@@ -2,7 +2,8 @@
 //
 //   UPDATE_SCREENSHOTS=1 flutter test test/screenshots
 //
-// Skipped in normal test runs. Writes PNGs to .github/assets/.
+// Skipped in normal test runs. Writes PNGs to .github/assets/, or to
+// SCREENSHOT_DIR when set.
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -27,7 +28,7 @@ import 'package:nem_a_pato_bullet/update/app_updates.dart';
 import 'package:nem_a_pato_bullet/update/update_checker.dart';
 import 'package:nem_a_pato_bullet/update/update_installer.dart';
 
-const _outDir = '.github/assets';
+final _outDir = Platform.environment['SCREENSHOT_DIR'] ?? '.github/assets';
 const _screenSize = Size(390, 844);
 const _emojiFont = '/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf';
 
