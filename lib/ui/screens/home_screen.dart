@@ -10,6 +10,7 @@ import '../theme/table_theme.dart';
 import '../widgets/credits_text.dart';
 import '../widgets/game_title.dart';
 import '../widgets/play_button.dart';
+import '../widgets/rules_dialog.dart';
 import '../widgets/table_scaffold.dart';
 import 'game_setup_screen.dart';
 import 'settings_screen.dart';
@@ -120,6 +121,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 const SizedBox(height: 16),
               ],
+            ),
+          ),
+          Positioned(
+            top: 4,
+            left: 8,
+            child: IconButton(
+              onPressed: () => showRulesDialog(context),
+              tooltip: context.l10n.rulesTooltip,
+              color: theme.title,
+              iconSize: 30,
+              icon: const Icon(Icons.info_outline),
             ),
           ),
           Positioned(
