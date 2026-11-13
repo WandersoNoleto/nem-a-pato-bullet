@@ -9,7 +9,7 @@ import 'seen_questions.dart';
 enum GameStatus { question, revealed, outOfQuestions, finished }
 
 /// Drives a game session: draws unseen questions, counts rounds and reveals
-/// answers. Who takes the card is decided at the table, not here.
+/// answers. Who is out of the game is decided at the table, not here.
 class GameController extends ChangeNotifier {
   GameController({
     required List<Question> questions,

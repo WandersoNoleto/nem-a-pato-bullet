@@ -110,6 +110,60 @@ abstract class AppLocalizations {
   /// **'Configurações'**
   String get settingsTooltip;
 
+  /// No description provided for @rulesTooltip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como jogar'**
+  String get rulesTooltip;
+
+  /// No description provided for @rulesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'COMO JOGAR'**
+  String get rulesTitle;
+
+  /// No description provided for @rulesSetup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha as rodadas, os baralhos e as categorias e toque em COMEÇAR.'**
+  String get rulesSetup;
+
+  /// No description provided for @rulesRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leia a carta em voz alta. Toda resposta é um número.'**
+  String get rulesRead;
+
+  /// No description provided for @rulesGuess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Na roda, cada um fala um número maior que o anterior, tentando não passar da resposta.'**
+  String get rulesGuess;
+
+  /// No description provided for @rulesChallenge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Achou que o último chute passou? Grite \"Nem a Pato!\" e toque no botão para virar a carta.'**
+  String get rulesChallenge;
+
+  /// No description provided for @rulesOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem perde o desafio está fora do jogo. O último que sobrar vence.'**
+  String get rulesOut;
+
+  /// No description provided for @rulesNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'O app só mostra as cartas: não guarda jogadores, eliminações nem placar. Isso fica com a mesa. Quer jogar no modo clássico? Quem perde o desafio pega uma carta, e quem tiver mais no fim é o pato da mesa.'**
+  String get rulesNote;
+
+  /// No description provided for @rulesClose.
+  ///
+  /// In pt, this message translates to:
+  /// **'ENTENDI'**
+  String get rulesClose;
+
   /// No description provided for @playButton.
   ///
   /// In pt, this message translates to:
@@ -149,7 +203,7 @@ abstract class AppLocalizations {
   /// No description provided for @gameOverBody.
   ///
   /// In pt, this message translates to:
-  /// **'{count, plural, =1{1 rodada jogada} other{{count} rodadas jogadas}}. Quem ficou com mais cartas é o pato da mesa.'**
+  /// **'{count, plural, =1{1 rodada jogada} other{{count} rodadas jogadas}}. Quem ainda está no jogo vence. Sobrou mais de um? Joguem de novo para desempatar.'**
   String gameOverBody(int count);
 
   /// No description provided for @backButton.
@@ -173,7 +227,7 @@ abstract class AppLocalizations {
   /// No description provided for @nextHint.
   ///
   /// In pt, this message translates to:
-  /// **'Quem errou fica com a carta'**
+  /// **'Errou? Tá fora do jogo!'**
   String get nextHint;
 
   /// No description provided for @playAgainButton.

@@ -16,6 +16,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsTooltip => 'Settings';
 
   @override
+  String get rulesTooltip => 'How to play';
+
+  @override
+  String get rulesTitle => 'HOW TO PLAY';
+
+  @override
+  String get rulesSetup =>
+      'Pick the rounds, the decks and the categories, then tap START.';
+
+  @override
+  String get rulesRead => 'Read the card out loud. Every answer is a number.';
+
+  @override
+  String get rulesGuess =>
+      'Around the table, each player says a number higher than the last one, trying not to go over the answer.';
+
+  @override
+  String get rulesChallenge =>
+      'Think the last guess went too far? Shout \"Nem a Pato!\" and tap the button to flip the card.';
+
+  @override
+  String get rulesOut =>
+      'Whoever loses the challenge is out of the game. The last player standing wins.';
+
+  @override
+  String get rulesNote =>
+      'The app only shows the cards: it doesn\'t track players, eliminations or score. That part stays at the table. Rather play the classic way? Whoever loses a challenge takes a card, and the player with the most cards at the end is the duck of the table.';
+
+  @override
+  String get rulesClose => 'GOT IT';
+
+  @override
   String get playButton => 'PLAY';
 
   @override
@@ -43,7 +75,7 @@ class AppLocalizationsEn extends AppLocalizations {
       other: '$count rounds played',
       one: '1 round played',
     );
-    return '$_temp0. Whoever has the most cards is the duck of the table.';
+    return '$_temp0. Whoever is still in wins. More than one left? Play again to break the tie.';
   }
 
   @override
@@ -56,7 +88,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nextButton => 'NEXT';
 
   @override
-  String get nextHint => 'Whoever was wrong takes the card';
+  String get nextHint => 'Wrong? You\'re out!';
 
   @override
   String get playAgainButton => 'PLAY AGAIN';

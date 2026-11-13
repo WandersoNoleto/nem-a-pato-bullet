@@ -16,6 +16,39 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsTooltip => 'Configurações';
 
   @override
+  String get rulesTooltip => 'Como jogar';
+
+  @override
+  String get rulesTitle => 'COMO JOGAR';
+
+  @override
+  String get rulesSetup =>
+      'Escolha as rodadas, os baralhos e as categorias e toque em COMEÇAR.';
+
+  @override
+  String get rulesRead =>
+      'Leia a carta em voz alta. Toda resposta é um número.';
+
+  @override
+  String get rulesGuess =>
+      'Na roda, cada um fala um número maior que o anterior, tentando não passar da resposta.';
+
+  @override
+  String get rulesChallenge =>
+      'Achou que o último chute passou? Grite \"Nem a Pato!\" e toque no botão para virar a carta.';
+
+  @override
+  String get rulesOut =>
+      'Quem perde o desafio está fora do jogo. O último que sobrar vence.';
+
+  @override
+  String get rulesNote =>
+      'O app só mostra as cartas: não guarda jogadores, eliminações nem placar. Isso fica com a mesa. Quer jogar no modo clássico? Quem perde o desafio pega uma carta, e quem tiver mais no fim é o pato da mesa.';
+
+  @override
+  String get rulesClose => 'ENTENDI';
+
+  @override
   String get playButton => 'JOGAR';
 
   @override
@@ -43,7 +76,7 @@ class AppLocalizationsPt extends AppLocalizations {
       other: '$count rodadas jogadas',
       one: '1 rodada jogada',
     );
-    return '$_temp0. Quem ficou com mais cartas é o pato da mesa.';
+    return '$_temp0. Quem ainda está no jogo vence. Sobrou mais de um? Joguem de novo para desempatar.';
   }
 
   @override
@@ -56,7 +89,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get nextButton => 'PRÓXIMA';
 
   @override
-  String get nextHint => 'Quem errou fica com a carta';
+  String get nextHint => 'Errou? Tá fora do jogo!';
 
   @override
   String get playAgainButton => 'JOGAR DE NOVO';
