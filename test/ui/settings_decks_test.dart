@@ -8,6 +8,7 @@ import 'package:nem_a_pato_bullet/l10n/l10n.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/state/theme_controller.dart';
+import 'package:nem_a_pato_bullet/ui/screens/deck_details_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
 
@@ -103,7 +104,41 @@ void main() {
     expect(find.byType(SnackBar), findsNothing);
   });
 
-  testWidgets('tapping a deck exports it as JSON', (tester) async {
+  testWidgets('tapping a deck opens its details', (tester) async {
+    final deck = Deck(
+      name: 'Espaço',
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+        Question.create(
+          category: 'Planetas',
+          text: 'Quantos?',
+          answer: '8',
+          fact: 'Plutão saiu da lista em 2006.',
+        ),
+      ],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+
+    await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+
+    expect(find.byType(DeckDetailsScreen), findsOneWidget);
+    expect(find.text('2 perguntas · 2 categorias'), findsOneWidget);
+    expect(find.textContaining('LUAS'), findsOneWidget);
+    expect(find.textContaining('PLANETAS'), findsOneWidget);
+    // Answers stay hidden until a question is tapped.
+    expect(find.text('8'), findsNothing);
+
+    await tester.ensureVisible(find.text('Quantos?'));
+    await tester.tap(find.text('Quantos?'));
+    await _settle(tester);
+
+    expect(find.text('8'), findsOneWidget);
+    expect(find.text('Plutão saiu da lista em 2006.'), findsOneWidget);
+    expect(find.text('2'), findsNothing);
+  });
+
+  testWidgets('a deck is exported as JSON from its details', (tester) async {
     final files = _FakeFiles();
     final deck = Deck(
       name: 'Espaço',
@@ -114,6 +149,8 @@ void main() {
     await _pumpSettings(tester, files, decks: [deck]);
 
     await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+    await tester.tap(find.text('Exportar'));
     await _settle(tester);
 
     expect(files.savedName, 'espaco.json');
@@ -134,6 +171,8 @@ void main() {
     await _pumpSettings(tester, _FakeFiles(saves: false), decks: [deck]);
 
     await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+    await tester.tap(find.text('Exportar'));
     await _settle(tester);
 
     expect(find.byType(SnackBar), findsNothing);

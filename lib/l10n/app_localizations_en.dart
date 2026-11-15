@@ -172,6 +172,29 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get deckDetailsTitle => 'DECK';
+
+  @override
+  String categoryCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count categories',
+      one: '1 category',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportDeck => 'Export deck';
+
+  @override
+  String get exportButton => 'Export';
+
+  @override
+  String get deckDetailsHint => 'Tap a question to see the answer.';
+
+  @override
   String get exportFailed => 'Could not export this deck.';
 
   @override

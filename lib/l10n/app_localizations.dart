@@ -356,6 +356,36 @@ abstract class AppLocalizations {
   /// **'Baralho \"{name}\" exportado.'**
   String deckExported(String name);
 
+  /// No description provided for @deckDetailsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'BARALHO'**
+  String get deckDetailsTitle;
+
+  /// No description provided for @categoryCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 categoria} other{{count} categorias}}'**
+  String categoryCount(int count);
+
+  /// No description provided for @exportDeck.
+  ///
+  /// In pt, this message translates to:
+  /// **'Exportar baralho'**
+  String get exportDeck;
+
+  /// No description provided for @exportButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Exportar'**
+  String get exportButton;
+
+  /// No description provided for @deckDetailsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toque numa pergunta para ver a resposta.'**
+  String get deckDetailsHint;
+
   /// No description provided for @exportFailed.
   ///
   /// In pt, this message translates to:
