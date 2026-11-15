@@ -94,13 +94,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showMessage(context.l10n.historyReset);
   }
 
-  void _openDeck(Deck deck) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
+  Future<void> _openDeck(Deck deck) async {
+    final deleted = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
         builder: (_) =>
             DeckDetailsScreen(deck: deck, dependencies: widget.dependencies),
       ),
     );
+    if (deleted != true || !mounted) return;
+    // The list and the used-card count both changed.
+    setState(() {
+      _decks = widget.dependencies.loadDecks();
+    });
+    _showMessage(context.l10n.deckDeleted(deck.name));
   }
 
   @override

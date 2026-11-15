@@ -7,7 +7,9 @@ import 'app.dart';
 import 'app_dependencies.dart';
 import 'data/all_decks.dart';
 import 'data/deck_files.dart';
+import 'data/delete_deck.dart';
 import 'data/imported_decks.dart';
+import 'domain/deck.dart';
 import 'l10n/l10n.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
@@ -43,18 +45,26 @@ Future<void> main() async {
     ),
     save: (theme) => preferences.setString(_themeKey, theme.name),
   );
+  final seen = SeenQuestions(
+    initial: preferences.getStringList(_seenKey) ?? const [],
+    onChanged: (ids) => preferences.setStringList(_seenKey, ids.toList()),
+  );
+  Future<List<Deck>> loadDecks() => loadAllDecks(imported);
   runApp(
     NemAPatoApp(
       dependencies: AppDependencies(
-        loadDecks: () => loadAllDecks(imported),
+        loadDecks: loadDecks,
         importDeck: imported.save,
+        deleteDeck: (deck) => deleteDeck(
+          deck,
+          imported: imported,
+          seen: seen,
+          loadDecks: loadDecks,
+        ),
         deckFiles: const DeckFiles(),
         language: language,
         theme: theme,
-        seen: SeenQuestions(
-          initial: preferences.getStringList(_seenKey) ?? const [],
-          onChanged: (ids) => preferences.setStringList(_seenKey, ids.toList()),
-        ),
+        seen: seen,
         updates: AppUpdates(
           checker: UpdateChecker(),
           installer: UpdateInstaller(),

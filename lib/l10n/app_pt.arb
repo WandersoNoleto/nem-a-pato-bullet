@@ -103,6 +103,30 @@
   "exportDeck": "Exportar baralho",
   "exportButton": "Exportar",
   "deckFromApp": "Vem com o app",
+  "deleteButton": "Excluir",
+  "deleteDeck": "Excluir baralho",
+  "deleteDeckTitle": "Excluir baralho?",
+  "deleteDeckBody": "{count, plural, =1{\"{name}\" e a sua pergunta saem do app.} other{\"{name}\" e as suas {count} perguntas saem do app.}} Para jogar com ele de novo, importe o arquivo outra vez.",
+  "@deleteDeckBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteDeckRestores": "O baralho original do app volta a aparecer.",
+  "deckDeleted": "Baralho \"{name}\" excluído.",
+  "@deckDeleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteFailed": "Não deu para excluir esse baralho.",
   "deckDetailsHint": "Toque numa pergunta para ver a resposta.",
   "exportFailed": "Não deu para exportar esse baralho.",
   "questionCount": "{count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}",

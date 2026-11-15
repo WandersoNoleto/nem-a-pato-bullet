@@ -55,6 +55,7 @@ Future<void> _pumpSettings(
             library.add(deck);
             return deck;
           },
+          deleteDeck: (deck) async => library.remove(deck),
           deckFiles: files,
           language: LanguageController(code: 'pt', save: (_) async {}),
           theme: ThemeController(theme: AppTheme.light, save: (_) async {}),
@@ -202,5 +203,73 @@ void main() {
     await _settle(tester);
 
     expect(find.byType(SnackBar), findsNothing);
+  });
+
+  group('deleting', () {
+    Deck deck(String name, {DeckOrigin origin = DeckOrigin.imported}) => Deck(
+      name: name,
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+      ],
+      origin: origin,
+    );
+
+    Future<void> openDetails(WidgetTester tester, Deck deck) async {
+      await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+      await tester.tap(find.text(deck.name));
+      await _settle(tester);
+    }
+
+    testWidgets('confirming removes the deck and goes back', (tester) async {
+      await openDetails(tester, deck('Espaço'));
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+      expect(find.text('Excluir baralho?'), findsOneWidget);
+      expect(
+        find.textContaining('"Espaço" e a sua pergunta saem do app.'),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.text('EXCLUIR'));
+      await _settle(tester);
+
+      expect(find.byType(DeckDetailsScreen), findsNothing);
+      expect(find.text('Espaço'), findsNothing);
+      expect(find.text('Baralho "Espaço" excluído.'), findsOneWidget);
+    });
+
+    testWidgets('canceling keeps the deck', (tester) async {
+      await openDetails(tester, deck('Espaço'));
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+      await tester.tap(find.text('CANCELAR'));
+      await _settle(tester);
+
+      expect(find.byType(DeckDetailsScreen), findsOneWidget);
+      expect(find.text('Espaço'), findsOneWidget);
+    });
+
+    testWidgets('decks shipped in the app have no delete', (tester) async {
+      await openDetails(tester, deck('Amostra', origin: DeckOrigin.app));
+
+      expect(find.text('Excluir'), findsNothing);
+    });
+
+    testWidgets('warns that the app deck comes back', (tester) async {
+      await openDetails(
+        tester,
+        deck('Amostra', origin: DeckOrigin.replacesApp),
+      );
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+
+      expect(
+        find.textContaining('O baralho original do app volta a aparecer.'),
+        findsOneWidget,
+      );
+    });
   });
 }

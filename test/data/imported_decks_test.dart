@@ -45,6 +45,19 @@ void main() {
     expect(loaded.single.questions.single.answer, '2');
   });
 
+  test('deletes a deck by name, ignoring case and spaces', () async {
+    await decks.save(_deckJson('Mar', '1'));
+    await decks.save(_deckJson('Terra', '2'));
+
+    expect(await decks.delete(' mar '), isTrue);
+
+    expect((await decks.load()).single.name, 'Terra');
+  });
+
+  test('deleting a deck that was never imported does nothing', () async {
+    expect(await decks.delete('Mar'), isFalse);
+  });
+
   test('rejects invalid files without storing them', () async {
     await expectLater(decks.save('not json'), throwsFormatException);
     await expectLater(decks.save('{"name": "Sem"}'), throwsFormatException);

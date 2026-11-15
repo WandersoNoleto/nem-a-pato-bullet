@@ -9,6 +9,7 @@ import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
+import '../widgets/app_dialog.dart';
 import '../widgets/app_message.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/panel.dart';
@@ -35,6 +36,50 @@ class DeckDetailsScreen extends StatefulWidget {
 
 class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
   bool _exporting = false;
+  bool _deleting = false;
+
+  /// Asks first, then deletes and goes back, popping true so the list
+  /// reloads.
+  Future<void> _delete(Future<void> Function(Deck deck) delete) async {
+    final deck = widget.deck;
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AppDialog(
+        title: l10n.deleteDeckTitle,
+        actions: [
+          DialogButton(
+            label: l10n.deleteButton,
+            onPressed: () => Navigator.of(context).pop(true),
+          ),
+          DialogButton(
+            label: l10n.cancel,
+            primary: false,
+            onPressed: () => Navigator.of(context).pop(false),
+          ),
+        ],
+        child: Text(
+          [
+            l10n.deleteDeckBody(deck.name, deck.questions.length),
+            if (deck.origin == DeckOrigin.replacesApp) l10n.deleteDeckRestores,
+          ].join('\n\n'),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    setState(() => _deleting = true);
+    try {
+      await delete(deck);
+      if (mounted) Navigator.of(context).pop(true);
+    } on Exception catch (error) {
+      debugPrint('Could not delete deck: $error');
+      if (mounted) {
+        setState(() => _deleting = false);
+        showAppMessage(context, l10n.deleteFailed);
+      }
+    }
+  }
 
   Future<void> _export() async {
     final deck = widget.deck;
@@ -58,6 +103,7 @@ class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final deck = widget.deck;
+    final delete = widget.dependencies.deleteDeck;
     final categories = categoriesOf([deck]);
     final theme = TableTheme.of(context);
     return TableScaffold(
@@ -83,7 +129,15 @@ class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
                       onTap: _export,
                     ),
                     if (deck.origin == DeckOrigin.app)
-                      _Tag(context.l10n.deckFromApp),
+                      _Tag(context.l10n.deckFromApp)
+                    else if (delete != null)
+                      _ActionPill(
+                        icon: Icons.delete_outline,
+                        label: context.l10n.deleteButton,
+                        semanticLabel: context.l10n.deleteDeck,
+                        busy: _deleting,
+                        onTap: () => _delete(delete),
+                      ),
                   ],
                 ),
                 const SizedBox(height: 20),

@@ -386,6 +386,48 @@ abstract class AppLocalizations {
   /// **'Vem com o app'**
   String get deckFromApp;
 
+  /// No description provided for @deleteButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir'**
+  String get deleteButton;
+
+  /// No description provided for @deleteDeck.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir baralho'**
+  String get deleteDeck;
+
+  /// No description provided for @deleteDeckTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir baralho?'**
+  String get deleteDeckTitle;
+
+  /// No description provided for @deleteDeckBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{\"{name}\" e a sua pergunta saem do app.} other{\"{name}\" e as suas {count} perguntas saem do app.}} Para jogar com ele de novo, importe o arquivo outra vez.'**
+  String deleteDeckBody(String name, int count);
+
+  /// No description provided for @deleteDeckRestores.
+  ///
+  /// In pt, this message translates to:
+  /// **'O baralho original do app volta a aparecer.'**
+  String get deleteDeckRestores;
+
+  /// No description provided for @deckDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Baralho \"{name}\" excluído.'**
+  String deckDeleted(String name);
+
+  /// No description provided for @deleteFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não deu para excluir esse baralho.'**
+  String get deleteFailed;
+
   /// No description provided for @deckDetailsHint.
   ///
   /// In pt, this message translates to:
