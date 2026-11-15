@@ -19,6 +19,7 @@ import 'package:nem_a_pato_bullet/l10n/l10n.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/state/theme_controller.dart';
+import 'package:nem_a_pato_bullet/ui/screens/deck_details_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/game_setup_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
@@ -72,6 +73,40 @@ final _decks = [
   ),
 ];
 
+/// An imported deck with real questions, for the deck details screenshot.
+final _triviaNight = Deck(
+  name: 'Trivia Night',
+  iconSvg: _bulb,
+  questions: [
+    Question.create(
+      category: 'Animals',
+      text: 'How many hearts does an octopus have?',
+      answer: '3 hearts',
+      fact: 'Two pump blood through the gills and one through the body.',
+    ),
+    Question.create(
+      category: 'Animals',
+      text: 'How many teeth does an adult dog have?',
+      answer: '42 teeth',
+    ),
+    Question.create(
+      category: 'Animals',
+      text: 'How fast can a cheetah run, in km/h?',
+      answer: '110 km/h',
+    ),
+    Question.create(
+      category: 'Space',
+      text: 'How many moons does Mars have?',
+      answer: '2 moons',
+    ),
+    Question.create(
+      category: 'Space',
+      text: 'How many minutes does sunlight take to reach Earth?',
+      answer: 'About 8 minutes',
+    ),
+  ],
+);
+
 final _skip = Platform.environment['UPDATE_SCREENSHOTS'] != '1';
 
 /// The app version from pubspec.yaml, e.g. "1.1.1".
@@ -84,6 +119,7 @@ AppDependencies _dependencies(TableTheme table) => AppDependencies(
   loadDecks: () async => _decks,
   importDeck: (source) async => Deck.fromJsonString(source),
   deckFiles: const DeckFiles(),
+  deleteDeck: (_) async {},
   language: LanguageController(code: 'en', save: (_) async {}),
   theme: ThemeController(
     theme: table == TableTheme.dark ? AppTheme.dark : AppTheme.light,
@@ -152,6 +188,13 @@ Future<void> _show(WidgetTester tester, Widget screen, TableTheme table) async {
   }
 }
 
+/// Lets taps, dialogs and flips finish animating.
+Future<void> _settle(WidgetTester tester) async {
+  for (var i = 0; i < 10; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 Future<void> _capture(WidgetTester tester, String name) async {
   final boundary = tester.renderObject<RenderRepaintBoundary>(
     find.byKey(const Key('screenshot')),
@@ -187,6 +230,12 @@ void main() {
         table,
       );
       await _capture(tester, 'home$suffix');
+      await tester.tap(find.byTooltip('How to play'));
+      await _settle(tester);
+      await _capture(tester, 'rules$suffix');
+      await tester.ensureVisible(find.text('GOT IT'));
+      await tester.tap(find.text('GOT IT'));
+      await _settle(tester);
 
       await _show(
         tester,
@@ -202,9 +251,7 @@ void main() {
       );
       await _capture(tester, 'question$suffix');
       await tester.tap(find.text('NEM A PATO!'));
-      for (var i = 0; i < 10; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+      await _settle(tester);
       await _capture(tester, 'answer$suffix');
 
       await _show(
@@ -213,6 +260,18 @@ void main() {
         table,
       );
       await _capture(tester, 'settings$suffix');
+
+      await _show(
+        tester,
+        DeckDetailsScreen(
+          deck: _triviaNight,
+          dependencies: _dependencies(table),
+        ),
+        table,
+      );
+      await tester.tap(find.text(_triviaNight.questions.first.text));
+      await _settle(tester);
+      await _capture(tester, 'deck$suffix');
     }
   });
 }
