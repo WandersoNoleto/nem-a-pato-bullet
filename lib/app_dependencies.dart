@@ -16,6 +16,7 @@ class AppDependencies {
     required this.language,
     required this.theme,
     required this.seen,
+    this.deleteDeck,
     this.updates,
   });
 
@@ -23,6 +24,10 @@ class AppDependencies {
 
   /// Stores a deck from its JSON text. Throws a [FormatException] if invalid.
   final Future<Deck> Function(String source) importDeck;
+
+  /// Removes an imported deck and its cards from the history. Null hides
+  /// deleting, e.g. in tests that don't need it.
+  final Future<void> Function(Deck deck)? deleteDeck;
   final DeckFiles deckFiles;
   final LanguageController language;
   final ThemeController theme;

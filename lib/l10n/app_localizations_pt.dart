@@ -173,6 +173,64 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get deckDetailsTitle => 'BARALHO';
+
+  @override
+  String categoryCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count categorias',
+      one: '1 categoria',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportDeck => 'Exportar baralho';
+
+  @override
+  String get exportButton => 'Exportar';
+
+  @override
+  String get deckFromApp => 'Vem com o app';
+
+  @override
+  String get deleteButton => 'Excluir';
+
+  @override
+  String get deleteDeck => 'Excluir baralho';
+
+  @override
+  String get deleteDeckTitle => 'Excluir baralho?';
+
+  @override
+  String deleteDeckBody(String name, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '\"$name\" e as suas $count perguntas saem do app.',
+      one: '\"$name\" e a sua pergunta saem do app.',
+    );
+    return '$_temp0 Para jogar com ele de novo, importe o arquivo outra vez.';
+  }
+
+  @override
+  String get deleteDeckRestores =>
+      'O baralho original do app volta a aparecer.';
+
+  @override
+  String deckDeleted(String name) {
+    return 'Baralho \"$name\" excluído.';
+  }
+
+  @override
+  String get deleteFailed => 'Não deu para excluir esse baralho.';
+
+  @override
+  String get deckDetailsHint => 'Toque numa pergunta para ver a resposta.';
+
+  @override
   String get exportFailed => 'Não deu para exportar esse baralho.';
 
   @override

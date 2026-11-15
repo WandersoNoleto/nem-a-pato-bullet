@@ -2,9 +2,27 @@ import 'dart:convert';
 
 import 'question.dart';
 
+/// Where a deck comes from. Not part of the JSON: the loaders set it.
+enum DeckOrigin {
+  /// Shipped inside the app; it can't be removed.
+  app,
+
+  /// Imported by the player.
+  imported,
+
+  /// Imported with the same name as a deck shipped in the app, which it
+  /// hides; removing it brings the app's deck back.
+  replacesApp,
+}
+
 /// A named list of questions loaded from a JSON deck file.
 class Deck {
-  const Deck({required this.name, required this.questions, this.iconSvg});
+  const Deck({
+    required this.name,
+    required this.questions,
+    this.iconSvg,
+    this.origin = DeckOrigin.imported,
+  });
 
   /// Parses a deck in the format:
   ///
@@ -57,6 +75,10 @@ class Deck {
     return Deck.fromJson(decoded);
   }
 
+  /// This deck with another [origin].
+  Deck withOrigin(DeckOrigin origin) =>
+      Deck(name: name, questions: questions, iconSvg: iconSvg, origin: origin);
+
   /// The deck in the same format [Deck.fromJson] reads.
   String toJsonString() {
     return const JsonEncoder.withIndent('  ').convert({
@@ -104,4 +126,6 @@ class Deck {
 
   /// The deck's symbol as inline SVG; null shows the default card symbol.
   final String? iconSvg;
+
+  final DeckOrigin origin;
 }

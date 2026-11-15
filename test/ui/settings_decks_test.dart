@@ -8,6 +8,7 @@ import 'package:nem_a_pato_bullet/l10n/l10n.dart';
 import 'package:nem_a_pato_bullet/state/language_controller.dart';
 import 'package:nem_a_pato_bullet/state/seen_questions.dart';
 import 'package:nem_a_pato_bullet/state/theme_controller.dart';
+import 'package:nem_a_pato_bullet/ui/screens/deck_details_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/theme/table_theme.dart';
 
@@ -54,6 +55,7 @@ Future<void> _pumpSettings(
             library.add(deck);
             return deck;
           },
+          deleteDeck: (deck) async => library.remove(deck),
           deckFiles: files,
           language: LanguageController(code: 'pt', save: (_) async {}),
           theme: ThemeController(theme: AppTheme.light, save: (_) async {}),
@@ -103,7 +105,67 @@ void main() {
     expect(find.byType(SnackBar), findsNothing);
   });
 
-  testWidgets('tapping a deck exports it as JSON', (tester) async {
+  testWidgets('tapping a deck opens its details', (tester) async {
+    final deck = Deck(
+      name: 'Espaço',
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+        Question.create(
+          category: 'Planetas',
+          text: 'Quantos?',
+          answer: '8',
+          fact: 'Plutão saiu da lista em 2006.',
+        ),
+      ],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+
+    await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+
+    expect(find.byType(DeckDetailsScreen), findsOneWidget);
+    expect(find.text('2 perguntas · 2 categorias'), findsOneWidget);
+    expect(find.textContaining('LUAS'), findsOneWidget);
+    expect(find.textContaining('PLANETAS'), findsOneWidget);
+    // Answers stay hidden until a question is tapped.
+    expect(find.text('8'), findsNothing);
+
+    await tester.ensureVisible(find.text('Quantos?'));
+    await tester.tap(find.text('Quantos?'));
+    await _settle(tester);
+
+    expect(find.text('8'), findsOneWidget);
+    expect(find.text('Plutão saiu da lista em 2006.'), findsOneWidget);
+    expect(find.text('2'), findsNothing);
+  });
+
+  testWidgets('decks shipped in the app are labeled', (tester) async {
+    final appDeck = Deck(
+      name: 'Amostra',
+      questions: [Question.create(category: 'A', text: 'q1', answer: '1')],
+      origin: DeckOrigin.app,
+    );
+    final importedDeck = Deck(
+      name: 'Meu',
+      questions: [Question.create(category: 'B', text: 'q2', answer: '2')],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [appDeck, importedDeck]);
+
+    expect(find.text('1 pergunta · Vem com o app'), findsOneWidget);
+    expect(find.text('1 pergunta'), findsOneWidget);
+
+    await tester.tap(find.text('Amostra'));
+    await _settle(tester);
+    expect(find.text('Vem com o app'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Voltar'));
+    await _settle(tester);
+    await tester.tap(find.text('Meu'));
+    await _settle(tester);
+    expect(find.text('Vem com o app'), findsNothing);
+  });
+
+  testWidgets('a deck is exported as JSON from its details', (tester) async {
     final files = _FakeFiles();
     final deck = Deck(
       name: 'Espaço',
@@ -114,6 +176,8 @@ void main() {
     await _pumpSettings(tester, files, decks: [deck]);
 
     await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+    await tester.tap(find.text('Exportar'));
     await _settle(tester);
 
     expect(files.savedName, 'espaco.json');
@@ -135,7 +199,77 @@ void main() {
 
     await tester.tap(find.text('Espaço'));
     await _settle(tester);
+    await tester.tap(find.text('Exportar'));
+    await _settle(tester);
 
     expect(find.byType(SnackBar), findsNothing);
+  });
+
+  group('deleting', () {
+    Deck deck(String name, {DeckOrigin origin = DeckOrigin.imported}) => Deck(
+      name: name,
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+      ],
+      origin: origin,
+    );
+
+    Future<void> openDetails(WidgetTester tester, Deck deck) async {
+      await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+      await tester.tap(find.text(deck.name));
+      await _settle(tester);
+    }
+
+    testWidgets('confirming removes the deck and goes back', (tester) async {
+      await openDetails(tester, deck('Espaço'));
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+      expect(find.text('Excluir baralho?'), findsOneWidget);
+      expect(
+        find.textContaining('"Espaço" e a sua pergunta saem do app.'),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.text('EXCLUIR'));
+      await _settle(tester);
+
+      expect(find.byType(DeckDetailsScreen), findsNothing);
+      expect(find.text('Espaço'), findsNothing);
+      expect(find.text('Baralho "Espaço" excluído.'), findsOneWidget);
+    });
+
+    testWidgets('canceling keeps the deck', (tester) async {
+      await openDetails(tester, deck('Espaço'));
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+      await tester.tap(find.text('CANCELAR'));
+      await _settle(tester);
+
+      expect(find.byType(DeckDetailsScreen), findsOneWidget);
+      expect(find.text('Espaço'), findsOneWidget);
+    });
+
+    testWidgets('decks shipped in the app have no delete', (tester) async {
+      await openDetails(tester, deck('Amostra', origin: DeckOrigin.app));
+
+      expect(find.text('Excluir'), findsNothing);
+    });
+
+    testWidgets('warns that the app deck comes back', (tester) async {
+      await openDetails(
+        tester,
+        deck('Amostra', origin: DeckOrigin.replacesApp),
+      );
+
+      await tester.tap(find.text('Excluir'));
+      await _settle(tester);
+
+      expect(
+        find.textContaining('O baralho original do app volta a aparecer.'),
+        findsOneWidget,
+      );
+    });
   });
 }

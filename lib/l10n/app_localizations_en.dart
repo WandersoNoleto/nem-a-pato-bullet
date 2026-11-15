@@ -172,6 +172,63 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get deckDetailsTitle => 'DECK';
+
+  @override
+  String categoryCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count categories',
+      one: '1 category',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportDeck => 'Export deck';
+
+  @override
+  String get exportButton => 'Export';
+
+  @override
+  String get deckFromApp => 'Comes with the app';
+
+  @override
+  String get deleteButton => 'Delete';
+
+  @override
+  String get deleteDeck => 'Delete deck';
+
+  @override
+  String get deleteDeckTitle => 'Delete deck?';
+
+  @override
+  String deleteDeckBody(String name, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '\"$name\" and its $count questions leave the app.',
+      one: '\"$name\" and its question leave the app.',
+    );
+    return '$_temp0 To play with it again, import the file once more.';
+  }
+
+  @override
+  String get deleteDeckRestores => 'The app\'s original deck shows up again.';
+
+  @override
+  String deckDeleted(String name) {
+    return 'Deck \"$name\" deleted.';
+  }
+
+  @override
+  String get deleteFailed => 'Couldn\'t delete this deck.';
+
+  @override
+  String get deckDetailsHint => 'Tap a question to see the answer.';
+
+  @override
   String get exportFailed => 'Could not export this deck.';
 
   @override

@@ -45,8 +45,22 @@ class ImportedDecks {
     }
     final folder = await _directory();
     await folder.create(recursive: true);
-    final name = sha1.convert(utf8.encode(textKey(deck.name))).toString();
-    await File('${folder.path}/$name.json').writeAsString(deck.toJsonString());
+    await _file(folder, deck.name).writeAsString(deck.toJsonString());
     return deck;
+  }
+
+  /// Removes the imported deck called [name]. Returns false if there was
+  /// none.
+  Future<bool> delete(String name) async {
+    final file = _file(await _directory(), name);
+    if (!file.existsSync()) return false;
+    await file.delete();
+    return true;
+  }
+
+  /// One file per deck name, so saving the same name replaces it.
+  static File _file(Directory folder, String deckName) {
+    final name = sha1.convert(utf8.encode(textKey(deckName))).toString();
+    return File('${folder.path}/$name.json');
   }
 }
