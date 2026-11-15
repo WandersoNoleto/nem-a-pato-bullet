@@ -171,7 +171,7 @@
   },
   "startButton": "COMEÇAR",
   "updateDialogTitle": "Nova versão disponível",
-  "updateDialogBody": "A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.",
+  "updateDialogBody": "A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em ATUALIZAR para instalar as novidades.",
   "@updateDialogBody": {
     "placeholders": {
       "version": {

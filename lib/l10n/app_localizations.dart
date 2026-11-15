@@ -509,7 +509,7 @@ abstract class AppLocalizations {
   /// No description provided for @updateDialogBody.
   ///
   /// In pt, this message translates to:
-  /// **'A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.'**
+  /// **'A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em ATUALIZAR para instalar as novidades.'**
   String updateDialogBody(String version);
 
   /// No description provided for @later.

@@ -284,7 +284,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String updateDialogBody(String version) {
-    return 'A versão v$version do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.';
+    return 'A versão v$version do Nem a Pato! Bullet está disponível.\n\nToque em ATUALIZAR para instalar as novidades.';
   }
 
   @override
