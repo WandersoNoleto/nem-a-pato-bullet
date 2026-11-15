@@ -122,6 +122,32 @@ void main() {
     expect(find.text('25'), findsOneWidget);
   });
 
+  testWidgets('round options fit one row on a narrow phone', (tester) async {
+    tester.view
+      ..physicalSize = const Size(360, 640)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await _openSetup(tester);
+
+    await tester.tap(find.text('+'));
+    await tester.pump();
+    await tester.pump(_transition);
+    await tester.enterText(find.byType(TextField).last, '999');
+    await tester.tap(find.text('OK'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    final rows = {
+      for (final label in ['Infinitas', '5', '20', 'Outra quantidade'])
+        tester
+            .getTopLeft(find.bySemanticsLabel(label).first)
+            .dy
+            .roundToDouble(),
+    };
+    expect(rows, hasLength(1));
+    expect(find.text('999'), findsOneWidget);
+  });
+
   testWidgets('COMEÇAR opens the game', (tester) async {
     await _openSetup(tester);
 

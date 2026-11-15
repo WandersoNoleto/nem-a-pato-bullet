@@ -10,6 +10,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
 import '../widgets/choice_pill.dart';
+import '../widgets/infinity_glyph.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/play_button.dart';
 import '../widgets/raised_box.dart';
@@ -166,29 +167,39 @@ class _RoundsPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    // One row: every option shares the width, so "+" never wraps alone.
+    final options = [
+      ChoicePill(
+        label: '∞',
+        semanticLabel: context.l10n.infiniteRounds,
+        glyph: (color) => InfinityGlyph(color: color),
+        selected: rounds == null,
+        expand: true,
+        onTap: () => onChanged(null),
+      ),
+      for (final preset in GameSetupController.roundPresets)
+        ChoicePill(
+          label: '$preset',
+          selected: rounds == preset,
+          expand: true,
+          onTap: () => onChanged(preset),
+        ),
+      ChoicePill(
+        label: _isCustom ? '$rounds' : '+',
+        semanticLabel: context.l10n.customRounds,
+        icon: _isCustom ? Icons.edit : null,
+        selected: _isCustom,
+        expand: true,
+        onTap: () => _pickCustom(context),
+      ),
+    ];
+    return Row(
       children: [
-        ChoicePill(
-          label: '∞',
-          semanticLabel: context.l10n.infiniteRounds,
-          selected: rounds == null,
-          onTap: () => onChanged(null),
-        ),
-        for (final preset in GameSetupController.roundPresets)
-          ChoicePill(
-            label: '$preset',
-            selected: rounds == preset,
-            onTap: () => onChanged(preset),
-          ),
-        ChoicePill(
-          label: _isCustom ? '$rounds' : '+',
-          semanticLabel: context.l10n.customRounds,
-          icon: _isCustom ? Icons.edit : null,
-          selected: _isCustom,
-          onTap: () => _pickCustom(context),
-        ),
+        for (final (index, option) in options.indexed) ...[
+          if (index > 0) const SizedBox(width: 8),
+          // ∞ is the default choice and gets a little more room.
+          Expanded(flex: index == 0 ? 5 : 4, child: option),
+        ],
       ],
     );
   }
