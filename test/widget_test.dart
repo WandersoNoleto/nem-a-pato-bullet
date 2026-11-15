@@ -14,6 +14,8 @@ import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/widgets/choice_pill.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/play_button.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/raised_box.dart';
 
 // The home screen's play button pulses forever, so these tests step frames
 // instead of using pumpAndSettle, which would never settle.
@@ -122,6 +124,89 @@ void main() {
     expect(find.text('25'), findsOneWidget);
   });
 
+  testWidgets('round options fit one row on a narrow phone', (tester) async {
+    tester.view
+      ..physicalSize = const Size(360, 640)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await _openSetup(tester);
+
+    await tester.tap(find.text('+'));
+    await tester.pump();
+    await tester.pump(_transition);
+    await tester.enterText(find.byType(TextField).last, '999');
+    await tester.tap(find.text('OK'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    final rows = {
+      for (final label in ['Infinitas', '5', '20', 'Outra quantidade'])
+        tester
+            .getTopLeft(find.bySemanticsLabel(label).first)
+            .dy
+            .roundToDouble(),
+    };
+    expect(rows, hasLength(1));
+    expect(find.text('999'), findsOneWidget);
+  });
+
+  for (final (width, columns) in [(360.0, 3), (390.0, 3), (768.0, 4)]) {
+    testWidgets('decks fill $columns columns on a $width-wide screen', (
+      tester,
+    ) async {
+      tester.view
+        ..physicalSize = Size(width, 800)
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await _openSetup(tester);
+
+      Rect tile(String name) => tester.getRect(
+        find.ancestor(of: find.text(name), matching: find.byType(RaisedBox)),
+      );
+      final first = tile('Espaço');
+      final second = tile('Mar');
+      // Content is at most 560 wide (tablets), with 20 of padding on each
+      // side and 12 between tiles.
+      final content = width.clamp(0, 560) - 40;
+      final expected = ((content - 12 * (columns - 1)) / columns)
+          .floorToDouble();
+
+      expect(second.top, first.top);
+      expect(first.width, expected);
+    });
+  }
+
+  testWidgets('without categories, a message shows above COMEÇAR', (
+    tester,
+  ) async {
+    await _openSetup(tester);
+    for (final category in ['Luas', 'Oceano', 'Planetas']) {
+      await tester.tap(find.text(category));
+      await tester.pump();
+    }
+
+    await tester.tap(find.text('COMEÇAR'));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(_frame);
+    }
+
+    final message = tester.getRect(
+      find.descendant(
+        of: find.byType(SnackBar),
+        matching: find.byType(RaisedBox),
+      ),
+    );
+    final start = tester.getRect(
+      find.ancestor(
+        of: find.text('COMEÇAR'),
+        matching: find.byType(PlayButton),
+      ),
+    );
+    expect(find.text('Escolha pelo menos uma categoria.'), findsOneWidget);
+    expect(message.bottom, lessThanOrEqualTo(start.top));
+    expect(find.byType(GameScreen), findsNothing);
+  });
+
   testWidgets('COMEÇAR opens the game', (tester) async {
     await _openSetup(tester);
 
@@ -131,6 +216,45 @@ void main() {
 
     expect(find.byType(GameScreen), findsOneWidget);
     expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('setup and game fit a large system font', (tester) async {
+    tester.view
+      ..physicalSize = const Size(390, 844)
+      ..devicePixelRatio = 1;
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(tester.view.reset);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await _openSetup(tester);
+
+    await tester.ensureVisible(find.text('COMEÇAR'));
+    await tester.tap(find.text('COMEÇAR'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    // Any overflow on the way fails the test.
+    expect(find.byType(GameScreen), findsOneWidget);
+    expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('on tablets the content keeps a phone-like width', (
+    tester,
+  ) async {
+    tester.view
+      ..physicalSize = const Size(1024, 1366)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await _openSetup(tester);
+
+    final start = tester.getRect(find.text('COMEÇAR'));
+    expect(start.center.dx, closeTo(512, 1));
+    final button = tester.getRect(
+      find.ancestor(
+        of: find.text('COMEÇAR'),
+        matching: find.byType(PlayButton),
+      ),
+    );
+    expect(button.width, lessThanOrEqualTo(560));
   });
 
   testWidgets('the gear on home opens the settings', (tester) async {

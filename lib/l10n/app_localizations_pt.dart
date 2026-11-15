@@ -222,6 +222,11 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String customRoundsHint(int max) {
+    return 'De 1 a $max rodadas';
+  }
+
+  @override
   String get cancel => 'Cancelar';
 
   @override
@@ -279,7 +284,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String updateDialogBody(String version) {
-    return 'A versão v$version do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.';
+    return 'A versão v$version do Nem a Pato! Bullet está disponível.\n\nToque em ATUALIZAR para instalar as novidades.';
   }
 
   @override

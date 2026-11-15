@@ -10,6 +10,9 @@ import '../theme/table_theme.dart';
 class TableScaffold extends StatelessWidget {
   const TableScaffold({super.key, required this.child, this.rays = false});
 
+  /// On tablets the content keeps a phone-like width, centered on the table.
+  static const maxContentWidth = 560.0;
+
   final Widget child;
 
   /// Draws the sunburst over the gradient; used by the game screen only.
@@ -27,7 +30,17 @@ class TableScaffold extends StatelessWidget {
               child: CustomPaint(painter: _TablePainter(theme, rays: rays)),
             ),
           ),
-          SafeArea(child: child),
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) => Center(
+                child: SizedBox(
+                  width: min(constraints.maxWidth, maxContentWidth),
+                  height: constraints.maxHeight,
+                  child: child,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

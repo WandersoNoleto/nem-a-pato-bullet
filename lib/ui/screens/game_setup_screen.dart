@@ -9,7 +9,10 @@ import '../../state/game_setup_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
+import '../widgets/app_dialog.dart';
+import '../widgets/app_message.dart';
 import '../widgets/choice_pill.dart';
+import '../widgets/infinity_glyph.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/play_button.dart';
 import '../widgets/raised_box.dart';
@@ -29,6 +32,7 @@ class GameSetupScreen extends StatefulWidget {
 }
 
 class _GameSetupScreenState extends State<GameSetupScreen> {
+  final _startAreaKey = GlobalKey();
   late final _controller = GameSetupController(
     loadDecks: widget.dependencies.loadDecks,
     seen: widget.dependencies.seen,
@@ -49,8 +53,13 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
   Future<void> _start() async {
     final questions = _controller.questions;
     if (questions.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(context.l10n.noCategoryChosen)));
+      // Above the start button, which the message would cover.
+      final startArea = _startAreaKey.currentContext?.size?.height ?? 0;
+      showAppMessage(
+        context,
+        context.l10n.noCategoryChosen,
+        bottom: startArea + 8,
+      );
       return;
     }
     await Navigator.of(context).push(
@@ -80,6 +89,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
             Expanded(child: _buildBody()),
             if (_controller.status == SetupStatus.ready)
               Padding(
+                key: _startAreaKey,
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
                 child: _StartArea(
                   unseenCount: _controller.unseenCount,
@@ -118,9 +128,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
           ),
           const SizedBox(height: 28),
           SectionLabel(context.l10n.decksSection),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
+          _DeckGrid(
             children: [
               for (final deck in _controller.decks)
                 _DeckTile(
@@ -166,29 +174,39 @@ class _RoundsPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
+    // One row: every option shares the width, so "+" never wraps alone.
+    final options = [
+      ChoicePill(
+        label: '∞',
+        semanticLabel: context.l10n.infiniteRounds,
+        glyph: (color) => InfinityGlyph(color: color),
+        selected: rounds == null,
+        expand: true,
+        onTap: () => onChanged(null),
+      ),
+      for (final preset in GameSetupController.roundPresets)
+        ChoicePill(
+          label: '$preset',
+          selected: rounds == preset,
+          expand: true,
+          onTap: () => onChanged(preset),
+        ),
+      ChoicePill(
+        label: _isCustom ? '$rounds' : '+',
+        semanticLabel: context.l10n.customRounds,
+        icon: _isCustom ? Icons.edit : null,
+        selected: _isCustom,
+        expand: true,
+        onTap: () => _pickCustom(context),
+      ),
+    ];
+    return Row(
       children: [
-        ChoicePill(
-          label: '∞',
-          semanticLabel: context.l10n.infiniteRounds,
-          selected: rounds == null,
-          onTap: () => onChanged(null),
-        ),
-        for (final preset in GameSetupController.roundPresets)
-          ChoicePill(
-            label: '$preset',
-            selected: rounds == preset,
-            onTap: () => onChanged(preset),
-          ),
-        ChoicePill(
-          label: _isCustom ? '$rounds' : '+',
-          semanticLabel: context.l10n.customRounds,
-          icon: _isCustom ? Icons.edit : null,
-          selected: _isCustom,
-          onTap: () => _pickCustom(context),
-        ),
+        for (final (index, option) in options.indexed) ...[
+          if (index > 0) const SizedBox(width: 8),
+          // ∞ is the default choice and gets a little more room.
+          Expanded(flex: index == 0 ? 5 : 4, child: option),
+        ],
       ],
     );
   }
@@ -228,34 +246,123 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(context.l10n.customRoundsTitle),
-      content: TextField(
-        controller: _text,
-        autofocus: true,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(3),
-        ],
-        decoration: InputDecoration(hintText: '25', errorText: _error),
-        onChanged: (_) {
-          if (_error != null) setState(() => _error = null);
-        },
-        onSubmitted: (_) => _submit(),
-      ),
+    final error = _error;
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: AppColors.ink, width: 2.5),
+    );
+    return AppDialog(
+      title: context.l10n.customRoundsTitle,
       actions: [
-        TextButton(
+        DialogButton(label: context.l10n.ok, onPressed: _submit),
+        DialogButton(
+          label: context.l10n.cancel,
+          primary: false,
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(context.l10n.cancel),
         ),
-        FilledButton(onPressed: _submit, child: Text(context.l10n.ok)),
       ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: _text,
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            cursorColor: AppColors.ink,
+            style: AppTextStyles.answer.copyWith(fontSize: 40),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(3),
+            ],
+            decoration: InputDecoration(
+              hintText: '25',
+              hintStyle: AppTextStyles.answer.copyWith(
+                fontSize: 40,
+                color: AppColors.cardDivider,
+              ),
+              filled: true,
+              fillColor: AppColors.white,
+              contentPadding: const EdgeInsets.symmetric(vertical: 14),
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border,
+            ),
+            onChanged: (_) {
+              if (_error != null) setState(() => _error = null);
+            },
+            onSubmitted: (_) => _submit(),
+          ),
+          // Always takes room, so the panel doesn't jump when it shows.
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (error != null) ...[
+                const Icon(
+                  Icons.error_outline,
+                  size: 18,
+                  color: AppColors.orange,
+                ),
+                const SizedBox(width: 6),
+              ],
+              Flexible(
+                child: Text(
+                  error ?? context.l10n.customRoundsHint(_max),
+                  textAlign: TextAlign.center,
+                  style: AppDialog.bodyStyle.copyWith(
+                    fontSize: 13,
+                    color: error == null ? AppColors.cardMuted : AppColors.ink,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
 // --- Decks ------------------------------------------------------------------
+
+/// Deck tiles in as many columns as fit: three on a typical phone, two on a
+/// narrow one and more on wide screens, so no empty strip is left on the right.
+class _DeckGrid extends StatelessWidget {
+  const _DeckGrid({required this.children});
+
+  static const _minTileWidth = 96.0;
+  static const _spacing = 12.0;
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        // A larger system font needs wider tiles, so fewer columns.
+        final minTileWidth = MediaQuery.textScalerOf(context)
+            .scale(_minTileWidth)
+            .clamp(_minTileWidth, _minTileWidth * 1.6);
+        final columns = ((width + _spacing) / (minTileWidth + _spacing))
+            .floor()
+            .clamp(2, 8);
+        // Rounded down so rounding never pushes the last tile to a new row.
+        final tileWidth = ((width - _spacing * (columns - 1)) / columns)
+            .floorToDouble();
+        return Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: [
+            for (final child in children)
+              SizedBox(width: tileWidth, child: child),
+          ],
+        );
+      },
+    );
+  }
+}
 
 class _DeckTile extends StatelessWidget {
   const _DeckTile({
@@ -289,7 +396,7 @@ class _DeckTile extends StatelessWidget {
                 colors: selected
                     ? AppColors.headerGradient
                     : AppColors.paperGradient,
-                width: 118,
+                width: double.infinity,
                 lipHeight: 4,
                 softShadow: false,
                 padding: const EdgeInsets.fromLTRB(6, 14, 6, 10),
@@ -299,27 +406,20 @@ class _DeckTile extends StatelessWidget {
                     const SizedBox(height: 8),
                     // Room for two lines, so every tile has the same height.
                     SizedBox(
-                      height: 34,
-                      child: Center(
-                        child: Text(
-                          deck.name,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyles.credits.copyWith(
-                            fontSize: 11,
-                            color: AppColors.ink,
-                          ),
-                        ),
-                      ),
+                      height: MediaQuery.textScalerOf(context).scale(34),
+                      child: Center(child: _DeckName(deck.name)),
                     ),
-                    Text(
-                      context.l10n.questionCount(count),
-                      style: AppTextStyles.credits.copyWith(
-                        fontSize: 10,
-                        color: selected
-                            ? AppColors.mutedOnYellow
-                            : AppColors.cardMuted,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        context.l10n.questionCount(count),
+                        maxLines: 1,
+                        style: AppTextStyles.credits.copyWith(
+                          fontSize: 10,
+                          color: selected
+                              ? AppColors.mutedOnYellow
+                              : AppColors.cardMuted,
+                        ),
                       ),
                     ),
                   ],
@@ -348,6 +448,64 @@ class _DeckTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// A deck name in up to two lines. The font shrinks until the longest word
+/// fits, so words never break in the middle on narrow tiles.
+class _DeckName extends StatelessWidget {
+  const _DeckName(this.name);
+
+  static const _fontSize = 11.0;
+  static const _minFontSize = 8.0;
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final base = AppTextStyles.credits.copyWith(color: AppColors.ink);
+    // Measured with what the Text inherits too, like the theme's spacing.
+    final inherited = DefaultTextStyle.of(context).style;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final scaler = MediaQuery.textScalerOf(context);
+        final longest = name
+            .split(RegExp(r'\s+'))
+            .map(
+              (word) => _width(
+                word,
+                inherited.merge(base.copyWith(fontSize: _fontSize)),
+                scaler,
+              ),
+            )
+            .fold(0.0, (a, b) => a > b ? a : b);
+        final available = constraints.maxWidth;
+        final fontSize = longest <= available
+            ? _fontSize
+            : (_fontSize * available / longest)
+                  .clamp(_minFontSize, _fontSize)
+                  .floorToDouble();
+        return Text(
+          name,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: base.copyWith(fontSize: fontSize),
+        );
+      },
+    );
+  }
+
+  static double _width(String word, TextStyle style, TextScaler scaler) {
+    final painter = TextPainter(
+      text: TextSpan(text: word, style: style),
+      textDirection: TextDirection.ltr,
+      textScaler: scaler,
+      maxLines: 1,
+    )..layout();
+    final width = painter.width;
+    painter.dispose();
+    return width;
   }
 }
 

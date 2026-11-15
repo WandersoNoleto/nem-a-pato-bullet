@@ -18,11 +18,18 @@ class ScreenHeader extends StatelessWidget {
       children: [
         const RaisedBackButton(),
         const SizedBox(width: 14),
-        Text(
-          title,
-          style: AppTextStyles.category.copyWith(
-            color: TableTheme.of(context).title,
-            fontSize: 20,
+        // Long titles shrink on narrow phones instead of overflowing.
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: AppTextStyles.category.copyWith(
+                color: TableTheme.of(context).title,
+                fontSize: 20,
+              ),
+            ),
           ),
         ),
       ],

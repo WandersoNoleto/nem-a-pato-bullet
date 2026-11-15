@@ -4,10 +4,14 @@ import '../theme/table_theme.dart';
 
 /// A loading bar where the mascot train runs right to left, leaving a trail.
 class TrainProgressBar extends StatelessWidget {
-  const TrainProgressBar({super.key, required this.progress});
+  const TrainProgressBar({super.key, required this.progress, this.color});
 
   /// From 0 (start) to 1 (done).
   final double progress;
+
+  /// The rail and trail; defaults to the text color on the table, so pass
+  /// ink when the bar sits on a paper panel.
+  final Color? color;
 
   static const trainWidth = 64.0;
   static const trainHeight = 41.0;
@@ -26,7 +30,7 @@ class TrainProgressBar extends StatelessWidget {
               Positioned.fill(
                 child: CustomPaint(
                   painter: _TrailPainter(
-                    color: TableTheme.of(context).onTable,
+                    color: color ?? TableTheme.of(context).onTable,
                     frontX: trainLeft,
                     tailX: trainLeft + trainWidth * 0.88,
                   ),

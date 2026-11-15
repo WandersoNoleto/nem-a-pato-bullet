@@ -15,6 +15,8 @@ class ChoicePill extends StatelessWidget {
     this.semanticLabel,
     this.icon,
     this.leading,
+    this.glyph,
+    this.expand = false,
   });
 
   final String label;
@@ -26,12 +28,37 @@ class ChoicePill extends StatelessWidget {
   /// Shown before the label, like a flag.
   final Widget? leading;
 
+  /// Drawn instead of the label, in the pill's text color.
+  final Widget Function(Color color)? glyph;
+
+  /// Fills the available width, shrinking the content if it doesn't fit.
+  final bool expand;
+
   @override
   Widget build(BuildContext context) {
     final icon = this.icon;
     final leading = this.leading;
+    final glyph = this.glyph;
     final theme = TableTheme.of(context);
     final foreground = selected ? theme.onSelected : AppColors.ink;
+    final content = Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (leading != null) ...[leading, const SizedBox(width: 8)],
+        if (glyph != null)
+          glyph(foreground)
+        else
+          Text(
+            label,
+            style: AppTextStyles.pill.copyWith(fontSize: 16, color: foreground),
+          ),
+        if (icon != null) ...[
+          const SizedBox(width: 4),
+          Icon(icon, size: 14, color: foreground),
+        ],
+      ],
+    );
     return Semantics(
       button: true,
       selected: selected,
@@ -46,26 +73,19 @@ class ChoicePill extends StatelessWidget {
           borderWidth: 2,
           lipHeight: 3,
           softShadow: false,
+          width: expand ? double.infinity : null,
           constraints: const BoxConstraints(minWidth: 48),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (leading != null) ...[leading, const SizedBox(width: 8)],
-              Text(
-                label,
-                style: AppTextStyles.pill.copyWith(
-                  fontSize: 16,
-                  color: foreground,
-                ),
-              ),
-              if (icon != null) ...[
-                const SizedBox(width: 4),
-                Icon(icon, size: 14, color: foreground),
-              ],
-            ],
+          padding: EdgeInsets.symmetric(
+            horizontal: expand ? 6 : 14,
+            vertical: 10,
           ),
+          child: expand
+              // Shrinks to fit, keeping the height of one line of text.
+              ? SizedBox(
+                  height: 16,
+                  child: FittedBox(fit: BoxFit.scaleDown, child: content),
+                )
+              : content,
         ),
       ),
     );

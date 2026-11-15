@@ -127,6 +127,14 @@
       }
     }
   },
+  "customRoundsHint": "De 1 a {max} rodadas",
+  "@customRoundsHint": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "cancel": "Cancelar",
   "ok": "OK",
   "deckTileLabel": "Baralho {name}, {count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}",
@@ -163,7 +171,7 @@
   },
   "startButton": "COMEÇAR",
   "updateDialogTitle": "Nova versão disponível",
-  "updateDialogBody": "A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em \"Atualizar\" para instalar as novidades.",
+  "updateDialogBody": "A versão v{version} do Nem a Pato! Bullet está disponível.\n\nToque em ATUALIZAR para instalar as novidades.",
   "@updateDialogBody": {
     "placeholders": {
       "version": {
