@@ -14,6 +14,7 @@ import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/widgets/choice_pill.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/play_button.dart';
 import 'package:nem_a_pato_bullet/ui/widgets/raised_box.dart';
 
 // The home screen's play button pulses forever, so these tests step frames
@@ -149,7 +150,7 @@ void main() {
     expect(find.text('999'), findsOneWidget);
   });
 
-  for (final (width, columns) in [(360.0, 3), (390.0, 3), (768.0, 6)]) {
+  for (final (width, columns) in [(360.0, 3), (390.0, 3), (768.0, 4)]) {
     testWidgets('decks fill $columns columns on a $width-wide screen', (
       tester,
     ) async {
@@ -164,8 +165,10 @@ void main() {
       );
       final first = tile('Espaço');
       final second = tile('Mar');
-      // The screen has 20 of padding on each side and 12 between tiles.
-      final expected = ((width - 40 - 12 * (columns - 1)) / columns)
+      // Content is at most 560 wide (tablets), with 20 of padding on each
+      // side and 12 between tiles.
+      final content = width.clamp(0, 560) - 40;
+      final expected = ((content - 12 * (columns - 1)) / columns)
           .floorToDouble();
 
       expect(second.top, first.top);
@@ -182,6 +185,45 @@ void main() {
 
     expect(find.byType(GameScreen), findsOneWidget);
     expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('setup and game fit a large system font', (tester) async {
+    tester.view
+      ..physicalSize = const Size(390, 844)
+      ..devicePixelRatio = 1;
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(tester.view.reset);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await _openSetup(tester);
+
+    await tester.ensureVisible(find.text('COMEÇAR'));
+    await tester.tap(find.text('COMEÇAR'));
+    await tester.pump();
+    await tester.pump(_transition);
+
+    // Any overflow on the way fails the test.
+    expect(find.byType(GameScreen), findsOneWidget);
+    expect(find.text('RODADA 1'), findsOneWidget);
+  });
+
+  testWidgets('on tablets the content keeps a phone-like width', (
+    tester,
+  ) async {
+    tester.view
+      ..physicalSize = const Size(1024, 1366)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await _openSetup(tester);
+
+    final start = tester.getRect(find.text('COMEÇAR'));
+    expect(start.center.dx, closeTo(512, 1));
+    final button = tester.getRect(
+      find.ancestor(
+        of: find.text('COMEÇAR'),
+        matching: find.byType(PlayButton),
+      ),
+    );
+    expect(button.width, lessThanOrEqualTo(560));
   });
 
   testWidgets('the gear on home opens the settings', (tester) async {
