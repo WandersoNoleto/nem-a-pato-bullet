@@ -267,7 +267,10 @@ class _DeckList extends StatelessWidget {
               PanelRow(
                 leading: DeckIcon(deck: deck, size: 28),
                 title: deck.name,
-                subtitle: context.l10n.questionCount(deck.questions.length),
+                subtitle: [
+                  context.l10n.questionCount(deck.questions.length),
+                  if (deck.origin == DeckOrigin.app) context.l10n.deckFromApp,
+                ].join(' · '),
                 trailing: const Icon(Icons.chevron_right, color: AppColors.ink),
                 onTap: () => onOpen(deck),
               ),

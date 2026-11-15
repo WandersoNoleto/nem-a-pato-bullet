@@ -192,6 +192,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportButton => 'Export';
 
   @override
+  String get deckFromApp => 'Comes with the app';
+
+  @override
   String get deckDetailsHint => 'Tap a question to see the answer.';
 
   @override

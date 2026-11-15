@@ -138,6 +138,32 @@ void main() {
     expect(find.text('2'), findsNothing);
   });
 
+  testWidgets('decks shipped in the app are labeled', (tester) async {
+    final appDeck = Deck(
+      name: 'Amostra',
+      questions: [Question.create(category: 'A', text: 'q1', answer: '1')],
+      origin: DeckOrigin.app,
+    );
+    final importedDeck = Deck(
+      name: 'Meu',
+      questions: [Question.create(category: 'B', text: 'q2', answer: '2')],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [appDeck, importedDeck]);
+
+    expect(find.text('1 pergunta · Vem com o app'), findsOneWidget);
+    expect(find.text('1 pergunta'), findsOneWidget);
+
+    await tester.tap(find.text('Amostra'));
+    await _settle(tester);
+    expect(find.text('Vem com o app'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Voltar'));
+    await _settle(tester);
+    await tester.tap(find.text('Meu'));
+    await _settle(tester);
+    expect(find.text('Vem com o app'), findsNothing);
+  });
+
   testWidgets('a deck is exported as JSON from its details', (tester) async {
     final files = _FakeFiles();
     final deck = Deck(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nem_a_pato_bullet/domain/deck.dart';
+import 'package:nem_a_pato_bullet/domain/question.dart';
 
 void main() {
   group('Deck.fromJson', () {
@@ -114,5 +115,19 @@ void main() {
         expect(question.fact, isNotNull, reason: question.text);
       }
     }
+  });
+
+  test('origin is not saved in the JSON', () {
+    final deck = Deck(
+      name: 'Amostra',
+      questions: [Question.create(category: 'A', text: 'q', answer: '1')],
+    ).withOrigin(DeckOrigin.app);
+
+    final copy = Deck.fromJsonString(deck.toJsonString());
+
+    expect(deck.origin, DeckOrigin.app);
+    expect(deck.questions, hasLength(1));
+    expect(copy.origin, DeckOrigin.imported);
+    expect(deck.toJsonString(), isNot(contains('origin')));
   });
 }

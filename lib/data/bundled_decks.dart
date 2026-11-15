@@ -19,7 +19,8 @@ Future<List<Deck>> loadBundledDecks([AssetBundle? bundle]) async {
   final decks = <Deck>[];
   for (final path in paths) {
     try {
-      decks.add(Deck.fromJsonString(await assets.loadString(path)));
+      final deck = Deck.fromJsonString(await assets.loadString(path));
+      decks.add(deck.withOrigin(DeckOrigin.app));
     } on FormatException catch (error) {
       debugPrint('Skipping deck $path: ${error.message}');
     }

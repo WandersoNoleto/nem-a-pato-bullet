@@ -82,6 +82,8 @@ class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
                       busy: _exporting,
                       onTap: _export,
                     ),
+                    if (deck.origin == DeckOrigin.app)
+                      _Tag(context.l10n.deckFromApp),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -163,7 +165,12 @@ class _Summary extends StatelessWidget {
             color: AppColors.mutedOnYellow.withValues(alpha: 0.2),
           ),
           const SizedBox(height: 10),
-          Wrap(spacing: 8, runSpacing: 8, children: actions),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: actions,
+          ),
         ],
       ),
     );
@@ -221,6 +228,28 @@ class _ActionPill extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// A muted outline label on the yellow summary, like "Vem com o app".
+class _Tag extends StatelessWidget {
+  const _Tag(this.text);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: AppColors.mutedOnYellow, width: 1.5),
+      ),
+      child: Text(
+        text,
+        style: AppTextStyles.credits.copyWith(color: AppColors.mutedOnYellow),
       ),
     );
   }

@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Exportar'**
   String get exportButton;
 
+  /// No description provided for @deckFromApp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vem com o app'**
+  String get deckFromApp;
+
   /// No description provided for @deckDetailsHint.
   ///
   /// In pt, this message translates to:

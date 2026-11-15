@@ -47,6 +47,7 @@
   "categoryCount": "{count, plural, =1{1 category} other{{count} categories}}",
   "exportDeck": "Export deck",
   "exportButton": "Export",
+  "deckFromApp": "Comes with the app",
   "deckDetailsHint": "Tap a question to see the answer.",
   "exportFailed": "Could not export this deck.",
   "questionCount": "{count, plural, =0{0 questions} =1{1 question} other{{count} questions}}",

@@ -193,6 +193,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get exportButton => 'Exportar';
 
   @override
+  String get deckFromApp => 'Vem com o app';
+
+  @override
   String get deckDetailsHint => 'Toque numa pergunta para ver a resposta.';
 
   @override
