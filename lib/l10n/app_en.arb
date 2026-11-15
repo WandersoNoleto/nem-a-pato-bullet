@@ -55,6 +55,7 @@
   "customRounds": "Other amount",
   "customRoundsTitle": "How many rounds?",
   "customRoundsError": "Enter a number from 1 to {max}",
+  "customRoundsHint": "From 1 to {max} rounds",
   "cancel": "Cancel",
   "ok": "OK",
   "deckTileLabel": "Deck {name}, {count, plural, =0{0 questions} =1{1 question} other{{count} questions}}",

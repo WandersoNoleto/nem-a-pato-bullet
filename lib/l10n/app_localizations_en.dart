@@ -221,6 +221,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String customRoundsHint(int max) {
+    return 'From 1 to $max rounds';
+  }
+
+  @override
   String get cancel => 'Cancel';
 
   @override

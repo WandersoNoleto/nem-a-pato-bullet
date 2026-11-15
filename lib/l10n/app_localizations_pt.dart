@@ -222,6 +222,11 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String customRoundsHint(int max) {
+    return 'De 1 a $max rodadas';
+  }
+
+  @override
   String get cancel => 'Cancelar';
 
   @override

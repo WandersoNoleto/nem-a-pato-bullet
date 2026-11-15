@@ -9,6 +9,7 @@ import '../../state/game_setup_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
+import '../widgets/app_dialog.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/infinity_glyph.dart';
 import '../widgets/deck_icon.dart';
@@ -237,29 +238,80 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(context.l10n.customRoundsTitle),
-      content: TextField(
-        controller: _text,
-        autofocus: true,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(3),
-        ],
-        decoration: InputDecoration(hintText: '25', errorText: _error),
-        onChanged: (_) {
-          if (_error != null) setState(() => _error = null);
-        },
-        onSubmitted: (_) => _submit(),
-      ),
+    final error = _error;
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: AppColors.ink, width: 2.5),
+    );
+    return AppDialog(
+      title: context.l10n.customRoundsTitle,
       actions: [
-        TextButton(
+        DialogButton(label: context.l10n.ok, onPressed: _submit),
+        DialogButton(
+          label: context.l10n.cancel,
+          primary: false,
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(context.l10n.cancel),
         ),
-        FilledButton(onPressed: _submit, child: Text(context.l10n.ok)),
       ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: _text,
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            cursorColor: AppColors.ink,
+            style: AppTextStyles.answer.copyWith(fontSize: 40),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(3),
+            ],
+            decoration: InputDecoration(
+              hintText: '25',
+              hintStyle: AppTextStyles.answer.copyWith(
+                fontSize: 40,
+                color: AppColors.cardDivider,
+              ),
+              filled: true,
+              fillColor: AppColors.white,
+              contentPadding: const EdgeInsets.symmetric(vertical: 14),
+              border: border,
+              enabledBorder: border,
+              focusedBorder: border,
+            ),
+            onChanged: (_) {
+              if (_error != null) setState(() => _error = null);
+            },
+            onSubmitted: (_) => _submit(),
+          ),
+          // Always takes room, so the panel doesn't jump when it shows.
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (error != null) ...[
+                const Icon(
+                  Icons.error_outline,
+                  size: 18,
+                  color: AppColors.orange,
+                ),
+                const SizedBox(width: 6),
+              ],
+              Flexible(
+                child: Text(
+                  error ?? context.l10n.customRoundsHint(_max),
+                  textAlign: TextAlign.center,
+                  style: AppDialog.bodyStyle.copyWith(
+                    fontSize: 13,
+                    color: error == null ? AppColors.cardMuted : AppColors.ink,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

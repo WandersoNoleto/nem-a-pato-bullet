@@ -127,6 +127,14 @@
       }
     }
   },
+  "customRoundsHint": "De 1 a {max} rodadas",
+  "@customRoundsHint": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "cancel": "Cancelar",
   "ok": "OK",
   "deckTileLabel": "Baralho {name}, {count, plural, =0{0 perguntas} =1{1 pergunta} other{{count} perguntas}}",

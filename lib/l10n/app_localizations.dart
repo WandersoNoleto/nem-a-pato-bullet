@@ -428,6 +428,12 @@ abstract class AppLocalizations {
   /// **'Digite um número de 1 a {max}'**
   String customRoundsError(int max);
 
+  /// No description provided for @customRoundsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'De 1 a {max} rodadas'**
+  String customRoundsHint(int max);
+
   /// No description provided for @cancel.
   ///
   /// In pt, this message translates to:
