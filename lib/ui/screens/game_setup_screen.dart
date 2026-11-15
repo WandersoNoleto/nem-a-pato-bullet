@@ -10,6 +10,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
 import '../widgets/app_dialog.dart';
+import '../widgets/app_message.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/infinity_glyph.dart';
 import '../widgets/deck_icon.dart';
@@ -31,6 +32,7 @@ class GameSetupScreen extends StatefulWidget {
 }
 
 class _GameSetupScreenState extends State<GameSetupScreen> {
+  final _startAreaKey = GlobalKey();
   late final _controller = GameSetupController(
     loadDecks: widget.dependencies.loadDecks,
     seen: widget.dependencies.seen,
@@ -51,8 +53,13 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
   Future<void> _start() async {
     final questions = _controller.questions;
     if (questions.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(context.l10n.noCategoryChosen)));
+      // Above the start button, which the message would cover.
+      final startArea = _startAreaKey.currentContext?.size?.height ?? 0;
+      showAppMessage(
+        context,
+        context.l10n.noCategoryChosen,
+        bottom: startArea + 8,
+      );
       return;
     }
     await Navigator.of(context).push(
@@ -82,6 +89,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
             Expanded(child: _buildBody()),
             if (_controller.status == SetupStatus.ready)
               Padding(
+                key: _startAreaKey,
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
                 child: _StartArea(
                   unseenCount: _controller.unseenCount,

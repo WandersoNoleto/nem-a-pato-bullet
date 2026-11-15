@@ -6,6 +6,7 @@ import '../l10n/l10n.dart';
 import '../ui/theme/app_colors.dart';
 import '../ui/theme/app_text_styles.dart';
 import '../ui/widgets/app_dialog.dart';
+import '../ui/widgets/app_message.dart';
 import '../ui/widgets/train_progress_bar.dart';
 import 'update_checker.dart';
 import 'update_installer.dart';
@@ -54,9 +55,7 @@ Future<void> showUpdateDialog(
     builder: (_) => _DownloadDialog(progress: installer.install(update)),
   );
   if (failure != null && context.mounted) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(failure), duration: const Duration(seconds: 8)),
-    );
+    showAppMessage(context, failure, duration: const Duration(seconds: 8));
   }
 }
 

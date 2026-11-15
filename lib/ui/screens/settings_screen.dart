@@ -14,6 +14,7 @@ import '../theme/table_theme.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
 import '../widgets/app_dialog.dart';
+import '../widgets/app_message.dart';
 import '../widgets/screen_header.dart';
 import '../widgets/raised_box.dart';
 import '../widgets/section_label.dart';
@@ -38,11 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late Future<List<Deck>> _decks = widget.dependencies.loadDecks();
   bool _importing = false;
 
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
-  }
+  void _showMessage(String message) => showAppMessage(context, message);
 
   Future<void> _importDeck() async {
     setState(() => _importing = true);

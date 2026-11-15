@@ -176,6 +176,37 @@ void main() {
     });
   }
 
+  testWidgets('without categories, a message shows above COMEÇAR', (
+    tester,
+  ) async {
+    await _openSetup(tester);
+    for (final category in ['Luas', 'Oceano', 'Planetas']) {
+      await tester.tap(find.text(category));
+      await tester.pump();
+    }
+
+    await tester.tap(find.text('COMEÇAR'));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(_frame);
+    }
+
+    final message = tester.getRect(
+      find.descendant(
+        of: find.byType(SnackBar),
+        matching: find.byType(RaisedBox),
+      ),
+    );
+    final start = tester.getRect(
+      find.ancestor(
+        of: find.text('COMEÇAR'),
+        matching: find.byType(PlayButton),
+      ),
+    );
+    expect(find.text('Escolha pelo menos uma categoria.'), findsOneWidget);
+    expect(message.bottom, lessThanOrEqualTo(start.top));
+    expect(find.byType(GameScreen), findsNothing);
+  });
+
   testWidgets('COMEÇAR opens the game', (tester) async {
     await _openSetup(tester);
 
