@@ -51,7 +51,7 @@ void main() {
 
     await _tap(tester, 'Devolver todas as cartas ao baralho');
     expect(find.text('Devolver todas as cartas ao baralho?'), findsOneWidget);
-    await _tap(tester, 'Devolver');
+    await _tap(tester, 'DEVOLVER');
 
     expect(seen.count, 0);
     expect(find.text('Nenhuma carta fora do baralho'), findsOneWidget);
@@ -66,7 +66,7 @@ void main() {
     await _pumpSettings(tester, seen);
 
     await _tap(tester, 'Devolver todas as cartas ao baralho');
-    await _tap(tester, 'Cancelar');
+    await _tap(tester, 'CANCELAR');
 
     expect(seen.count, 2);
   });

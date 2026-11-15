@@ -87,7 +87,8 @@ class DialogButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = TableTheme.of(context);
     return PlayButton(
-      label: label,
+      // Sticker buttons are always in capitals, like VOLTAR and JOGAR.
+      label: label.toUpperCase(),
       color: primary ? theme.action.last : AppColors.white,
       textColor: primary ? theme.onAction : AppColors.ink,
       shadowColor: primary ? AppColors.orange : theme.paperLip,

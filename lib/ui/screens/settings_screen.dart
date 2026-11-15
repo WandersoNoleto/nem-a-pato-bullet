@@ -13,6 +13,7 @@ import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
 import '../widgets/choice_pill.dart';
 import '../widgets/deck_icon.dart';
+import '../widgets/app_dialog.dart';
 import '../widgets/screen_header.dart';
 import '../widgets/raised_box.dart';
 import '../widgets/section_label.dart';
@@ -73,19 +74,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.resetHistoryTitle),
-        content: Text(context.l10n.resetHistoryBody(seen.count)),
+      builder: (context) => AppDialog(
+        title: context.l10n.resetHistoryTitle,
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(context.l10n.cancel),
-          ),
-          FilledButton(
+          DialogButton(
+            label: context.l10n.resetHistoryConfirm,
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text(context.l10n.resetHistoryConfirm),
+          ),
+          DialogButton(
+            label: context.l10n.cancel,
+            primary: false,
+            onPressed: () => Navigator.of(context).pop(false),
           ),
         ],
+        child: Text(
+          context.l10n.resetHistoryBody(seen.count),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
     if (confirmed != true || !mounted) return;
