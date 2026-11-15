@@ -14,6 +14,7 @@ import 'package:nem_a_pato_bullet/ui/screens/home_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/loading_screen.dart';
 import 'package:nem_a_pato_bullet/ui/screens/settings_screen.dart';
 import 'package:nem_a_pato_bullet/ui/widgets/choice_pill.dart';
+import 'package:nem_a_pato_bullet/ui/widgets/raised_box.dart';
 
 // The home screen's play button pulses forever, so these tests step frames
 // instead of using pumpAndSettle, which would never settle.
@@ -147,6 +148,30 @@ void main() {
     expect(rows, hasLength(1));
     expect(find.text('999'), findsOneWidget);
   });
+
+  for (final (width, columns) in [(360.0, 3), (390.0, 3), (768.0, 6)]) {
+    testWidgets('decks fill $columns columns on a $width-wide screen', (
+      tester,
+    ) async {
+      tester.view
+        ..physicalSize = Size(width, 800)
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await _openSetup(tester);
+
+      Rect tile(String name) => tester.getRect(
+        find.ancestor(of: find.text(name), matching: find.byType(RaisedBox)),
+      );
+      final first = tile('Espaço');
+      final second = tile('Mar');
+      // The screen has 20 of padding on each side and 12 between tiles.
+      final expected = ((width - 40 - 12 * (columns - 1)) / columns)
+          .floorToDouble();
+
+      expect(second.top, first.top);
+      expect(first.width, expected);
+    });
+  }
 
   testWidgets('COMEÇAR opens the game', (tester) async {
     await _openSetup(tester);

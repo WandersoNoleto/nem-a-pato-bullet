@@ -119,9 +119,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
           ),
           const SizedBox(height: 28),
           SectionLabel(context.l10n.decksSection),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
+          _DeckGrid(
             children: [
               for (final deck in _controller.decks)
                 _DeckTile(
@@ -268,6 +266,40 @@ class _CustomRoundsDialogState extends State<_CustomRoundsDialog> {
 
 // --- Decks ------------------------------------------------------------------
 
+/// Deck tiles in as many columns as fit: three on a typical phone, two on a
+/// narrow one and more on wide screens, so no empty strip is left on the right.
+class _DeckGrid extends StatelessWidget {
+  const _DeckGrid({required this.children});
+
+  static const _minTileWidth = 96.0;
+  static const _spacing = 12.0;
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final columns = ((width + _spacing) / (_minTileWidth + _spacing))
+            .floor()
+            .clamp(2, 8);
+        // Rounded down so rounding never pushes the last tile to a new row.
+        final tileWidth = ((width - _spacing * (columns - 1)) / columns)
+            .floorToDouble();
+        return Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: [
+            for (final child in children)
+              SizedBox(width: tileWidth, child: child),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _DeckTile extends StatelessWidget {
   const _DeckTile({
     required this.deck,
@@ -300,7 +332,7 @@ class _DeckTile extends StatelessWidget {
                 colors: selected
                     ? AppColors.headerGradient
                     : AppColors.paperGradient,
-                width: 118,
+                width: double.infinity,
                 lipHeight: 4,
                 softShadow: false,
                 padding: const EdgeInsets.fromLTRB(6, 14, 6, 10),
@@ -311,18 +343,7 @@ class _DeckTile extends StatelessWidget {
                     // Room for two lines, so every tile has the same height.
                     SizedBox(
                       height: 34,
-                      child: Center(
-                        child: Text(
-                          deck.name,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyles.credits.copyWith(
-                            fontSize: 11,
-                            color: AppColors.ink,
-                          ),
-                        ),
-                      ),
+                      child: Center(child: _DeckName(deck.name)),
                     ),
                     Text(
                       context.l10n.questionCount(count),
@@ -359,6 +380,58 @@ class _DeckTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// A deck name in up to two lines. The font shrinks until the longest word
+/// fits, so words never break in the middle on narrow tiles.
+class _DeckName extends StatelessWidget {
+  const _DeckName(this.name);
+
+  static const _fontSize = 11.0;
+  static const _minFontSize = 8.0;
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final base = AppTextStyles.credits.copyWith(color: AppColors.ink);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final scaler = MediaQuery.textScalerOf(context);
+        final longest = name
+            .split(RegExp(r'\s+'))
+            .map(
+              (word) =>
+                  _width(word, base.copyWith(fontSize: _fontSize), scaler),
+            )
+            .fold(0.0, (a, b) => a > b ? a : b);
+        final fontSize = longest <= constraints.maxWidth
+            ? _fontSize
+            : (_fontSize * constraints.maxWidth / longest)
+                  .clamp(_minFontSize, _fontSize)
+                  .floorToDouble();
+        return Text(
+          name,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: base.copyWith(fontSize: fontSize),
+        );
+      },
+    );
+  }
+
+  static double _width(String word, TextStyle style, TextScaler scaler) {
+    final painter = TextPainter(
+      text: TextSpan(text: word, style: style),
+      textDirection: TextDirection.ltr,
+      textScaler: scaler,
+      maxLines: 1,
+    )..layout();
+    final width = painter.width;
+    painter.dispose();
+    return width;
   }
 }
 
