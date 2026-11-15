@@ -281,7 +281,11 @@ class _DeckGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final columns = ((width + _spacing) / (_minTileWidth + _spacing))
+        // A larger system font needs wider tiles, so fewer columns.
+        final minTileWidth = MediaQuery.textScalerOf(context)
+            .scale(_minTileWidth)
+            .clamp(_minTileWidth, _minTileWidth * 1.6);
+        final columns = ((width + _spacing) / (minTileWidth + _spacing))
             .floor()
             .clamp(2, 8);
         // Rounded down so rounding never pushes the last tile to a new row.
@@ -342,16 +346,20 @@ class _DeckTile extends StatelessWidget {
                     const SizedBox(height: 8),
                     // Room for two lines, so every tile has the same height.
                     SizedBox(
-                      height: 34,
+                      height: MediaQuery.textScalerOf(context).scale(34),
                       child: Center(child: _DeckName(deck.name)),
                     ),
-                    Text(
-                      context.l10n.questionCount(count),
-                      style: AppTextStyles.credits.copyWith(
-                        fontSize: 10,
-                        color: selected
-                            ? AppColors.mutedOnYellow
-                            : AppColors.cardMuted,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        context.l10n.questionCount(count),
+                        maxLines: 1,
+                        style: AppTextStyles.credits.copyWith(
+                          fontSize: 10,
+                          color: selected
+                              ? AppColors.mutedOnYellow
+                              : AppColors.cardMuted,
+                        ),
                       ),
                     ),
                   ],
@@ -396,19 +404,25 @@ class _DeckName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final base = AppTextStyles.credits.copyWith(color: AppColors.ink);
+    // Measured with what the Text inherits too, like the theme's spacing.
+    final inherited = DefaultTextStyle.of(context).style;
     return LayoutBuilder(
       builder: (context, constraints) {
         final scaler = MediaQuery.textScalerOf(context);
         final longest = name
             .split(RegExp(r'\s+'))
             .map(
-              (word) =>
-                  _width(word, base.copyWith(fontSize: _fontSize), scaler),
+              (word) => _width(
+                word,
+                inherited.merge(base.copyWith(fontSize: _fontSize)),
+                scaler,
+              ),
             )
             .fold(0.0, (a, b) => a > b ? a : b);
-        final fontSize = longest <= constraints.maxWidth
+        final available = constraints.maxWidth;
+        final fontSize = longest <= available
             ? _fontSize
-            : (_fontSize * constraints.maxWidth / longest)
+            : (_fontSize * available / longest)
                   .clamp(_minFontSize, _fontSize)
                   .floorToDouble();
         return Text(

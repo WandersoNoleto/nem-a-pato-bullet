@@ -211,19 +211,26 @@ class _TopBar extends StatelessWidget {
         const RaisedBackButton(),
         const Spacer(),
         if (round > 0)
-          RaisedBox(
-            colors: theme.action,
-            radius: 999,
-            borderWidth: 2,
-            lipHeight: 3,
-            lipColor: theme.actionLip,
-            softShadow: false,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(
-              total == null
-                  ? context.l10n.round(round)
-                  : context.l10n.roundOfTotal(round, total),
-              style: AppTextStyles.pill.copyWith(color: theme.onSelected),
+          // Shrinks with a large system font instead of overflowing.
+          Flexible(
+            flex: 8,
+            child: RaisedBox(
+              colors: theme.action,
+              radius: 999,
+              borderWidth: 2,
+              lipHeight: 3,
+              lipColor: theme.actionLip,
+              softShadow: false,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  total == null
+                      ? context.l10n.round(round)
+                      : context.l10n.roundOfTotal(round, total),
+                  style: AppTextStyles.pill.copyWith(color: theme.onSelected),
+                ),
+              ),
             ),
           ),
         const Spacer(),
