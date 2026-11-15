@@ -67,6 +67,8 @@ final _decks = [
   Deck(
     name: 'Sample deck',
     questions: [Question.create(category: 'Space', text: 'f', answer: '1')],
+    // Bundled with the app, like the real sample deck.
+    origin: DeckOrigin.app,
   ),
 ];
 

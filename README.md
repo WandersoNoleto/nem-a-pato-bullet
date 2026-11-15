@@ -42,7 +42,8 @@ The app is the deck; the game happens at the table.
 - **Game setup:** infinite rounds or 5, 10, 15, 20 or a custom number; pick decks and categories, with search to add categories back.
 - **3D card flip:** the answer and a fun fact are revealed with a tap.
 - **No repeats:** cards that came up stay out of the deck, even after closing the app. Return them from the settings, or only the current game's cards when they run out.
-- **Your own decks:** import decks from JSON files and export any deck to share it.
+- **Your own decks:** import decks from JSON files, export any deck to share it, and delete the ones you imported.
+- **Deck details:** see a deck's categories and questions, with the answers hidden until you tap.
 - **Deck symbols:** each deck can have its own SVG symbol.
 - **Light and dark themes:** a yellow theme and a dark one, switched in the settings and remembered on the device.
 - **Portuguese and English:** the app's texts switch language; deck content always stays exactly as written.
