@@ -1,0 +1,91 @@
+{
+  "name": "Recordes Mundiais",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V17h3v4H8v-4h3v-2.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3zm0 4H6v1a2 2 0 0 0 1 1.7zm10 0v2.7A2 2 0 0 0 18 8V7z'/></svg>",
+  "questions": [
+    {
+      "category": "Pessoas",
+      "text": "Qual a altura de Robert Wadlow, o homem mais alto da história? (m)",
+      "answer": "2,72 m",
+      "fact": "Os sapatos dele mediam cerca de 47 cm."
+    },
+    {
+      "category": "Pessoas",
+      "text": "Quantos anos viveu Jeanne Calment, a pessoa mais velha já registrada?",
+      "answer": "122 anos",
+      "fact": "A francesa conheceu Van Gogh quando tinha 13 anos."
+    },
+    {
+      "category": "Pessoas",
+      "text": "Qual a maior permanência seguida de uma pessoa no espaço? (dias)",
+      "answer": "437 dias",
+      "fact": "O russo Valeri Polyakov ficou na estação Mir entre 1994 e 1995."
+    },
+    {
+      "category": "Pessoas",
+      "text": "Qual a maior velocidade já atingida por seres humanos? (km/h)",
+      "answer": "Cerca de 39.900 km/h",
+      "fact": "Foi a tripulação da Apollo 10, na volta da Lua, em 1969."
+    },
+    {
+      "category": "Natureza",
+      "text": "Qual a maior temperatura já registrada na Terra? (°C)",
+      "answer": "56,7 °C",
+      "fact": "Foi no Vale da Morte, nos Estados Unidos, em 1913."
+    },
+    {
+      "category": "Natureza",
+      "text": "Qual a menor temperatura natural já registrada? (°C)",
+      "answer": "−89,2 °C",
+      "fact": "Foi na estação russa de Vostok, na Antártida, em 1983."
+    },
+    {
+      "category": "Natureza",
+      "text": "Qual a altura de Hyperion, a árvore mais alta do mundo? (m)",
+      "answer": "Cerca de 116 m",
+      "fact": "É uma sequoia, na Califórnia. A localização exata é mantida em segredo."
+    },
+    {
+      "category": "Natureza",
+      "text": "Qual o comprimento da maior cobra já medida? (m)",
+      "answer": "7,67 m",
+      "fact": "É uma píton-reticulada chamada Medusa, nos Estados Unidos."
+    },
+    {
+      "category": "Natureza",
+      "text": "Qual a altura do Salto Angel, a cachoeira mais alta do mundo? (m)",
+      "answer": "979 m",
+      "fact": "Fica na Venezuela. A água vira névoa antes de chegar ao chão."
+    },
+    {
+      "category": "Velocidade e altura",
+      "text": "Qual o recorde de velocidade de um carro em terra? (km/h)",
+      "answer": "Cerca de 1.228 km/h",
+      "fact": "O Thrust SSC quebrou a barreira do som em 1997."
+    },
+    {
+      "category": "Velocidade e altura",
+      "text": "De que altitude foi feito o salto de paraquedas mais alto? (km)",
+      "answer": "Cerca de 41 km",
+      "fact": "Alan Eustace saltou em 2014, superando Felix Baumgartner."
+    },
+    {
+      "category": "Velocidade e altura",
+      "text": "Qual a altura da maior onda já surfada? (m)",
+      "answer": "Cerca de 26 m",
+      "fact": "O alemão Sebastian Steudtner surfou a onda em Nazaré, Portugal, em 2020."
+    },
+    {
+      "category": "Velocidade e altura",
+      "text": "A que altitude fica La Rinconada, a cidade mais alta do mundo? (m)",
+      "answer": "Cerca de 5.100 m",
+      "fact": "Fica no Peru e cresceu em volta de minas de ouro."
+    },
+    {
+      "category": "Velocidade e altura",
+      "text": "Qual a profundidade do buraco mais fundo já cavado? (km)",
+      "answer": "Cerca de 12,2 km",
+      "fact": "É o Poço Superprofundo de Kola, na Rússia."
+    }
+  ]
+}

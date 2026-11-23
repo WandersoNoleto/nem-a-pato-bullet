@@ -1,0 +1,91 @@
+{
+  "name": "Cinema",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 10h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/><path d='M3.2 8.6 2.7 6.7a1 1 0 0 1 .7-1.2l15-4a1 1 0 0 1 1.2.7l.5 1.9z'/></svg>",
+  "questions": [
+    {
+      "category": "Oscar",
+      "text": "Quantos Oscars Titanic ganhou?",
+      "answer": "11 estatuetas",
+      "fact": "Empata com Ben-Hur e O Senhor dos Anéis: O Retorno do Rei."
+    },
+    {
+      "category": "Oscar",
+      "text": "Quantas vezes Meryl Streep foi indicada ao Oscar?",
+      "answer": "21 indicações",
+      "fact": "É o recorde entre atores e atrizes. Ela venceu três vezes."
+    },
+    {
+      "category": "Oscar",
+      "text": "Qual a altura da estatueta do Oscar? (cm)",
+      "answer": "34 cm",
+      "fact": "Ela pesa cerca de 3,9 kg e é banhada a ouro."
+    },
+    {
+      "category": "Oscar",
+      "text": "Em que ano aconteceu a primeira cerimônia do Oscar?",
+      "answer": "1929",
+      "fact": "A cerimônia durou cerca de 15 minutos."
+    },
+    {
+      "category": "Bilheteria",
+      "text": "Qual a bilheteria mundial de Avatar, de 2009? (bilhões de dólares)",
+      "answer": "Cerca de 2,9 bilhões",
+      "fact": "É a maior bilheteria da história do cinema."
+    },
+    {
+      "category": "Bilheteria",
+      "text": "Quanto custou para produzir Titanic? (milhões de dólares)",
+      "answer": "Cerca de 200 milhões",
+      "fact": "Foi o filme mais caro já feito até então."
+    },
+    {
+      "category": "Bastidores",
+      "text": "Quantos quadros por segundo tem o cinema tradicional?",
+      "answer": "24 quadros",
+      "fact": "O Hobbit foi filmado com o dobro, 48 quadros por segundo."
+    },
+    {
+      "category": "Bastidores",
+      "text": "Por quantos anos Boyhood foi filmado?",
+      "answer": "12 anos",
+      "fact": "O elenco se reunia alguns dias por ano, de 2002 a 2013."
+    },
+    {
+      "category": "Bastidores",
+      "text": "Quanto tempo dura ...E o Vento Levou? (minutos)",
+      "answer": "Cerca de 238 minutos",
+      "fact": "São quase quatro horas, com intervalo no meio."
+    },
+    {
+      "category": "Bastidores",
+      "text": "Quanto dura Marty, o vencedor mais curto do Oscar de Melhor Filme? (minutos)",
+      "answer": "90 minutos",
+      "fact": "Ganhou o prêmio em 1956."
+    },
+    {
+      "category": "Sagas",
+      "text": "Quantos atores interpretaram James Bond nos filmes oficiais?",
+      "answer": "6 atores",
+      "fact": "Sean Connery, George Lazenby, Roger Moore, Timothy Dalton, Pierce Brosnan e Daniel Craig."
+    },
+    {
+      "category": "Sagas",
+      "text": "Quantos filmes tem a saga principal de Star Wars?",
+      "answer": "9 filmes",
+      "fact": "São três trilogias, de 1977 a 2019."
+    },
+    {
+      "category": "Sagas",
+      "text": "Em que ano estreou Toy Story?",
+      "answer": "1995",
+      "fact": "Foi o primeiro longa-metragem feito todo em computação gráfica."
+    },
+    {
+      "category": "Cinema nacional",
+      "text": "Quantas indicações ao Oscar Cidade de Deus recebeu?",
+      "answer": "4 indicações",
+      "fact": "Incluindo melhor direção, para Fernando Meirelles."
+    }
+  ]
+}

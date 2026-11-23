@@ -1,0 +1,91 @@
+{
+  "name": "Science",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#000' stroke-width='1.8'><ellipse cx='12' cy='12' rx='10' ry='4'/><ellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(60 12 12)'/><ellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(120 12 12)'/><circle cx='12' cy='12' r='1.8' fill='#000'/></svg>",
+  "questions": [
+    {
+      "category": "Physics",
+      "text": "What temperature is absolute zero? (°C)",
+      "answer": "−273.15 °C",
+      "fact": "It is the lowest temperature possible. Nothing can get colder."
+    },
+    {
+      "category": "Physics",
+      "text": "What is the speed of sound in air at 20 °C? (m/s)",
+      "answer": "About 343 m/s",
+      "fact": "That is why thunder arrives about 3 seconds after the lightning for every kilometer."
+    },
+    {
+      "category": "Physics",
+      "text": "At what temperature does water boil on top of Everest? (°C)",
+      "answer": "About 70 °C",
+      "fact": "With lower air pressure, water boils sooner."
+    },
+    {
+      "category": "Physics",
+      "text": "What would a scale show on the Moon for a 60 kg person? (kg)",
+      "answer": "About 10 kg",
+      "fact": "The Moon's gravity is about one sixth of Earth's."
+    },
+    {
+      "category": "Physics",
+      "text": "What is the melting point of iron? (°C)",
+      "answer": "1,538 °C",
+      "fact": "Earth's core is made mostly of iron and nickel."
+    },
+    {
+      "category": "Physics",
+      "text": "How many times denser than water is gold?",
+      "answer": "About 19.3 times",
+      "fact": "A gold cube 10 cm on each side weighs about 19 kg."
+    },
+    {
+      "category": "Space",
+      "text": "How long does sunlight take to reach Earth? (minutes)",
+      "answer": "About 8 minutes",
+      "fact": "It travels about 150 million km."
+    },
+    {
+      "category": "Space",
+      "text": "How many days does Mars take to orbit the Sun?",
+      "answer": "687 days",
+      "fact": "A Martian year lasts almost two Earth years."
+    },
+    {
+      "category": "Space",
+      "text": "What is the average surface temperature on Venus? (°C)",
+      "answer": "About 465 °C",
+      "fact": "It is hotter than Mercury, because of the greenhouse effect."
+    },
+    {
+      "category": "Space",
+      "text": "How fast does the International Space Station orbit Earth? (km/h)",
+      "answer": "About 28,000 km/h",
+      "fact": "It goes all the way around Earth every 90 minutes."
+    },
+    {
+      "category": "Space",
+      "text": "What is the temperature at the Sun's core? (millions of °C)",
+      "answer": "About 15 million °C",
+      "fact": "At the surface, it is close to 5,500 °C."
+    },
+    {
+      "category": "Human body",
+      "text": "How many times does the heart beat per day, on average?",
+      "answer": "About 100,000",
+      "fact": "Over a lifetime, that is more than 2.5 billion beats."
+    },
+    {
+      "category": "Human body",
+      "text": "How many liters of air does an adult breathe per day?",
+      "answer": "About 11,000 liters",
+      "fact": "At rest, each breath takes in about half a liter of air."
+    },
+    {
+      "category": "Human body",
+      "text": "How fast are the fastest nerve impulses? (m/s)",
+      "answer": "About 120 m/s",
+      "fact": "That is more than 400 km/h."
+    }
+  ]
+}

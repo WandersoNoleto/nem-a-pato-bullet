@@ -1,0 +1,91 @@
+{
+  "name": "Games",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M7 6h10a5 5 0 0 1 4.9 6l-.9 4.5a2.5 2.5 0 0 1-4.3 1.2L14.5 15h-5l-2.2 2.7A2.5 2.5 0 0 1 3 16.5L2.1 12A5 5 0 0 1 7 6zm0 3v1.5H5.5v1.5H7v1.5h1.5V12H10v-1.5H8.5V9zm9 .5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/></svg>",
+  "questions": [
+    {
+      "category": "Clássicos",
+      "text": "Qual a pontuação máxima possível no Pac-Man original?",
+      "answer": "3.333.360 pontos",
+      "fact": "A primeira partida perfeita foi feita por Billy Mitchell, em 1999, depois de quase seis horas de jogo."
+    },
+    {
+      "category": "Clássicos",
+      "text": "Em que ano o Tetris foi criado?",
+      "answer": "1984",
+      "fact": "Alexey Pajitnov criou o jogo em Moscou, num computador soviético que só mostrava texto."
+    },
+    {
+      "category": "Clássicos",
+      "text": "Quantos anos tinha Shigeru Miyamoto quando Donkey Kong foi lançado?",
+      "answer": "28 anos",
+      "fact": "Donkey Kong marcou a estreia do Mario, que na época se chamava Jumpman."
+    },
+    {
+      "category": "Clássicos",
+      "text": "Em quanto tempo está o recorde de speedrun de Super Mario Bros.? (minutos)",
+      "answer": "Menos de 5 minutos",
+      "fact": "O recorde fica em torno de 4 minutos e 54 segundos e é disputado em milésimos."
+    },
+    {
+      "category": "Consoles",
+      "text": "Quantas unidades do PlayStation 2 foram vendidas no mundo? (milhões)",
+      "answer": "Mais de 155 milhões",
+      "fact": "É o console de mesa mais vendido da história."
+    },
+    {
+      "category": "Consoles",
+      "text": "Quantos tons de cor a tela do Game Boy original conseguia mostrar?",
+      "answer": "4 tons",
+      "fact": "Eram quatro tons esverdeados, numa tela sem luz própria."
+    },
+    {
+      "category": "Consoles",
+      "text": "Qual a velocidade do processador do Super Nintendo? (MHz)",
+      "answer": "Cerca de 3,58 MHz",
+      "fact": "Um celular atual é milhares de vezes mais rápido."
+    },
+    {
+      "category": "Consoles",
+      "text": "Quantos botões de ação tinha o controle do Atari 2600?",
+      "answer": "1 botão",
+      "fact": "O resto era feito com o manche, que se mexia em oito direções."
+    },
+    {
+      "category": "Indústria",
+      "text": "Em que ano a Nintendo foi fundada?",
+      "answer": "1889",
+      "fact": "Ela começou fabricando cartas de baralho japonesas, as hanafuda."
+    },
+    {
+      "category": "Indústria",
+      "text": "Quantos anos Duke Nukem Forever levou entre o anúncio e o lançamento?",
+      "answer": "14 anos",
+      "fact": "Foi anunciado em 1997 e só chegou às lojas em 2011."
+    },
+    {
+      "category": "Indústria",
+      "text": "Quantas cópias o Minecraft já vendeu? (milhões)",
+      "answer": "Mais de 300 milhões",
+      "fact": "É o jogo mais vendido da história."
+    },
+    {
+      "category": "Jogos online",
+      "text": "Quantos jogadores caem na ilha numa partida padrão de Fortnite Battle Royale?",
+      "answer": "100 jogadores",
+      "fact": "Vence o último jogador ou time que ficar de pé."
+    },
+    {
+      "category": "Jogos online",
+      "text": "Quantos blocos de altura tem o mundo do Minecraft desde a versão 1.18?",
+      "answer": "384 blocos",
+      "fact": "O mundo vai da camada -64 até a 319."
+    },
+    {
+      "category": "Jogos online",
+      "text": "Em que ano foi lançado World of Warcraft?",
+      "answer": "2004",
+      "fact": "Chegou a ter mais de 12 milhões de assinantes ao mesmo tempo, em 2010."
+    }
+  ]
+}

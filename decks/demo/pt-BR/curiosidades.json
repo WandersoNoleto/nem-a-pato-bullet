@@ -1,0 +1,85 @@
+{
+  "name": "Curiosidades",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 4a4 4 0 0 0-4 4h2.5A1.5 1.5 0 1 1 12 11.5a1.2 1.2 0 0 0-1.2 1.2V15h2.4v-1.4A4 4 0 0 0 12 6zm0 10.5a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z'/></svg>",
+  "questions": [
+    {
+      "category": "Animais",
+      "text": "Quantos olhos tem uma abelha?",
+      "answer": "5 olhos",
+      "fact": "São dois olhos grandes e três pequenos no alto da cabeça."
+    },
+    {
+      "category": "Animais",
+      "text": "Quantas horas por dia um coala dorme?",
+      "answer": "Até 22 horas",
+      "fact": "A dieta de eucalipto dá pouca energia, então ele economiza."
+    },
+    {
+      "category": "Animais",
+      "text": "Quantas vezes por segundo um beija-flor bate as asas?",
+      "answer": "Cerca de 50 a 80",
+      "fact": "Em voos de exibição, pode passar de 200 batidas por segundo."
+    },
+    {
+      "category": "Animais",
+      "text": "Quanto um elefante come por dia? (kg)",
+      "answer": "Até 150 kg",
+      "fact": "Ele passa até 16 horas por dia comendo."
+    },
+    {
+      "category": "Mundo",
+      "text": "Quantas línguas são faladas no mundo hoje?",
+      "answer": "Cerca de 7.000",
+      "fact": "Quase metade delas está ameaçada de desaparecer."
+    },
+    {
+      "category": "Mundo",
+      "text": "Quantos cômodos tem o Palácio de Buckingham?",
+      "answer": "775 cômodos",
+      "fact": "Entre eles, há 78 banheiros."
+    },
+    {
+      "category": "Mundo",
+      "text": "Qual a altura da Torre de Pisa? (m)",
+      "answer": "Cerca de 56 m",
+      "fact": "Ela começou a inclinar ainda durante a construção, no século 12."
+    },
+    {
+      "category": "Mundo",
+      "text": "Qual o comprimento da Grande Muralha da China, somando todos os trechos? (km)",
+      "answer": "Cerca de 21.000 km",
+      "fact": "Ao contrário do que se diz, ela não é visível do espaço a olho nu."
+    },
+    {
+      "category": "Tecnologia",
+      "text": "Em que ano foi enviado o primeiro e-mail?",
+      "answer": "1971",
+      "fact": "Ray Tomlinson escolheu o @ para separar o usuário do computador."
+    },
+    {
+      "category": "Tecnologia",
+      "text": "Quantos emojis existem no padrão Unicode?",
+      "answer": "Mais de 3.700",
+      "fact": "O primeiro conjunto de emojis foi criado no Japão, em 1999."
+    },
+    {
+      "category": "Comida",
+      "text": "Quantas sementes tem um morango, em média?",
+      "answer": "Cerca de 200",
+      "fact": "Os pontinhos de fora são, na verdade, os frutos verdadeiros do morango."
+    },
+    {
+      "category": "Comida",
+      "text": "Quantos litros de seiva são necessários para fazer 1 litro de xarope de bordo?",
+      "answer": "Cerca de 40 litros",
+      "fact": "A seiva é fervida até sobrar só o xarope."
+    },
+    {
+      "category": "Corpo",
+      "text": "Quanto tempo leva para o cabelo crescer 1 cm? (dias)",
+      "answer": "Cerca de 30 dias",
+      "fact": "Cada fio cresce por 2 a 7 anos antes de cair."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Movies",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 10h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/><path d='M3.2 8.6 2.7 6.7a1 1 0 0 1 .7-1.2l15-4a1 1 0 0 1 1.2.7l.5 1.9z'/></svg>",
+  "questions": [
+    {
+      "category": "Oscars",
+      "text": "How many Oscars did Titanic win?",
+      "answer": "11 statuettes",
+      "fact": "Tied with Ben-Hur and The Lord of the Rings: The Return of the King."
+    },
+    {
+      "category": "Oscars",
+      "text": "How many times has Meryl Streep been nominated for an Oscar?",
+      "answer": "21 nominations",
+      "fact": "It is the record among actors. She won three times."
+    },
+    {
+      "category": "Oscars",
+      "text": "How tall is the Oscar statuette? (cm)",
+      "answer": "34 cm",
+      "fact": "It weighs about 3.9 kg and is gold-plated."
+    },
+    {
+      "category": "Oscars",
+      "text": "In what year was the first Oscars ceremony held?",
+      "answer": "1929",
+      "fact": "The ceremony lasted about 15 minutes."
+    },
+    {
+      "category": "Box office",
+      "text": "What is the worldwide box office of Avatar, from 2009? (billions of dollars)",
+      "answer": "About 2.9 billion",
+      "fact": "It is the highest-grossing film of all time."
+    },
+    {
+      "category": "Box office",
+      "text": "How much did Titanic cost to make? (millions of dollars)",
+      "answer": "About 200 million",
+      "fact": "It was the most expensive film ever made at the time."
+    },
+    {
+      "category": "Behind the scenes",
+      "text": "How many frames per second does traditional cinema use?",
+      "answer": "24 frames",
+      "fact": "The Hobbit was shot at twice that, 48 frames per second."
+    },
+    {
+      "category": "Behind the scenes",
+      "text": "For how many years was Boyhood filmed?",
+      "answer": "12 years",
+      "fact": "The cast met for a few days each year, from 2002 to 2013."
+    },
+    {
+      "category": "Behind the scenes",
+      "text": "How long is Gone with the Wind? (minutes)",
+      "answer": "About 238 minutes",
+      "fact": "Almost four hours, with an intermission in the middle."
+    },
+    {
+      "category": "Behind the scenes",
+      "text": "How long is Marty, the shortest Best Picture winner? (minutes)",
+      "answer": "90 minutes",
+      "fact": "It won the award in 1956."
+    },
+    {
+      "category": "Franchises",
+      "text": "How many actors have played James Bond in the official films?",
+      "answer": "6 actors",
+      "fact": "Sean Connery, George Lazenby, Roger Moore, Timothy Dalton, Pierce Brosnan and Daniel Craig."
+    },
+    {
+      "category": "Franchises",
+      "text": "How many films are in the main Star Wars saga?",
+      "answer": "9 films",
+      "fact": "Three trilogies, from 1977 to 2019."
+    },
+    {
+      "category": "Franchises",
+      "text": "In what year did Toy Story come out?",
+      "answer": "1995",
+      "fact": "It was the first feature film made entirely with computer graphics."
+    },
+    {
+      "category": "World cinema",
+      "text": "How many Oscar nominations did the Brazilian film City of God get?",
+      "answer": "4 nominations",
+      "fact": "Including Best Director, for Fernando Meirelles."
+    }
+  ]
+}
