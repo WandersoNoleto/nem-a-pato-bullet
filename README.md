@@ -1,4 +1,4 @@
-![Nem a Pato! Bullet](docs/banner.webp)
+![Nem a Pato! Bullet](.github/assets/banner.webp)
 
 # Nem a Pato! Bullet
 
