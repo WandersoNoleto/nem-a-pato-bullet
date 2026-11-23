@@ -2,6 +2,7 @@ import 'data/deck_files.dart';
 import 'domain/deck.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
+import 'state/sound_controller.dart';
 import 'state/theme_controller.dart';
 import 'update/app_updates.dart';
 
@@ -17,6 +18,7 @@ class AppDependencies {
     required this.theme,
     required this.seen,
     this.deleteDeck,
+    this.sound,
     this.updates,
   });
 
@@ -32,6 +34,9 @@ class AppDependencies {
   final LanguageController language;
   final ThemeController theme;
   final SeenQuestions seen;
+
+  /// Null keeps the game silent and hides the sound setting.
+  final SoundController? sound;
 
   /// Null hides the version line and skips update checks.
   final AppUpdates? updates;

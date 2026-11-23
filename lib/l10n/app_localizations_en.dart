@@ -437,4 +437,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get themeDark => 'Dark';
+
+  @override
+  String get soundSection => 'SOUND';
+
+  @override
+  String get soundOn => 'On';
+
+  @override
+  String get soundOff => 'Off';
 }

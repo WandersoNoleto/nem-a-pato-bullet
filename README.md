@@ -42,7 +42,7 @@ The app is the deck; the game happens at the table.
 ### Playing
 
 - **Rules at hand:** the info button on the home screen opens how to play, step by step, with a reminder that the score stays at the table.
-- **3D card flip:** tap "Nem a Pato!" to flip the card and reveal the answer and a fun fact. A short vibration marks the moment.
+- **3D card flip:** tap "Nem a Pato!" to flip the card and reveal the answer and a fun fact. A duck quacks and a short vibration marks the moment; the sound can be turned off in the settings.
 - **No repeats:** cards that came up stay out of the deck, even after closing the app. When a game runs out of cards, return only that game's cards and keep playing; return every card from the settings.
 - **Round counter:** the top of the game shows the current round, and the total when the game has a limit.
 
@@ -191,6 +191,8 @@ tool/build_demo.sh
 ## Credits
 
 Inspired by [*Nem a Pato!*](https://loja.grokgames.com.br/nem-a-pato), designed by **Rodrigo Rego** and published in Brazil by **Grok Games** (original edition: *How Dare You?*, Alion). This is a non-profit study project, not affiliated with or endorsed by Grok Games or the designer.
+
+The duck quack is a sound by freesound_community, from [Pixabay](https://pixabay.com/sound-effects/), used under the Pixabay Content License.
 
 ## License
 

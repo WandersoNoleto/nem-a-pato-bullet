@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'app_dependencies.dart';
+import 'audio/quack_sound.dart';
 import 'data/all_decks.dart';
 import 'data/deck_files.dart';
 import 'data/delete_deck.dart';
@@ -13,6 +14,7 @@ import 'domain/deck.dart';
 import 'l10n/l10n.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
+import 'state/sound_controller.dart';
 import 'state/theme_controller.dart';
 import 'update/app_updates.dart';
 import 'update/update_checker.dart';
@@ -21,6 +23,7 @@ import 'update/update_installer.dart';
 const _languageKey = 'language';
 const _seenKey = 'seen_questions';
 const _themeKey = 'theme';
+const _soundKey = 'sound';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +68,12 @@ Future<void> main() async {
         language: language,
         theme: theme,
         seen: seen,
+        sound: SoundController(
+          enabled:
+              preferences.getBool(_soundKey) ?? SoundController.defaultEnabled,
+          save: (enabled) => preferences.setBool(_soundKey, enabled),
+          playQuack: QuackSound().play,
+        ),
         updates: AppUpdates(
           checker: UpdateChecker(),
           installer: UpdateInstaller(),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app_dependencies.dart';
 import '../../domain/deck.dart';
 import '../../l10n/l10n.dart';
+import '../../state/sound_controller.dart';
 import '../../state/theme_controller.dart';
 import '../../update/app_updates.dart';
 import '../../update/update_checker.dart';
@@ -151,6 +152,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
                 const SizedBox(height: 28),
+                if (widget.dependencies.sound case final sound?) ...[
+                  SectionLabel(context.l10n.soundSection),
+                  _SoundPicker(controller: sound),
+                  const SizedBox(height: 28),
+                ],
                 SectionLabel(context.l10n.historySection),
                 Panel(
                   children: [
@@ -326,6 +332,44 @@ class _ThemePicker extends StatelessWidget {
             onTap: () => controller.setTheme(option.theme),
           ),
       ],
+    );
+  }
+}
+
+/// Sound on or off, as pills like the theme.
+class _SoundPicker extends StatelessWidget {
+  const _SoundPicker({required this.controller});
+
+  final SoundController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final table = TableTheme.of(context);
+    final options = [
+      (enabled: true, label: context.l10n.soundOn, icon: Icons.volume_up),
+      (enabled: false, label: context.l10n.soundOff, icon: Icons.volume_off),
+    ];
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) => Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          for (final option in options)
+            ChoicePill(
+              label: option.label,
+              leading: Icon(
+                option.icon,
+                size: 20,
+                color: controller.enabled == option.enabled
+                    ? table.onSelected
+                    : AppColors.ink,
+              ),
+              selected: controller.enabled == option.enabled,
+              onTap: () => controller.setEnabled(option.enabled),
+            ),
+        ],
+      ),
     );
   }
 }

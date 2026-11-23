@@ -439,4 +439,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get themeDark => 'Escuro';
+
+  @override
+  String get soundSection => 'SOM';
+
+  @override
+  String get soundOn => 'Ligado';
+
+  @override
+  String get soundOff => 'Desligado';
 }
