@@ -7,15 +7,19 @@
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)
-[![Languages](https://img.shields.io/badge/languages-PT%20%7C%20EN-111111)](#features)
+[![Languages](https://img.shields.io/badge/languages-PT%20%7C%20EN-111111)](#whats-in-the-game)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A fan-made, **offline** card deck for playing the trivia party game *Nem a Pato!* at the table. Everyone guesses a number, each guess higher than the last, without going over the real answer. Think the last guess went too far? Shout **"Nem a Pato!"**, flip the card and see who was wrong.
+**The trivia party game where every answer is a number, and nobody knows how far to push it.**
+
+How many teeth does a dog have? How tall is a soccer goal? Around the table, each player bids a number higher than the last, without going over the real answer. When someone thinks the last bid went too far, they shout **"Nem a Pato!"**, a pun on the Brazilian "nem a pau" ("no way!"), flip the card and see who was wrong.
+
+This app is the deck: a fan-made, **offline** companion for the board game *Nem a Pato!*, with a duck in sunglasses riding a bullet train.
 
 > [!NOTE]
 > Unofficial fan project based on the board game *Nem a Pato!*. See the [credits](#credits).
 
-**[Download the APK](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** · **[How to play](#how-to-play)** · **[Features](#features)** · **[Screens](#screens)** · **[Demo](#demo)** · **[Decks](#decks)** · **[Build from source](#build-from-source)** · **[Credits](#credits)**
+**[Get the app](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** · **[Try the demo](#try-the-demo)** · **[How to play](#how-to-play)** · **[What's in the game](#whats-in-the-game)** · **[Make your own deck](#make-your-own-deck)**
 
 <p align="center">
   <img src=".github/assets/home.png" width="200" alt="Home screen with the duck mascot riding a bullet train and the PLAY button">
@@ -26,48 +30,47 @@ A fan-made, **offline** card deck for playing the trivia party game *Nem a Pato!
 
 ## How to play
 
-The app is the deck; the game happens at the table.
+**You need:** this app, two or more friends, and the nerve to bid one number too high.
 
-1. **Set up the game:** pick the number of rounds, the decks and the categories, then tap **START**.
+1. **Set up the game:** pick the rounds, the decks and the categories, then tap **START**.
 2. **Read the card** out loud. Every answer is a number.
-3. **Guess around the table:** each player says a number higher than the last one, trying not to go over the answer.
-4. **Challenge:** when someone thinks the last guess went too far, they shout "Nem a Pato!" and tap the button to flip the card.
-5. **Whoever loses the challenge is out of the game.** The last player standing wins.
+3. **Bid around the table:** each player says a number higher than the last one, trying not to go over the answer.
+4. **Call it:** think the last bid went too far? Shout **"Nem a Pato!"** and tap the button to flip the card. The duck quacks, the answer shows up.
+5. **Whoever loses the challenge is out.** If the bid was over the answer, the bidder is out; if not, whoever shouted is. The last player standing wins.
 
-> [!NOTE]
-> The app only shows the cards: it doesn't track players, eliminations or how many cards each one has. That part stays at the table. If you'd rather play the classic way, keep score yourselves: whoever loses a challenge takes a card, and the player with the most cards at the end is the duck of the table.
+> [!TIP]
+> The app only shows the cards. Players, eliminations and score stay at the table. Rather play the classic way? Whoever loses a challenge takes a card, and the player with the most cards at the end is the duck of the table.
 
-## Features
+## What's in the game
 
-### Playing
+### At the table
 
-- **Rules at hand:** the info button on the home screen opens how to play, step by step, with a reminder that the score stays at the table.
-- **3D card flip:** tap "Nem a Pato!" to flip the card and reveal the answer and a fun fact.
-- **Duck quack:** the challenge comes with a quack and a short vibration. The sound can be turned off in the settings; the vibration stays.
-- **No repeats:** cards that came up stay out of the deck, even after closing the app. When a game runs out of cards, return only that game's cards and keep playing, or return every card from the settings.
-- **Round counter:** the top of the game shows the current round, and the total when the game has a limit.
+- **The card flip:** tap "Nem a Pato!" and the card turns over in 3D, showing the answer and a fun fact.
+- **The quack:** every challenge comes with a duck quack and a short vibration. Playing somewhere quiet? Turn the sound off in the settings; the vibration stays.
+- **No repeats:** a card that came up stays out of the deck, even after you close the app. Out of cards? Put this game's cards back and keep going, or return every card from the settings.
+- **Round counter:** the top of the screen shows the round, and the total when the game has a limit.
+- **Rules at hand:** the info button on the home screen explains how to play, step by step.
 
-### Game setup
+### Before the game
 
-- **Rounds:** infinite (the default), 5, 10, 15, 20 or a custom number up to 999.
-- **Decks:** pick one or more decks from a grid that fits the screen, three per row on a typical phone.
-- **Categories:** every category of the chosen decks starts selected. Remove one with a tap, search to add it back, or select all again.
-- **Cards left:** the setup shows how many unused cards the choices leave in the deck.
+- **Rounds:** infinite (the default), 5, 10, 15, 20 or any number up to 999.
+- **Decks:** pick one or more from a grid of deck tiles.
+- **Categories:** all of them start in. Tap one to leave it out, search to bring it back, or select all again.
+- **Cards left:** the setup tells you how many unused cards your choices leave.
 
-### Decks
+### Your decks
 
-- **Deck page:** tap a deck in the settings to see its symbol, language, categories and questions. Answers stay hidden until you tap a question, so you can browse without spoiling the game.
-- **Your own decks:** import decks from JSON files, export any deck to share it, and delete the ones you imported. Deleting a deck lets its cards come up again if you import it later.
-- **Comes with the app:** decks shipped with the app are labeled and can't be deleted. Importing a deck with the same name replaces it until you delete the imported one.
-- **Deck symbols:** each deck can have its own SVG symbol, shown in the setup, the settings and the deck page.
-- **Deck language:** a deck can say which language its questions are in. The deck page shows it by name in the app's language, like "Portuguese (Brazil)" for `pt-BR`.
+- **Deck page:** open a deck in the settings to see its symbol, language, categories and questions. Answers stay hidden until you tap, so browsing won't spoil the game.
+- **Import, export, delete:** load decks from JSON files, share any deck as a file, and delete the ones you imported.
+- **Comes with the app:** decks shipped with the app are labeled and can't be deleted.
+- **Deck symbols and language:** each deck can have its own symbol, and can say which language its questions are in, shown by name, like "Portuguese (Brazil)".
 
-### App
+### Your phone
 
-- **Light and dark themes:** a yellow theme and a dark one, switched in the settings and remembered on the device.
-- **Portuguese and English:** the app's texts switch language; deck content always stays exactly as written.
-- **Fits any screen:** small phones, large phones and tablets, and larger system font sizes. On tablets the game keeps a phone-like width.
-- **Auto-update:** the app checks GitHub Releases when it opens and offers new versions, with the mascot train running along the download bar. You can also check by hand in the settings.
+- **Light and dark themes:** a yellow table or a dark one.
+- **Portuguese and English:** the app's texts switch language; the cards always stay exactly as written.
+- **Any screen:** small phones, big phones, tablets and large system fonts.
+- **Auto-update:** new versions show up when you open the app, with the mascot train running along the download bar.
 - **Fully offline**, portrait, made for Android.
 
 ## Screens
@@ -101,38 +104,37 @@ The app is the deck; the game happens at the table.
 
 </details>
 
-## Install
+## Get the app
 
-Download `nem-a-pato-bullet-<version>.apk` from the **[latest release](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** and open it on your Android phone. Android will ask you to allow installs from this source.
+Download `nem-a-pato-bullet-<version>.apk` from the **[latest release](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest)** and open it on your Android phone. Android will ask you to allow installs from this source. After that, the app offers new versions by itself.
 
-After that, the app offers new versions by itself when it opens.
+## Try the demo
 
-## Demo
-
-Want to try the game with more questions? There are two demo apps, each with **83 questions in 6 decks**: games, sports, movies, science, world records and trivia.
+Want more cards to play with? Two demo apps come loaded with **83 questions in 6 decks**: games, sports, movies, science, world records and trivia.
 
 | Demo | Language | Download |
 | --- | --- | --- |
 | Nem a Pato! Demo PT | Brazilian Portuguese | [nem-a-pato-bullet-demo-pt-BR.apk](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest/download/nem-a-pato-bullet-demo-pt-BR.apk) |
 | Nem a Pato! Demo EN | English | [nem-a-pato-bullet-demo-en-US.apk](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest/download/nem-a-pato-bullet-demo-en-US.apk) |
 
-The demos are separate apps: they install next to the regular app and to each other, start in their own language and come with their decks ready to play.
+The demos are separate apps: they install next to the regular one, start in their own language and come with their decks ready to play.
 
 > [!TIP]
-> **Recommended:** the demos don't receive updates. For the best experience, install the [latest version of the app](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest) and import the demo decks from the settings, using the JSON files in [`decks/demo/pt-BR`](https://github.com/WandersoNoleto/nem-a-pato-bullet/tree/main/decks/demo/pt-BR) or [`decks/demo/en-US`](https://github.com/WandersoNoleto/nem-a-pato-bullet/tree/main/decks/demo/en-US).
+> **Recommended:** the demos don't receive updates. For the best experience, get the [latest version of the app](https://github.com/WandersoNoleto/nem-a-pato-bullet/releases/latest) and import the demo decks from the settings, using the JSON files in [`decks/demo/pt-BR`](https://github.com/WandersoNoleto/nem-a-pato-bullet/tree/main/decks/demo/pt-BR) or [`decks/demo/en-US`](https://github.com/WandersoNoleto/nem-a-pato-bullet/tree/main/decks/demo/en-US).
 
 > [!WARNING]
-> The demo questions were **generated with AI**, only for demonstration. Their answers are not guaranteed to be accurate. For the game, **the answer in the app is the one that counts**.
+> The demo questions were **generated with AI**, only for demonstration. Their answers are not guaranteed to be accurate. At the table, **the answer in the app is the one that counts**.
 
-## Decks
+## Make your own deck
 
-The app does not ship the original game's questions. Questions live in JSON decks, kept separate from the code:
+The app doesn't ship the original game's questions, so the fun is in bringing your own. A deck is a JSON file: write it, import it from the settings, and it's in the game.
 
-- `assets/decks/sample.json`: a sample deck with original questions, bundled with the app.
-- `decks/demo/pt-BR/` and `decks/demo/en-US/`: the [demo](#demo) decks, the same 83 questions in each language, used for the demo builds and ready to import.
-- `decks/private/`: personal decks; ignored by Git and never published.
+**What makes a good card:**
 
-Players can also import decks from the settings screen. A deck with the same name as an existing one replaces it. Imported decks can be exported or deleted from their page in the settings; decks bundled with the app can only be exported.
+- **One number as the answer.** A challenge needs a clear winner, so avoid "about", "over" or ranges in the answer.
+- **Approximate? Say it in the question.** "Approximately how long does sunlight take to reach Earth? (minutes)" → `8 minutes`.
+- **Give the unit when it isn't obvious**, at the end: "How tall is a soccer goal? (m)". Skip it when the question already says it: "In what year...".
+- **A fun fact** makes the reveal better.
 
 | Field | Required | Notes |
 | --- | --- | --- |
@@ -166,11 +168,17 @@ Players can also import decks from the settings screen. A deck with the same nam
 
 </details>
 
-Question ids are not part of the file: the app derives each one from the category and text, so a question is never repeated, even after re-importing its deck. Deck content can be in any language; the sample deck is in Brazilian Portuguese. The `language` code is written the usual way (`pt-br` is stored as `pt-BR`), and a value that isn't a language code makes the file invalid.
+A few more details:
 
-Every answer should be a single number, so a challenge always has a winner. When the real value is approximate, say so in the question ("Approximately how...") and keep one number as the answer.
+- **Same name, new deck:** importing a deck with the name of one you have replaces it.
+- **No repeats across imports:** each question's id comes from its category and text, so a card that came up stays out even if you import its deck again.
+- **Language codes** are written the usual way (`pt-br` is stored as `pt-BR`); a value that isn't a language code makes the file invalid.
+- **Where the decks live in this repository:**
+  - `assets/decks/sample.json`: a small sample deck, bundled with the app.
+  - `decks/demo/pt-BR/` and `decks/demo/en-US/`: the [demo](#try-the-demo) decks, the same 83 questions in each language.
+  - `decks/private/`: personal decks, ignored by Git and never published.
 
-## Build from source
+## For developers
 
 Requires Flutter (stable).
 
