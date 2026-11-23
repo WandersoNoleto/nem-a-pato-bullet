@@ -103,6 +103,7 @@ void main() {
     final source = File('assets/decks/sample.json').readAsStringSync();
     final deck = Deck.fromJsonString(source);
     expect(deck.questions, isNotEmpty);
+    expect(deck.language, 'pt-BR');
   });
 
   test('the demo decks are valid and complete', () {
