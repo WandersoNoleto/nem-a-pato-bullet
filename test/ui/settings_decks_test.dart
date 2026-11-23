@@ -165,6 +165,29 @@ void main() {
     expect(find.text('Vem com o app'), findsNothing);
   });
 
+  testWidgets('the deck page shows its language', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final deck = Deck(
+      name: 'Espaço',
+      language: 'pt-BR',
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+      ],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+
+    await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+
+    expect(find.text('Português (Brasil)'), findsOneWidget);
+    // Read together with the deck summary by screen readers.
+    expect(
+      tester.getSemantics(find.text('Português (Brasil)')).label,
+      contains('Idioma: Português (Brasil)'),
+    );
+    semantics.dispose();
+  });
+
   testWidgets('a deck is exported as JSON from its details', (tester) async {
     final files = _FakeFiles();
     final deck = Deck(
@@ -203,6 +226,21 @@ void main() {
     await _settle(tester);
 
     expect(find.byType(SnackBar), findsNothing);
+  });
+
+  testWidgets('a deck without a language shows no tag', (tester) async {
+    final deck = Deck(
+      name: 'Espaço',
+      questions: [
+        Question.create(category: 'Luas', text: 'Quantas?', answer: '2'),
+      ],
+    );
+    await _pumpSettings(tester, _FakeFiles(), decks: [deck]);
+
+    await tester.tap(find.text('Espaço'));
+    await _settle(tester);
+
+    expect(find.byIcon(Icons.translate), findsNothing);
   });
 
   group('deleting', () {

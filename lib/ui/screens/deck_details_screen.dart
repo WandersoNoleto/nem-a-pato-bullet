@@ -5,6 +5,7 @@ import '../../data/deck_files.dart';
 import '../../domain/categories.dart';
 import '../../domain/deck.dart';
 import '../../domain/question.dart';
+import '../../l10n/language_names.dart';
 import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -104,6 +105,10 @@ class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
   Widget build(BuildContext context) {
     final deck = widget.deck;
     final delete = widget.dependencies.deleteDeck;
+    final code = deck.language;
+    final language = code == null
+        ? null
+        : languageName(code, Localizations.localeOf(context).languageCode);
     final categories = categoriesOf([deck]);
     final theme = TableTheme.of(context);
     return TableScaffold(
@@ -120,6 +125,7 @@ class _DeckDetailsScreenState extends State<DeckDetailsScreen> {
                 _Summary(
                   deck: deck,
                   categories: categories.length,
+                  language: language,
                   actions: [
                     _ActionPill(
                       icon: Icons.ios_share,
@@ -168,15 +174,23 @@ class _Summary extends StatelessWidget {
     required this.deck,
     required this.categories,
     required this.actions,
+    this.language,
   });
 
   final Deck deck;
   final int categories;
   final List<Widget> actions;
 
+  /// The deck's language by name, like "Português (Brasil)"; null hides it.
+  final String? language;
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final language = this.language;
+    final muted = AppTextStyles.credits.copyWith(
+      color: AppColors.mutedOnYellow,
+    );
     return RaisedBox(
       colors: AppColors.headerGradient,
       lipHeight: 4,
@@ -203,10 +217,26 @@ class _Summary extends StatelessWidget {
                     Text(
                       '${l10n.questionCount(deck.questions.length)}'
                       ' · ${l10n.categoryCount(categories)}',
-                      style: AppTextStyles.credits.copyWith(
-                        color: AppColors.mutedOnYellow,
-                      ),
+                      style: muted,
                     ),
+                    if (language != null) ...[
+                      const SizedBox(height: 2),
+                      Semantics(
+                        label: l10n.deckLanguage(language),
+                        excludeSemantics: true,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.translate,
+                              size: 14,
+                              color: AppColors.mutedOnYellow,
+                            ),
+                            const SizedBox(width: 4),
+                            Flexible(child: Text(language, style: muted)),
+                          ],
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
