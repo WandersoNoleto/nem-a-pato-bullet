@@ -25,6 +25,10 @@ const _seenKey = 'seen_questions';
 const _themeKey = 'theme';
 const _soundKey = 'sound';
 
+/// Set by tool/build_demo.sh: the demo's language (`pt` or `en`). Empty in
+/// the regular app.
+const _demoLanguage = String.fromEnvironment('DEMO_LANGUAGE');
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -37,6 +41,8 @@ Future<void> main() async {
           (locale) => locale.languageCode == savedLanguage,
         )
         ? savedLanguage!
+        : _demoLanguage.isNotEmpty
+        ? _demoLanguage
         : LanguageController.defaultCode,
     save: (code) => preferences.setString(_languageKey, code),
   );
@@ -74,14 +80,18 @@ Future<void> main() async {
           save: (enabled) => preferences.setBool(_soundKey, enabled),
           playQuack: QuackSound().play,
         ),
-        updates: AppUpdates(
-          checker: UpdateChecker(),
-          installer: UpdateInstaller(),
-          // Debug builds take their version from pubspec.yaml and are often
-          // behind the latest release, so the prompt would show on every
-          // `flutter run`.
-          checkOnStartup: !kDebugMode,
-        ),
+        // Demos are separate apps: the releases only carry the regular app's
+        // updates.
+        updates: _demoLanguage.isNotEmpty
+            ? null
+            : AppUpdates(
+                checker: UpdateChecker(),
+                installer: UpdateInstaller(),
+                // Debug builds take their version from pubspec.yaml and are
+                // often behind the latest release, so the prompt would show
+                // on every `flutter run`.
+                checkOnStartup: !kDebugMode,
+              ),
       ),
     ),
   );

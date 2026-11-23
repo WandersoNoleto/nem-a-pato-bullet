@@ -11,6 +11,11 @@ if (keystorePropertiesFile.exists()) {
     FileInputStream(keystorePropertiesFile).use { keystoreProperties.load(it) }
 }
 
+// Demo builds (tool/build_demo.sh passes -Pdemo=pt or -Pdemo=en) are
+// separate apps with their own id and name, so they install next to the
+// regular app and to each other.
+val demo = project.findProperty("demo") as String?
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
@@ -31,7 +36,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.wandersonnoleto.nem_a_pato_bullet"
+        applicationId = "com.wandersonnoleto.nem_a_pato_bullet" +
+            (demo?.let { ".demo.$it" } ?: "")
+        manifestPlaceholders["appLabel"] =
+            demo?.let { "Nem a Pato! Demo ${it.uppercase()}" } ?: "Nem a Pato! Bullet"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

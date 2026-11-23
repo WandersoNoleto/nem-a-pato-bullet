@@ -2,7 +2,7 @@
     <!-- Checking GitHub Releases for updates. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="Nem a Pato! Bullet"
+        android:label="${appLabel}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
