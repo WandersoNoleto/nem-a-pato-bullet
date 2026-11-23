@@ -386,6 +386,12 @@ abstract class AppLocalizations {
   /// **'Vem com o app'**
   String get deckFromApp;
 
+  /// No description provided for @deckLanguage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Idioma: {name}'**
+  String deckLanguage(String name);
+
   /// No description provided for @deleteButton.
   ///
   /// In pt, this message translates to:

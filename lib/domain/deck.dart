@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'deck_language.dart';
 import 'question.dart';
 
 /// Where a deck comes from. Not part of the JSON: the loaders set it.
@@ -21,6 +22,7 @@ class Deck {
     required this.name,
     required this.questions,
     this.iconSvg,
+    this.language,
     this.origin = DeckOrigin.imported,
   });
 
@@ -30,13 +32,15 @@ class Deck {
   /// {
   ///   "name": "Sample deck",
   ///   "icon": "<svg ...>...</svg>",
+  ///   "language": "pt-BR",
   ///   "questions": [
   ///     { "category": "Oceano", "text": "...", "answer": "24 m", "fact": "..." }
   ///   ]
   /// }
   /// ```
   ///
-  /// `icon` (an inline SVG) and `fact` are optional. A numeric `answer` is
+  /// `icon` (an inline SVG), `language` (a code like `pt-BR`) and `fact` are
+  /// optional. A numeric `answer` is
   /// accepted and shown as text.
   /// Questions with the same id as an earlier one are dropped.
   /// Throws a [FormatException] naming the first invalid question.
@@ -53,6 +57,15 @@ class Deck {
     if (icon != null && (icon is! String || !icon.contains('<svg'))) {
       throw const FormatException('Deck "icon" must be an inline SVG');
     }
+    final rawLanguage = json['language'];
+    final language = rawLanguage is String
+        ? normalizeLanguageCode(rawLanguage)
+        : null;
+    if (rawLanguage != null && language == null) {
+      throw const FormatException(
+        'Deck "language" must be a language code like "pt-BR"',
+      );
+    }
 
     final seenIds = <String>{};
     final questions = <Question>[];
@@ -64,6 +77,7 @@ class Deck {
       name: name.trim(),
       questions: List.unmodifiable(questions),
       iconSvg: icon as String?,
+      language: language,
     );
   }
 
@@ -76,14 +90,20 @@ class Deck {
   }
 
   /// This deck with another [origin].
-  Deck withOrigin(DeckOrigin origin) =>
-      Deck(name: name, questions: questions, iconSvg: iconSvg, origin: origin);
+  Deck withOrigin(DeckOrigin origin) => Deck(
+    name: name,
+    questions: questions,
+    iconSvg: iconSvg,
+    language: language,
+    origin: origin,
+  );
 
   /// The deck in the same format [Deck.fromJson] reads.
   String toJsonString() {
     return const JsonEncoder.withIndent('  ').convert({
       'name': name,
       if (iconSvg != null) 'icon': iconSvg,
+      if (language != null) 'language': language,
       'questions': [
         for (final question in questions)
           {
@@ -126,6 +146,10 @@ class Deck {
 
   /// The deck's symbol as inline SVG; null shows the default card symbol.
   final String? iconSvg;
+
+  /// The language the questions are written in, like `pt-BR`; null when the
+  /// deck doesn't say.
+  final String? language;
 
   final DeckOrigin origin;
 }

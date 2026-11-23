@@ -103,6 +103,14 @@
   "exportDeck": "Exportar baralho",
   "exportButton": "Exportar",
   "deckFromApp": "Vem com o app",
+  "deckLanguage": "Idioma: {name}",
+  "@deckLanguage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "deleteButton": "Excluir",
   "deleteDeck": "Excluir baralho",
   "deleteDeckTitle": "Excluir baralho?",

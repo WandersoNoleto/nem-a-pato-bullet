@@ -130,4 +130,38 @@ void main() {
     expect(copy.origin, DeckOrigin.imported);
     expect(deck.toJsonString(), isNot(contains('origin')));
   });
+
+  test('reads the language, writes it back and keeps it with the origin', () {
+    final deck = Deck.fromJsonString(
+      '{"name": "Mar", "language": "pt-br", "questions": '
+      '[{"category": "A", "text": "q", "answer": "1"}]}',
+    );
+
+    expect(deck.language, 'pt-BR');
+    expect(Deck.fromJsonString(deck.toJsonString()).language, 'pt-BR');
+    expect(deck.withOrigin(DeckOrigin.app).language, 'pt-BR');
+  });
+
+  test('a deck without language has none', () {
+    final deck = Deck.fromJsonString(
+      '{"name": "Mar", "questions": '
+      '[{"category": "A", "text": "q", "answer": "1"}]}',
+    );
+
+    expect(deck.language, isNull);
+    expect(deck.toJsonString(), isNot(contains('language')));
+  });
+
+  test('rejects a language that is not a code', () {
+    for (final language in ['"português"', '42', '""']) {
+      expect(
+        () => Deck.fromJsonString(
+          '{"name": "Mar", "language": $language, "questions": '
+          '[{"category": "A", "text": "q", "answer": "1"}]}',
+        ),
+        throwsFormatException,
+        reason: language,
+      );
+    }
+  });
 }

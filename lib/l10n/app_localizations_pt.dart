@@ -196,6 +196,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get deckFromApp => 'Vem com o app';
 
   @override
+  String deckLanguage(String name) {
+    return 'Idioma: $name';
+  }
+
+  @override
   String get deleteButton => 'Excluir';
 
   @override

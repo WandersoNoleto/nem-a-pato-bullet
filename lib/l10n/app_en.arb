@@ -48,6 +48,7 @@
   "exportDeck": "Export deck",
   "exportButton": "Export",
   "deckFromApp": "Comes with the app",
+  "deckLanguage": "Language: {name}",
   "deleteButton": "Delete",
   "deleteDeck": "Delete deck",
   "deleteDeckTitle": "Delete deck?",

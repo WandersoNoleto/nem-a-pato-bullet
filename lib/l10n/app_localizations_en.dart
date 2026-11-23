@@ -195,6 +195,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deckFromApp => 'Comes with the app';
 
   @override
+  String deckLanguage(String name) {
+    return 'Language: $name';
+  }
+
+  @override
   String get deleteButton => 'Delete';
 
   @override
