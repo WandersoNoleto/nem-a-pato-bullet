@@ -11,9 +11,9 @@
     },
     {
       "category": "Futebol",
-      "text": "Quanto pesa uma bola oficial de futebol? (g)",
-      "answer": "Entre 410 e 450 g",
-      "fact": "O peso é medido com a bola seca, antes do jogo."
+      "text": "Qual o peso máximo de uma bola oficial de futebol? (g)",
+      "answer": "450 g",
+      "fact": "O mínimo é 410 g, e a bola é pesada seca, antes do jogo."
     },
     {
       "category": "Futebol",
@@ -72,14 +72,14 @@
     {
       "category": "Outros esportes",
       "text": "Qual o peso máximo de uma bola de boliche? (kg)",
-      "answer": "Cerca de 7,26 kg",
+      "answer": "7,26 kg",
       "fact": "O limite oficial é de 16 libras."
     },
     {
       "category": "Outros esportes",
-      "text": "Quantas covinhas tem uma bola de golfe?",
-      "answer": "Entre 300 e 500",
-      "fact": "As covinhas reduzem a resistência do ar e fazem a bola ir mais longe."
+      "text": "Qual o diâmetro mínimo de uma bola de golfe? (mm)",
+      "answer": "42,67 mm",
+      "fact": "As 300 a 500 covinhas da bola reduzem a resistência do ar e fazem ela ir mais longe."
     },
     {
       "category": "Outros esportes",

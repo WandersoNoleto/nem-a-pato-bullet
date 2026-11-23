@@ -12,19 +12,19 @@
     {
       "category": "Física",
       "text": "Qual a velocidade do som no ar, a 20 °C? (m/s)",
-      "answer": "Cerca de 343 m/s",
+      "answer": "343 m/s",
       "fact": "Por isso o trovão chega cerca de 3 segundos depois do relâmpago, a cada quilômetro."
     },
     {
       "category": "Física",
-      "text": "A que temperatura a água ferve no topo do Everest? (°C)",
-      "answer": "Cerca de 70 °C",
+      "text": "Aproximadamente a que temperatura a água ferve no topo do Everest? (°C)",
+      "answer": "70 °C",
       "fact": "Com menos pressão do ar, a água ferve mais cedo."
     },
     {
       "category": "Física",
-      "text": "Quanto marcaria na Lua a balança de uma pessoa de 60 kg? (kg)",
-      "answer": "Cerca de 10 kg",
+      "text": "Aproximadamente quanto marcaria na Lua a balança de uma pessoa de 60 kg? (kg)",
+      "answer": "10 kg",
       "fact": "A gravidade da Lua é cerca de um sexto da gravidade da Terra."
     },
     {
@@ -36,14 +36,14 @@
     {
       "category": "Física",
       "text": "Quantas vezes o ouro é mais denso que a água?",
-      "answer": "Cerca de 19,3 vezes",
+      "answer": "19,3 vezes",
       "fact": "Um cubo de ouro de 10 cm de lado pesa cerca de 19 kg."
     },
     {
       "category": "Espaço",
-      "text": "Quanto tempo a luz do Sol leva para chegar à Terra? (minutos)",
-      "answer": "Cerca de 8 minutos",
-      "fact": "São cerca de 150 milhões de km de distância."
+      "text": "Aproximadamente quanto tempo a luz do Sol leva para chegar à Terra? (minutos)",
+      "answer": "8 minutos",
+      "fact": "São cerca de 150 milhões de km, percorridos em 8 minutos e 20 segundos."
     },
     {
       "category": "Espaço",
@@ -53,38 +53,38 @@
     },
     {
       "category": "Espaço",
-      "text": "Qual a temperatura média na superfície de Vênus? (°C)",
-      "answer": "Cerca de 465 °C",
+      "text": "Aproximadamente qual a temperatura média na superfície de Vênus? (°C)",
+      "answer": "465 °C",
       "fact": "É mais quente que Mercúrio, por causa do efeito estufa."
     },
     {
       "category": "Espaço",
-      "text": "A que velocidade a Estação Espacial Internacional orbita a Terra? (km/h)",
-      "answer": "Cerca de 28.000 km/h",
+      "text": "Aproximadamente a que velocidade a Estação Espacial Internacional orbita a Terra? (km/h)",
+      "answer": "28.000 km/h",
       "fact": "Ela dá uma volta completa na Terra a cada 90 minutos."
     },
     {
       "category": "Espaço",
-      "text": "Qual a temperatura no núcleo do Sol? (milhões de °C)",
-      "answer": "Cerca de 15 milhões °C",
+      "text": "Aproximadamente qual a temperatura no núcleo do Sol? (milhões de °C)",
+      "answer": "15 milhões °C",
       "fact": "Na superfície, a temperatura fica perto de 5.500 °C."
     },
     {
       "category": "Corpo humano",
-      "text": "Quantas vezes o coração bate por dia, em média?",
-      "answer": "Cerca de 100 mil",
+      "text": "Aproximadamente quantas vezes o coração bate por dia?",
+      "answer": "100 mil",
       "fact": "Ao longo de uma vida, são mais de 2,5 bilhões de batidas."
     },
     {
       "category": "Corpo humano",
-      "text": "Quantos litros de ar um adulto respira por dia?",
-      "answer": "Cerca de 11 mil litros",
+      "text": "Aproximadamente quantos litros de ar um adulto respira por dia?",
+      "answer": "11 mil litros",
       "fact": "Em repouso, cada respiração leva cerca de meio litro de ar."
     },
     {
       "category": "Corpo humano",
-      "text": "Qual a velocidade dos impulsos nervosos mais rápidos? (m/s)",
-      "answer": "Cerca de 120 m/s",
+      "text": "Aproximadamente qual a velocidade dos impulsos nervosos mais rápidos? (m/s)",
+      "answer": "120 m/s",
       "fact": "São mais de 400 km/h."
     }
   ]

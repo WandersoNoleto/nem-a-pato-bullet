@@ -12,19 +12,19 @@
     {
       "category": "Physics",
       "text": "What is the speed of sound in air at 20 °C? (m/s)",
-      "answer": "About 343 m/s",
+      "answer": "343 m/s",
       "fact": "That is why thunder arrives about 3 seconds after the lightning for every kilometer."
     },
     {
       "category": "Physics",
-      "text": "At what temperature does water boil on top of Everest? (°C)",
-      "answer": "About 70 °C",
+      "text": "Approximately at what temperature does water boil on top of Everest? (°C)",
+      "answer": "70 °C",
       "fact": "With lower air pressure, water boils sooner."
     },
     {
       "category": "Physics",
-      "text": "What would a scale show on the Moon for a 60 kg person? (kg)",
-      "answer": "About 10 kg",
+      "text": "Approximately what would a scale show on the Moon for a 60 kg person? (kg)",
+      "answer": "10 kg",
       "fact": "The Moon's gravity is about one sixth of Earth's."
     },
     {
@@ -36,14 +36,14 @@
     {
       "category": "Physics",
       "text": "How many times denser than water is gold?",
-      "answer": "About 19.3 times",
+      "answer": "19.3 times",
       "fact": "A gold cube 10 cm on each side weighs about 19 kg."
     },
     {
       "category": "Space",
-      "text": "How long does sunlight take to reach Earth? (minutes)",
-      "answer": "About 8 minutes",
-      "fact": "It travels about 150 million km."
+      "text": "Approximately how long does sunlight take to reach Earth? (minutes)",
+      "answer": "8 minutes",
+      "fact": "About 150 million km, covered in 8 minutes and 20 seconds."
     },
     {
       "category": "Space",
@@ -53,38 +53,38 @@
     },
     {
       "category": "Space",
-      "text": "What is the average surface temperature on Venus? (°C)",
-      "answer": "About 465 °C",
+      "text": "Approximately what is the average surface temperature on Venus? (°C)",
+      "answer": "465 °C",
       "fact": "It is hotter than Mercury, because of the greenhouse effect."
     },
     {
       "category": "Space",
-      "text": "How fast does the International Space Station orbit Earth? (km/h)",
-      "answer": "About 28,000 km/h",
+      "text": "Approximately how fast does the International Space Station orbit Earth? (km/h)",
+      "answer": "28,000 km/h",
       "fact": "It goes all the way around Earth every 90 minutes."
     },
     {
       "category": "Space",
-      "text": "What is the temperature at the Sun's core? (millions of °C)",
-      "answer": "About 15 million °C",
+      "text": "Approximately what is the temperature at the Sun's core? (millions of °C)",
+      "answer": "15 million °C",
       "fact": "At the surface, it is close to 5,500 °C."
     },
     {
       "category": "Human body",
-      "text": "How many times does the heart beat per day, on average?",
-      "answer": "About 100,000",
+      "text": "Approximately how many times does the heart beat per day?",
+      "answer": "100,000",
       "fact": "Over a lifetime, that is more than 2.5 billion beats."
     },
     {
       "category": "Human body",
-      "text": "How many liters of air does an adult breathe per day?",
-      "answer": "About 11,000 liters",
+      "text": "Approximately how many liters of air does an adult breathe per day?",
+      "answer": "11,000 liters",
       "fact": "At rest, each breath takes in about half a liter of air."
     },
     {
       "category": "Human body",
-      "text": "How fast are the fastest nerve impulses? (m/s)",
-      "answer": "About 120 m/s",
+      "text": "Approximately how fast are the fastest nerve impulses? (m/s)",
+      "answer": "120 m/s",
       "fact": "That is more than 400 km/h."
     }
   ]

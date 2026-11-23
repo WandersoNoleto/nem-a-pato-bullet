@@ -24,7 +24,7 @@
     {
       "category": "Pessoas",
       "text": "Qual a maior velocidade já atingida por seres humanos? (km/h)",
-      "answer": "Cerca de 39.900 km/h",
+      "answer": "39.897 km/h",
       "fact": "Foi a tripulação da Apollo 10, na volta da Lua, em 1969."
     },
     {
@@ -41,8 +41,8 @@
     },
     {
       "category": "Natureza",
-      "text": "Qual a altura de Hyperion, a árvore mais alta do mundo? (m)",
-      "answer": "Cerca de 116 m",
+      "text": "Aproximadamente qual a altura de Hyperion, a árvore mais alta do mundo? (m)",
+      "answer": "116 m",
       "fact": "É uma sequoia, na Califórnia. A localização exata é mantida em segredo."
     },
     {
@@ -60,31 +60,31 @@
     {
       "category": "Velocidade e altura",
       "text": "Qual o recorde de velocidade de um carro em terra? (km/h)",
-      "answer": "Cerca de 1.228 km/h",
+      "answer": "1.228 km/h",
       "fact": "O Thrust SSC quebrou a barreira do som em 1997."
     },
     {
       "category": "Velocidade e altura",
-      "text": "De que altitude foi feito o salto de paraquedas mais alto? (km)",
-      "answer": "Cerca de 41 km",
+      "text": "De que altitude foi feito o salto de paraquedas mais alto? (m)",
+      "answer": "41.419 m",
       "fact": "Alan Eustace saltou em 2014, superando Felix Baumgartner."
     },
     {
       "category": "Velocidade e altura",
       "text": "Qual a altura da maior onda já surfada? (m)",
-      "answer": "Cerca de 26 m",
+      "answer": "26,21 m",
       "fact": "O alemão Sebastian Steudtner surfou a onda em Nazaré, Portugal, em 2020."
     },
     {
       "category": "Velocidade e altura",
-      "text": "A que altitude fica La Rinconada, a cidade mais alta do mundo? (m)",
-      "answer": "Cerca de 5.100 m",
+      "text": "Aproximadamente a que altitude fica La Rinconada, a cidade mais alta do mundo? (m)",
+      "answer": "5.100 m",
       "fact": "Fica no Peru e cresceu em volta de minas de ouro."
     },
     {
       "category": "Velocidade e altura",
-      "text": "Qual a profundidade do buraco mais fundo já cavado? (km)",
-      "answer": "Cerca de 12,2 km",
+      "text": "Qual a profundidade do buraco mais fundo já cavado? (m)",
+      "answer": "12.262 m",
       "fact": "É o Poço Superprofundo de Kola, na Rússia."
     }
   ]

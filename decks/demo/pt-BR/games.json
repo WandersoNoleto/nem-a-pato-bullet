@@ -23,14 +23,14 @@
     },
     {
       "category": "Clássicos",
-      "text": "Em quanto tempo está o recorde de speedrun de Super Mario Bros.? (minutos)",
-      "answer": "Menos de 5 minutos",
-      "fact": "O recorde fica em torno de 4 minutos e 54 segundos e é disputado em milésimos."
+      "text": "Quantas fases tem o Super Mario Bros. original?",
+      "answer": "32 fases",
+      "fact": "São 8 mundos com 4 fases cada. Os canos de atalho deixam pular mundos inteiros."
     },
     {
       "category": "Consoles",
-      "text": "Quantas unidades do PlayStation 2 foram vendidas no mundo? (milhões)",
-      "answer": "Mais de 155 milhões",
+      "text": "Aproximadamente quantas unidades do PlayStation 2 foram vendidas no mundo? (milhões)",
+      "answer": "155 milhões",
       "fact": "É o console de mesa mais vendido da história."
     },
     {
@@ -41,8 +41,8 @@
     },
     {
       "category": "Consoles",
-      "text": "Qual a velocidade do processador do Super Nintendo? (MHz)",
-      "answer": "Cerca de 3,58 MHz",
+      "text": "Qual a velocidade máxima do processador do Super Nintendo? (MHz)",
+      "answer": "3,58 MHz",
       "fact": "Um celular atual é milhares de vezes mais rápido."
     },
     {
@@ -65,8 +65,8 @@
     },
     {
       "category": "Indústria",
-      "text": "Quantas cópias o Minecraft já vendeu? (milhões)",
-      "answer": "Mais de 300 milhões",
+      "text": "Aproximadamente quantas cópias o Minecraft tinha vendido em 2023? (milhões)",
+      "answer": "300 milhões",
       "fact": "É o jogo mais vendido da história."
     },
     {

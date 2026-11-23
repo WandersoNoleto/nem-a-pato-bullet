@@ -29,14 +29,14 @@
     },
     {
       "category": "Box office",
-      "text": "What is the worldwide box office of Avatar, from 2009? (billions of dollars)",
-      "answer": "About 2.9 billion",
+      "text": "Approximately what is the worldwide box office of Avatar, from 2009? (billions of dollars)",
+      "answer": "2.9 billion",
       "fact": "It is the highest-grossing film of all time."
     },
     {
       "category": "Box office",
-      "text": "How much did Titanic cost to make? (millions of dollars)",
-      "answer": "About 200 million",
+      "text": "Approximately how much did Titanic cost to make? (millions of dollars)",
+      "answer": "200 million",
       "fact": "It was the most expensive film ever made at the time."
     },
     {
@@ -53,9 +53,9 @@
     },
     {
       "category": "Behind the scenes",
-      "text": "How long is Gone with the Wind? (minutes)",
-      "answer": "About 238 minutes",
-      "fact": "Almost four hours, with an intermission in the middle."
+      "text": "Approximately how long is Gone with the Wind, with overture and intermission? (minutes)",
+      "answer": "238 minutes",
+      "fact": "Almost four hours of film."
     },
     {
       "category": "Behind the scenes",

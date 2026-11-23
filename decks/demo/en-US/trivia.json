@@ -11,26 +11,26 @@
     },
     {
       "category": "Animals",
-      "text": "How many hours a day does a koala sleep?",
-      "answer": "Up to 22 hours",
+      "text": "Up to how many hours a day can a koala sleep?",
+      "answer": "22 hours",
       "fact": "Its eucalyptus diet gives little energy, so it saves it."
     },
     {
       "category": "Animals",
-      "text": "How many times per second does a hummingbird beat its wings?",
-      "answer": "About 50 to 80",
-      "fact": "In display flights, it can go over 200 beats per second."
+      "text": "Approximately how much does the bee hummingbird, the smallest bird in the world, weigh? (g)",
+      "answer": "2 g",
+      "fact": "It lives in Cuba and is about 5 cm long."
     },
     {
       "category": "Animals",
-      "text": "How much does an elephant eat per day? (kg)",
-      "answer": "Up to 150 kg",
+      "text": "Up to how much food can an elephant eat per day? (kg)",
+      "answer": "150 kg",
       "fact": "It spends up to 16 hours a day eating."
     },
     {
       "category": "World",
-      "text": "How many languages are spoken in the world today?",
-      "answer": "About 7,000",
+      "text": "Approximately how many languages are spoken in the world today?",
+      "answer": "7,000",
       "fact": "Almost half of them are at risk of disappearing."
     },
     {
@@ -41,14 +41,14 @@
     },
     {
       "category": "World",
-      "text": "How tall is the Leaning Tower of Pisa? (m)",
-      "answer": "About 56 m",
+      "text": "Approximately how tall is the Leaning Tower of Pisa? (m)",
+      "answer": "56 m",
       "fact": "It started to lean while it was still being built, in the 12th century."
     },
     {
       "category": "World",
-      "text": "How long is the Great Wall of China, counting all its sections? (km)",
-      "answer": "About 21,000 km",
+      "text": "How long is the Great Wall of China, according to the official 2012 survey? (km)",
+      "answer": "21,196 km",
       "fact": "Contrary to popular belief, it is not visible from space with the naked eye."
     },
     {
@@ -59,26 +59,26 @@
     },
     {
       "category": "Technology",
-      "text": "How many emojis are there in the Unicode standard?",
-      "answer": "Over 3,700",
-      "fact": "The first set of emojis was created in Japan, in 1999."
+      "text": "How many emojis were in the original set Shigetaka Kurita created in 1999?",
+      "answer": "176 emojis",
+      "fact": "The set is part of the collection of MoMA, in New York."
     },
     {
       "category": "Food",
-      "text": "How many seeds does a strawberry have, on average?",
-      "answer": "About 200",
+      "text": "Approximately how many seeds does a strawberry have?",
+      "answer": "200",
       "fact": "The little dots on the outside are actually the strawberry's true fruits."
     },
     {
       "category": "Food",
-      "text": "How many liters of sap does it take to make 1 liter of maple syrup?",
-      "answer": "About 40 liters",
+      "text": "Approximately how many liters of sap does it take to make 1 liter of maple syrup?",
+      "answer": "40 liters",
       "fact": "The sap is boiled down until only the syrup is left."
     },
     {
       "category": "Body",
-      "text": "How long does it take hair to grow 1 cm? (days)",
-      "answer": "About 30 days",
+      "text": "Approximately how long does it take hair to grow 1 cm? (days)",
+      "answer": "30 days",
       "fact": "Each hair grows for 2 to 7 years before it falls out."
     }
   ]

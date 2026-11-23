@@ -11,26 +11,26 @@
     },
     {
       "category": "Animais",
-      "text": "Quantas horas por dia um coala dorme?",
-      "answer": "Até 22 horas",
+      "text": "Até quantas horas por dia um coala pode dormir?",
+      "answer": "22 horas",
       "fact": "A dieta de eucalipto dá pouca energia, então ele economiza."
     },
     {
       "category": "Animais",
-      "text": "Quantas vezes por segundo um beija-flor bate as asas?",
-      "answer": "Cerca de 50 a 80",
-      "fact": "Em voos de exibição, pode passar de 200 batidas por segundo."
+      "text": "Aproximadamente quanto pesa o beija-flor-abelha, o menor pássaro do mundo? (g)",
+      "answer": "2 g",
+      "fact": "Ele vive em Cuba e mede cerca de 5 cm."
     },
     {
       "category": "Animais",
-      "text": "Quanto um elefante come por dia? (kg)",
-      "answer": "Até 150 kg",
+      "text": "Até quantos quilos de comida um elefante pode comer por dia?",
+      "answer": "150 kg",
       "fact": "Ele passa até 16 horas por dia comendo."
     },
     {
       "category": "Mundo",
-      "text": "Quantas línguas são faladas no mundo hoje?",
-      "answer": "Cerca de 7.000",
+      "text": "Aproximadamente quantas línguas são faladas no mundo hoje?",
+      "answer": "7.000",
       "fact": "Quase metade delas está ameaçada de desaparecer."
     },
     {
@@ -41,14 +41,14 @@
     },
     {
       "category": "Mundo",
-      "text": "Qual a altura da Torre de Pisa? (m)",
-      "answer": "Cerca de 56 m",
+      "text": "Aproximadamente qual a altura da Torre de Pisa? (m)",
+      "answer": "56 m",
       "fact": "Ela começou a inclinar ainda durante a construção, no século 12."
     },
     {
       "category": "Mundo",
-      "text": "Qual o comprimento da Grande Muralha da China, somando todos os trechos? (km)",
-      "answer": "Cerca de 21.000 km",
+      "text": "Qual o comprimento da Grande Muralha da China, segundo a medição oficial de 2012? (km)",
+      "answer": "21.196 km",
       "fact": "Ao contrário do que se diz, ela não é visível do espaço a olho nu."
     },
     {
@@ -59,26 +59,26 @@
     },
     {
       "category": "Tecnologia",
-      "text": "Quantos emojis existem no padrão Unicode?",
-      "answer": "Mais de 3.700",
-      "fact": "O primeiro conjunto de emojis foi criado no Japão, em 1999."
+      "text": "Quantos emojis tinha o conjunto original criado por Shigetaka Kurita em 1999?",
+      "answer": "176 emojis",
+      "fact": "Esse conjunto faz parte do acervo do MoMA, em Nova York."
     },
     {
       "category": "Comida",
-      "text": "Quantas sementes tem um morango, em média?",
-      "answer": "Cerca de 200",
+      "text": "Aproximadamente quantas sementes tem um morango?",
+      "answer": "200",
       "fact": "Os pontinhos de fora são, na verdade, os frutos verdadeiros do morango."
     },
     {
       "category": "Comida",
-      "text": "Quantos litros de seiva são necessários para fazer 1 litro de xarope de bordo?",
-      "answer": "Cerca de 40 litros",
+      "text": "Aproximadamente quantos litros de seiva são necessários para fazer 1 litro de xarope de bordo?",
+      "answer": "40 litros",
       "fact": "A seiva é fervida até sobrar só o xarope."
     },
     {
       "category": "Corpo",
-      "text": "Quanto tempo leva para o cabelo crescer 1 cm? (dias)",
-      "answer": "Cerca de 30 dias",
+      "text": "Aproximadamente quanto tempo leva para o cabelo crescer 1 cm? (dias)",
+      "answer": "30 dias",
       "fact": "Cada fio cresce por 2 a 7 anos antes de cair."
     }
   ]

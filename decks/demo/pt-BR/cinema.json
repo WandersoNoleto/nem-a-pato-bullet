@@ -29,14 +29,14 @@
     },
     {
       "category": "Bilheteria",
-      "text": "Qual a bilheteria mundial de Avatar, de 2009? (bilhões de dólares)",
-      "answer": "Cerca de 2,9 bilhões",
+      "text": "Aproximadamente qual a bilheteria mundial de Avatar, de 2009? (bilhões de dólares)",
+      "answer": "2,9 bilhões",
       "fact": "É a maior bilheteria da história do cinema."
     },
     {
       "category": "Bilheteria",
-      "text": "Quanto custou para produzir Titanic? (milhões de dólares)",
-      "answer": "Cerca de 200 milhões",
+      "text": "Aproximadamente quanto custou para produzir Titanic? (milhões de dólares)",
+      "answer": "200 milhões",
       "fact": "Foi o filme mais caro já feito até então."
     },
     {
@@ -53,9 +53,9 @@
     },
     {
       "category": "Bastidores",
-      "text": "Quanto tempo dura ...E o Vento Levou? (minutos)",
-      "answer": "Cerca de 238 minutos",
-      "fact": "São quase quatro horas, com intervalo no meio."
+      "text": "Aproximadamente quanto tempo dura ...E o Vento Levou, com abertura e intervalo? (minutos)",
+      "answer": "238 minutos",
+      "fact": "São quase quatro horas de filme."
     },
     {
       "category": "Bastidores",

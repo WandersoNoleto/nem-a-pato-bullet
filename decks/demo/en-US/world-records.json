@@ -24,7 +24,7 @@
     {
       "category": "People",
       "text": "What is the highest speed ever reached by humans? (km/h)",
-      "answer": "About 39,900 km/h",
+      "answer": "39,897 km/h",
       "fact": "It was the Apollo 10 crew, on the way back from the Moon, in 1969."
     },
     {
@@ -41,8 +41,8 @@
     },
     {
       "category": "Nature",
-      "text": "How tall is Hyperion, the tallest tree in the world? (m)",
-      "answer": "About 116 m",
+      "text": "Approximately how tall is Hyperion, the tallest tree in the world? (m)",
+      "answer": "116 m",
       "fact": "It is a redwood in California. Its exact location is kept secret."
     },
     {
@@ -60,31 +60,31 @@
     {
       "category": "Speed and height",
       "text": "What is the land speed record for a car? (km/h)",
-      "answer": "About 1,228 km/h",
+      "answer": "1,228 km/h",
       "fact": "Thrust SSC broke the sound barrier in 1997."
     },
     {
       "category": "Speed and height",
-      "text": "From what altitude was the highest parachute jump made? (km)",
-      "answer": "About 41 km",
+      "text": "From what altitude was the highest parachute jump made? (m)",
+      "answer": "41,419 m",
       "fact": "Alan Eustace jumped in 2014, beating Felix Baumgartner."
     },
     {
       "category": "Speed and height",
       "text": "How tall is the biggest wave ever surfed? (m)",
-      "answer": "About 26 m",
+      "answer": "26.21 m",
       "fact": "Germany's Sebastian Steudtner surfed it in Nazaré, Portugal, in 2020."
     },
     {
       "category": "Speed and height",
-      "text": "At what altitude is La Rinconada, the highest city in the world? (m)",
-      "answer": "About 5,100 m",
+      "text": "Approximately at what altitude is La Rinconada, the highest city in the world? (m)",
+      "answer": "5,100 m",
       "fact": "It is in Peru and grew around gold mines."
     },
     {
       "category": "Speed and height",
-      "text": "How deep is the deepest hole ever dug? (km)",
-      "answer": "About 12.2 km",
+      "text": "How deep is the deepest hole ever dug? (m)",
+      "answer": "12,262 m",
       "fact": "It is the Kola Superdeep Borehole, in Russia."
     }
   ]

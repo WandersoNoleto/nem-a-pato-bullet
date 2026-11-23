@@ -23,14 +23,14 @@
     },
     {
       "category": "Classics",
-      "text": "How fast is the Super Mario Bros. speedrun record? (minutes)",
-      "answer": "Under 5 minutes",
-      "fact": "The record is around 4 minutes 54 seconds and is fought over in milliseconds."
+      "text": "How many levels does the original Super Mario Bros. have?",
+      "answer": "32 levels",
+      "fact": "Eight worlds of four levels each. Warp pipes let you skip whole worlds."
     },
     {
       "category": "Consoles",
-      "text": "How many PlayStation 2 units were sold worldwide? (millions)",
-      "answer": "Over 155 million",
+      "text": "Approximately how many PlayStation 2 units were sold worldwide? (millions)",
+      "answer": "155 million",
       "fact": "It is the best-selling home console in history."
     },
     {
@@ -41,8 +41,8 @@
     },
     {
       "category": "Consoles",
-      "text": "What was the clock speed of the Super Nintendo's processor? (MHz)",
-      "answer": "About 3.58 MHz",
+      "text": "What was the top clock speed of the Super Nintendo's processor? (MHz)",
+      "answer": "3.58 MHz",
       "fact": "A phone today is thousands of times faster."
     },
     {
@@ -65,8 +65,8 @@
     },
     {
       "category": "Industry",
-      "text": "How many copies has Minecraft sold? (millions)",
-      "answer": "Over 300 million",
+      "text": "Approximately how many copies had Minecraft sold by 2023? (millions)",
+      "answer": "300 million",
       "fact": "It is the best-selling video game in history."
     },
     {

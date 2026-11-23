@@ -11,9 +11,9 @@
     },
     {
       "category": "Soccer",
-      "text": "How much does an official soccer ball weigh? (g)",
-      "answer": "Between 410 and 450 g",
-      "fact": "The ball is weighed dry, before the match."
+      "text": "What is the maximum weight of an official soccer ball? (g)",
+      "answer": "450 g",
+      "fact": "The minimum is 410 g, and the ball is weighed dry, before the match."
     },
     {
       "category": "Soccer",
@@ -72,14 +72,14 @@
     {
       "category": "Other sports",
       "text": "What is the maximum weight of a bowling ball? (kg)",
-      "answer": "About 7.26 kg",
+      "answer": "7.26 kg",
       "fact": "The official limit is 16 pounds."
     },
     {
       "category": "Other sports",
-      "text": "How many dimples does a golf ball have?",
-      "answer": "Between 300 and 500",
-      "fact": "The dimples cut air drag and make the ball fly farther."
+      "text": "What is the minimum diameter of a golf ball? (mm)",
+      "answer": "42.67 mm",
+      "fact": "The ball's 300 to 500 dimples cut air drag and make it fly farther."
     },
     {
       "category": "Other sports",
