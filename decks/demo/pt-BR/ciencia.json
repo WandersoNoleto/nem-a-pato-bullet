@@ -1,0 +1,91 @@
+{
+  "name": "Ciência",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#000' stroke-width='1.8'><ellipse cx='12' cy='12' rx='10' ry='4'/><ellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(60 12 12)'/><ellipse cx='12' cy='12' rx='10' ry='4' transform='rotate(120 12 12)'/><circle cx='12' cy='12' r='1.8' fill='#000'/></svg>",
+  "questions": [
+    {
+      "category": "Física",
+      "text": "Qual a temperatura do zero absoluto? (°C)",
+      "answer": "−273,15 °C",
+      "fact": "É a menor temperatura possível. Nada pode ficar mais frio que isso."
+    },
+    {
+      "category": "Física",
+      "text": "Qual a velocidade do som no ar, a 20 °C? (m/s)",
+      "answer": "343 m/s",
+      "fact": "Por isso o trovão chega cerca de 3 segundos depois do relâmpago, a cada quilômetro."
+    },
+    {
+      "category": "Física",
+      "text": "Aproximadamente a que temperatura a água ferve no topo do Everest? (°C)",
+      "answer": "70 °C",
+      "fact": "Com menos pressão do ar, a água ferve mais cedo."
+    },
+    {
+      "category": "Física",
+      "text": "Aproximadamente quanto marcaria na Lua a balança de uma pessoa de 60 kg? (kg)",
+      "answer": "10 kg",
+      "fact": "A gravidade da Lua é cerca de um sexto da gravidade da Terra."
+    },
+    {
+      "category": "Física",
+      "text": "Qual o ponto de fusão do ferro? (°C)",
+      "answer": "1.538 °C",
+      "fact": "O núcleo da Terra é feito principalmente de ferro e níquel."
+    },
+    {
+      "category": "Física",
+      "text": "Quantas vezes o ouro é mais denso que a água?",
+      "answer": "19,3 vezes",
+      "fact": "Um cubo de ouro de 10 cm de lado pesa cerca de 19 kg."
+    },
+    {
+      "category": "Espaço",
+      "text": "Aproximadamente quanto tempo a luz do Sol leva para chegar à Terra? (minutos)",
+      "answer": "8 minutos",
+      "fact": "São cerca de 150 milhões de km, percorridos em 8 minutos e 20 segundos."
+    },
+    {
+      "category": "Espaço",
+      "text": "Quantos dias Marte leva para dar uma volta no Sol?",
+      "answer": "687 dias",
+      "fact": "Um ano marciano dura quase dois anos da Terra."
+    },
+    {
+      "category": "Espaço",
+      "text": "Aproximadamente qual a temperatura média na superfície de Vênus? (°C)",
+      "answer": "465 °C",
+      "fact": "É mais quente que Mercúrio, por causa do efeito estufa."
+    },
+    {
+      "category": "Espaço",
+      "text": "Aproximadamente a que velocidade a Estação Espacial Internacional orbita a Terra? (km/h)",
+      "answer": "28.000 km/h",
+      "fact": "Ela dá uma volta completa na Terra a cada 90 minutos."
+    },
+    {
+      "category": "Espaço",
+      "text": "Aproximadamente qual a temperatura no núcleo do Sol? (milhões de °C)",
+      "answer": "15 milhões °C",
+      "fact": "Na superfície, a temperatura fica perto de 5.500 °C."
+    },
+    {
+      "category": "Corpo humano",
+      "text": "Aproximadamente quantas vezes o coração bate por dia?",
+      "answer": "100 mil",
+      "fact": "Ao longo de uma vida, são mais de 2,5 bilhões de batidas."
+    },
+    {
+      "category": "Corpo humano",
+      "text": "Aproximadamente quantos litros de ar um adulto respira por dia?",
+      "answer": "11 mil litros",
+      "fact": "Em repouso, cada respiração leva cerca de meio litro de ar."
+    },
+    {
+      "category": "Corpo humano",
+      "text": "Aproximadamente qual a velocidade dos impulsos nervosos mais rápidos? (m/s)",
+      "answer": "120 m/s",
+      "fact": "São mais de 400 km/h."
+    }
+  ]
+}

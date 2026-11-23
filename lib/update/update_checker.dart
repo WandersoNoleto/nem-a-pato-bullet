@@ -85,7 +85,7 @@ class UpdateChecker {
 
       final apk = (release['assets'] as List<dynamic>? ?? const [])
           .cast<Map<String, dynamic>>()
-          .where((asset) => (asset['name'] as String? ?? '').endsWith('.apk'))
+          .where((asset) => _isAppApk(asset['name'] as String? ?? ''))
           .firstOrNull;
       if (apk == null) continue;
 
@@ -103,6 +103,11 @@ class UpdateChecker {
     final installed = await _installedVersion();
     return newest.version.code > installed.code ? newest : null;
   }
+
+  /// The regular app's APK. Releases also carry demo APKs, which are other
+  /// apps and must never replace this one.
+  static bool _isAppApk(String name) =>
+      name.endsWith('.apk') && !name.toLowerCase().contains('demo');
 
   static Future<InstalledVersion> _readInstalledVersion() async {
     final info = await PackageInfo.fromPlatform();

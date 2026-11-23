@@ -1,0 +1,85 @@
+{
+  "name": "Trivia",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 4a4 4 0 0 0-4 4h2.5A1.5 1.5 0 1 1 12 11.5a1.2 1.2 0 0 0-1.2 1.2V15h2.4v-1.4A4 4 0 0 0 12 6zm0 10.5a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z'/></svg>",
+  "questions": [
+    {
+      "category": "Animals",
+      "text": "How many eyes does a bee have?",
+      "answer": "5 eyes",
+      "fact": "Two large eyes and three small ones on top of the head."
+    },
+    {
+      "category": "Animals",
+      "text": "Up to how many hours a day can a koala sleep?",
+      "answer": "22 hours",
+      "fact": "Its eucalyptus diet gives little energy, so it saves it."
+    },
+    {
+      "category": "Animals",
+      "text": "Approximately how much does the bee hummingbird, the smallest bird in the world, weigh? (g)",
+      "answer": "2 g",
+      "fact": "It lives in Cuba and is about 5 cm long."
+    },
+    {
+      "category": "Animals",
+      "text": "Up to how much food can an elephant eat per day? (kg)",
+      "answer": "150 kg",
+      "fact": "It spends up to 16 hours a day eating."
+    },
+    {
+      "category": "World",
+      "text": "Approximately how many languages are spoken in the world today?",
+      "answer": "7,000",
+      "fact": "Almost half of them are at risk of disappearing."
+    },
+    {
+      "category": "World",
+      "text": "How many rooms does Buckingham Palace have?",
+      "answer": "775 rooms",
+      "fact": "Among them are 78 bathrooms."
+    },
+    {
+      "category": "World",
+      "text": "Approximately how tall is the Leaning Tower of Pisa? (m)",
+      "answer": "56 m",
+      "fact": "It started to lean while it was still being built, in the 12th century."
+    },
+    {
+      "category": "World",
+      "text": "How long is the Great Wall of China, according to the official 2012 survey? (km)",
+      "answer": "21,196 km",
+      "fact": "Contrary to popular belief, it is not visible from space with the naked eye."
+    },
+    {
+      "category": "Technology",
+      "text": "In what year was the first email sent?",
+      "answer": "1971",
+      "fact": "Ray Tomlinson picked the @ to separate the user from the computer."
+    },
+    {
+      "category": "Technology",
+      "text": "How many emojis were in the original set Shigetaka Kurita created in 1999?",
+      "answer": "176 emojis",
+      "fact": "The set is part of the collection of MoMA, in New York."
+    },
+    {
+      "category": "Food",
+      "text": "Approximately how many seeds does a strawberry have?",
+      "answer": "200",
+      "fact": "The little dots on the outside are actually the strawberry's true fruits."
+    },
+    {
+      "category": "Food",
+      "text": "Approximately how many liters of sap does it take to make 1 liter of maple syrup?",
+      "answer": "40 liters",
+      "fact": "The sap is boiled down until only the syrup is left."
+    },
+    {
+      "category": "Body",
+      "text": "Approximately how long does it take hair to grow 1 cm? (days)",
+      "answer": "30 days",
+      "fact": "Each hair grows for 2 to 7 years before it falls out."
+    }
+  ]
+}

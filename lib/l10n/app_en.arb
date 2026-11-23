@@ -105,5 +105,8 @@
   "returnCardsHint": "Cards from other decks and categories stay out",
   "themeSection": "THEME",
   "themeLight": "Light",
-  "themeDark": "Dark"
+  "themeDark": "Dark",
+  "soundSection": "SOUND",
+  "soundOn": "On",
+  "soundOff": "Off"
 }

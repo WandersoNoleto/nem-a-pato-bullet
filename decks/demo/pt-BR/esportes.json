@@ -1,0 +1,91 @@
+{
+  "name": "Esportes",
+  "language": "pt-BR",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#000' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2v20M2 12h20M5 5c3 3 3 11 0 14M19 5c-3 3-3 11 0 14'/></svg>",
+  "questions": [
+    {
+      "category": "Futebol",
+      "text": "Qual a altura de um gol de futebol? (m)",
+      "answer": "2,44 m",
+      "fact": "A largura é de 7,32 m. As medidas vêm de 8 pés por 8 jardas."
+    },
+    {
+      "category": "Futebol",
+      "text": "Qual o peso máximo de uma bola oficial de futebol? (g)",
+      "answer": "450 g",
+      "fact": "O mínimo é 410 g, e a bola é pesada seca, antes do jogo."
+    },
+    {
+      "category": "Futebol",
+      "text": "A que distância do gol fica a marca do pênalti? (m)",
+      "answer": "11 m",
+      "fact": "A regra do pênalti foi criada em 1891, na Irlanda."
+    },
+    {
+      "category": "Futebol",
+      "text": "Qual o comprimento máximo de um campo em jogos internacionais? (m)",
+      "answer": "110 m",
+      "fact": "O mínimo é de 100 m. A largura vai de 64 a 75 m."
+    },
+    {
+      "category": "Atletismo",
+      "text": "Qual o recorde mundial de Usain Bolt nos 100 metros? (s)",
+      "answer": "9,58 s",
+      "fact": "Ele fez a marca em Berlim, em 2009, chegando a cerca de 44 km/h."
+    },
+    {
+      "category": "Atletismo",
+      "text": "Qual o recorde mundial do salto em altura masculino? (m)",
+      "answer": "2,45 m",
+      "fact": "O cubano Javier Sotomayor fez a marca em 1993, e ela nunca foi superada."
+    },
+    {
+      "category": "Atletismo",
+      "text": "Quantas medalhas olímpicas Michael Phelps ganhou?",
+      "answer": "28 medalhas",
+      "fact": "Foram 23 de ouro, um recorde absoluto nos Jogos."
+    },
+    {
+      "category": "Quadra",
+      "text": "Quantos minutos dura uma partida da NBA, sem prorrogação?",
+      "answer": "48 minutos",
+      "fact": "São quatro quartos de 12 minutos. Nas regras da FIBA, são 40 minutos."
+    },
+    {
+      "category": "Quadra",
+      "text": "Qual a altura da rede no vôlei masculino? (m)",
+      "answer": "2,43 m",
+      "fact": "No vôlei feminino, a rede fica a 2,24 m."
+    },
+    {
+      "category": "Quadra",
+      "text": "Quanto dura um round no boxe profissional masculino? (minutos)",
+      "answer": "3 minutos",
+      "fact": "Entre os rounds, os lutadores descansam 1 minuto."
+    },
+    {
+      "category": "Outros esportes",
+      "text": "Quantos jogadores cada time tem em campo no rúgbi union?",
+      "answer": "15 jogadores",
+      "fact": "Na versão de sete, jogada nas Olimpíadas, são 7 de cada lado."
+    },
+    {
+      "category": "Outros esportes",
+      "text": "Qual o peso máximo de uma bola de boliche? (kg)",
+      "answer": "7,26 kg",
+      "fact": "O limite oficial é de 16 libras."
+    },
+    {
+      "category": "Outros esportes",
+      "text": "Qual o diâmetro mínimo de uma bola de golfe? (mm)",
+      "answer": "42,67 mm",
+      "fact": "As 300 a 500 covinhas da bola reduzem a resistência do ar e fazem ela ir mais longe."
+    },
+    {
+      "category": "Outros esportes",
+      "text": "Quantas etapas tem o Tour de France?",
+      "answer": "21 etapas",
+      "fact": "São cerca de 3.500 km pedalados em três semanas."
+    }
+  ]
+}

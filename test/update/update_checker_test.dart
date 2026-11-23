@@ -90,6 +90,47 @@ void main() {
       expect(update!.tag, 'v1.0.3');
     });
 
+    test('picks the app APK, never a demo one', () async {
+      final update = await _checker([
+        {
+          'tag_name': 'v1.0.6',
+          'draft': false,
+          'body': '',
+          'assets': [
+            {
+              'name': 'nem-a-pato-bullet-demo-pt-BR-1.0.6.apk',
+              'browser_download_url': 'https://example.com/demo-pt.apk',
+            },
+            {
+              'name': 'nem-a-pato-bullet-1.0.6.apk',
+              'browser_download_url': 'https://example.com/app.apk',
+            },
+          ],
+        },
+      ]).check();
+
+      expect(update!.apkUrl.toString(), 'https://example.com/app.apk');
+    });
+
+    test('a release with only demo APKs is skipped', () async {
+      final update = await _checker([
+        {
+          'tag_name': 'v1.0.7',
+          'draft': false,
+          'body': '',
+          'assets': [
+            {
+              'name': 'nem-a-pato-bullet-demo-en-US-1.0.7.apk',
+              'browser_download_url': 'https://example.com/demo-en.apk',
+            },
+          ],
+        },
+        _release('v1.0.3'),
+      ]).check();
+
+      expect(update!.tag, 'v1.0.3');
+    });
+
     test('throws when GitHub answers with an error', () async {
       expect(
         _checker([], status: 403).check(),

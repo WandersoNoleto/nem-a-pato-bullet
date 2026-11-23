@@ -260,5 +260,8 @@
   "returnCardsHint": "Cartas de outros baralhos e categorias continuam fora",
   "themeSection": "TEMA",
   "themeLight": "Claro",
-  "themeDark": "Escuro"
+  "themeDark": "Escuro",
+  "soundSection": "SOM",
+  "soundOn": "Ligado",
+  "soundOff": "Desligado"
 }

@@ -1,0 +1,91 @@
+{
+  "name": "Sports",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='#000' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2v20M2 12h20M5 5c3 3 3 11 0 14M19 5c-3 3-3 11 0 14'/></svg>",
+  "questions": [
+    {
+      "category": "Soccer",
+      "text": "How tall is a soccer goal? (m)",
+      "answer": "2.44 m",
+      "fact": "It is 7.32 m wide. The sizes come from 8 feet by 8 yards."
+    },
+    {
+      "category": "Soccer",
+      "text": "What is the maximum weight of an official soccer ball? (g)",
+      "answer": "450 g",
+      "fact": "The minimum is 410 g, and the ball is weighed dry, before the match."
+    },
+    {
+      "category": "Soccer",
+      "text": "How far from the goal is the penalty spot? (m)",
+      "answer": "11 m",
+      "fact": "The penalty kick was created in 1891, in Ireland."
+    },
+    {
+      "category": "Soccer",
+      "text": "What is the maximum length of a field in international matches? (m)",
+      "answer": "110 m",
+      "fact": "The minimum is 100 m. The width goes from 64 to 75 m."
+    },
+    {
+      "category": "Track and field",
+      "text": "What is Usain Bolt's 100 meters world record? (s)",
+      "answer": "9.58 s",
+      "fact": "He set it in Berlin in 2009, reaching about 44 km/h."
+    },
+    {
+      "category": "Track and field",
+      "text": "What is the men's high jump world record? (m)",
+      "answer": "2.45 m",
+      "fact": "Cuba's Javier Sotomayor set it in 1993, and it has never been beaten."
+    },
+    {
+      "category": "Track and field",
+      "text": "How many Olympic medals did Michael Phelps win?",
+      "answer": "28 medals",
+      "fact": "23 of them were gold, an all-time Olympic record."
+    },
+    {
+      "category": "Court",
+      "text": "How many minutes is an NBA game, without overtime?",
+      "answer": "48 minutes",
+      "fact": "Four quarters of 12 minutes. Under FIBA rules, games last 40 minutes."
+    },
+    {
+      "category": "Court",
+      "text": "How high is the net in men's volleyball? (m)",
+      "answer": "2.43 m",
+      "fact": "In women's volleyball, the net is 2.24 m high."
+    },
+    {
+      "category": "Court",
+      "text": "How long is a round in men's professional boxing? (minutes)",
+      "answer": "3 minutes",
+      "fact": "Fighters rest for 1 minute between rounds."
+    },
+    {
+      "category": "Other sports",
+      "text": "How many players does each team have on the field in rugby union?",
+      "answer": "15 players",
+      "fact": "In rugby sevens, played at the Olympics, there are 7 per side."
+    },
+    {
+      "category": "Other sports",
+      "text": "What is the maximum weight of a bowling ball? (kg)",
+      "answer": "7.26 kg",
+      "fact": "The official limit is 16 pounds."
+    },
+    {
+      "category": "Other sports",
+      "text": "What is the minimum diameter of a golf ball? (mm)",
+      "answer": "42.67 mm",
+      "fact": "The ball's 300 to 500 dimples cut air drag and make it fly farther."
+    },
+    {
+      "category": "Other sports",
+      "text": "How many stages does the Tour de France have?",
+      "answer": "21 stages",
+      "fact": "About 3,500 km ridden over three weeks."
+    }
+  ]
+}

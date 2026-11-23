@@ -4,6 +4,7 @@ import '../../domain/question.dart';
 import '../../l10n/l10n.dart';
 import '../../state/game_controller.dart';
 import '../../state/seen_questions.dart';
+import '../../state/sound_controller.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../theme/table_theme.dart';
@@ -19,6 +20,7 @@ class GameScreen extends StatefulWidget {
     required this.questions,
     required this.seen,
     this.rounds,
+    this.sound,
   });
 
   /// The questions the game draws from, already filtered by the setup.
@@ -27,6 +29,9 @@ class GameScreen extends StatefulWidget {
 
   /// Null means infinite.
   final int? rounds;
+
+  /// Quacks when the card is revealed; null keeps the game silent.
+  final SoundController? sound;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -43,6 +48,11 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     super.initState();
     _controller.start();
+  }
+
+  void _reveal() {
+    _controller.reveal();
+    widget.sound?.quack();
   }
 
   @override
@@ -123,7 +133,7 @@ class _GameScreenState extends State<GameScreen> {
             textColor: theme.onAction,
             tilt: 0,
             expand: true,
-            onPressed: _controller.reveal,
+            onPressed: _reveal,
           ),
         ],
         context.l10n.revealHint,

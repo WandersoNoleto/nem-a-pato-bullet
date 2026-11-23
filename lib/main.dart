@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'app_dependencies.dart';
+import 'audio/quack_sound.dart';
 import 'data/all_decks.dart';
 import 'data/deck_files.dart';
 import 'data/delete_deck.dart';
@@ -13,6 +14,7 @@ import 'domain/deck.dart';
 import 'l10n/l10n.dart';
 import 'state/language_controller.dart';
 import 'state/seen_questions.dart';
+import 'state/sound_controller.dart';
 import 'state/theme_controller.dart';
 import 'update/app_updates.dart';
 import 'update/update_checker.dart';
@@ -21,6 +23,11 @@ import 'update/update_installer.dart';
 const _languageKey = 'language';
 const _seenKey = 'seen_questions';
 const _themeKey = 'theme';
+const _soundKey = 'sound';
+
+/// Set by tool/build_demo.sh: the demo's language (`pt` or `en`). Empty in
+/// the regular app.
+const _demoLanguage = String.fromEnvironment('DEMO_LANGUAGE');
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +41,8 @@ Future<void> main() async {
           (locale) => locale.languageCode == savedLanguage,
         )
         ? savedLanguage!
+        : _demoLanguage.isNotEmpty
+        ? _demoLanguage
         : LanguageController.defaultCode,
     save: (code) => preferences.setString(_languageKey, code),
   );
@@ -65,14 +74,24 @@ Future<void> main() async {
         language: language,
         theme: theme,
         seen: seen,
-        updates: AppUpdates(
-          checker: UpdateChecker(),
-          installer: UpdateInstaller(),
-          // Debug builds take their version from pubspec.yaml and are often
-          // behind the latest release, so the prompt would show on every
-          // `flutter run`.
-          checkOnStartup: !kDebugMode,
+        sound: SoundController(
+          enabled:
+              preferences.getBool(_soundKey) ?? SoundController.defaultEnabled,
+          save: (enabled) => preferences.setBool(_soundKey, enabled),
+          playQuack: QuackSound().play,
         ),
+        // Demos are separate apps: the releases only carry the regular app's
+        // updates.
+        updates: _demoLanguage.isNotEmpty
+            ? null
+            : AppUpdates(
+                checker: UpdateChecker(),
+                installer: UpdateInstaller(),
+                // Debug builds take their version from pubspec.yaml and are
+                // often behind the latest release, so the prompt would show
+                // on every `flutter run`.
+                checkOnStartup: !kDebugMode,
+              ),
       ),
     ),
   );

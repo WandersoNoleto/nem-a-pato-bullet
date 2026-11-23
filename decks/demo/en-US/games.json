@@ -1,0 +1,91 @@
+{
+  "name": "Games",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M7 6h10a5 5 0 0 1 4.9 6l-.9 4.5a2.5 2.5 0 0 1-4.3 1.2L14.5 15h-5l-2.2 2.7A2.5 2.5 0 0 1 3 16.5L2.1 12A5 5 0 0 1 7 6zm0 3v1.5H5.5v1.5H7v1.5h1.5V12H10v-1.5H8.5V9zm9 .5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm2 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/></svg>",
+  "questions": [
+    {
+      "category": "Classics",
+      "text": "What is the highest possible score in the original Pac-Man?",
+      "answer": "3,333,360 points",
+      "fact": "Billy Mitchell played the first perfect game in 1999, after almost six hours."
+    },
+    {
+      "category": "Classics",
+      "text": "In what year was Tetris created?",
+      "answer": "1984",
+      "fact": "Alexey Pajitnov made it in Moscow, on a Soviet computer that could only show text."
+    },
+    {
+      "category": "Classics",
+      "text": "How old was Shigeru Miyamoto when Donkey Kong came out?",
+      "answer": "28 years",
+      "fact": "Donkey Kong was Mario's debut, back when he was called Jumpman."
+    },
+    {
+      "category": "Classics",
+      "text": "How many levels does the original Super Mario Bros. have?",
+      "answer": "32 levels",
+      "fact": "Eight worlds of four levels each. Warp pipes let you skip whole worlds."
+    },
+    {
+      "category": "Consoles",
+      "text": "Approximately how many PlayStation 2 units were sold worldwide? (millions)",
+      "answer": "155 million",
+      "fact": "It is the best-selling home console in history."
+    },
+    {
+      "category": "Consoles",
+      "text": "How many shades could the original Game Boy screen show?",
+      "answer": "4 shades",
+      "fact": "Four greenish shades, on a screen with no backlight."
+    },
+    {
+      "category": "Consoles",
+      "text": "What was the top clock speed of the Super Nintendo's processor? (MHz)",
+      "answer": "3.58 MHz",
+      "fact": "A phone today is thousands of times faster."
+    },
+    {
+      "category": "Consoles",
+      "text": "How many action buttons did the Atari 2600 controller have?",
+      "answer": "1 button",
+      "fact": "Everything else was done with the joystick, which moved in eight directions."
+    },
+    {
+      "category": "Industry",
+      "text": "In what year was Nintendo founded?",
+      "answer": "1889",
+      "fact": "It started out making Japanese playing cards called hanafuda."
+    },
+    {
+      "category": "Industry",
+      "text": "How many years did Duke Nukem Forever take from announcement to release?",
+      "answer": "14 years",
+      "fact": "It was announced in 1997 and only reached stores in 2011."
+    },
+    {
+      "category": "Industry",
+      "text": "Approximately how many copies had Minecraft sold by 2023? (millions)",
+      "answer": "300 million",
+      "fact": "It is the best-selling video game in history."
+    },
+    {
+      "category": "Online games",
+      "text": "How many players drop onto the island in a standard Fortnite Battle Royale match?",
+      "answer": "100 players",
+      "fact": "The last player or team standing wins."
+    },
+    {
+      "category": "Online games",
+      "text": "How many blocks tall is a Minecraft world since version 1.18?",
+      "answer": "384 blocks",
+      "fact": "The world goes from layer -64 up to 319."
+    },
+    {
+      "category": "Online games",
+      "text": "In what year was World of Warcraft released?",
+      "answer": "2004",
+      "fact": "It peaked at more than 12 million subscribers at once, in 2010."
+    }
+  ]
+}

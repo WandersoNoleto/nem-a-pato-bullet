@@ -733,6 +733,24 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Escuro'**
   String get themeDark;
+
+  /// No description provided for @soundSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'SOM'**
+  String get soundSection;
+
+  /// No description provided for @soundOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ligado'**
+  String get soundOn;
+
+  /// No description provided for @soundOff.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligado'**
+  String get soundOff;
 }
 
 class _AppLocalizationsDelegate

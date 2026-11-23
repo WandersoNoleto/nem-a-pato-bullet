@@ -103,16 +103,24 @@ void main() {
     final source = File('assets/decks/sample.json').readAsStringSync();
     final deck = Deck.fromJsonString(source);
     expect(deck.questions, isNotEmpty);
+    expect(deck.language, 'pt-BR');
   });
 
   test('the demo decks are valid and complete', () {
-    final files = Directory('decks/demo').listSync().whereType<File>();
-    expect(files, isNotEmpty);
-    for (final file in files) {
-      final deck = Deck.fromJsonString(file.readAsStringSync());
-      expect(deck.iconSvg, isNotNull, reason: '${file.path} has no icon');
-      for (final question in deck.questions) {
-        expect(question.fact, isNotNull, reason: question.text);
+    final folders = Directory('decks/demo').listSync().whereType<Directory>();
+    expect(folders, isNotEmpty);
+    for (final folder in folders) {
+      // One folder per demo, named after its language: decks/demo/pt-BR/.
+      final locale = folder.path.split(Platform.pathSeparator).last;
+      final files = folder.listSync().whereType<File>();
+      expect(files, isNotEmpty, reason: '${folder.path} has no decks');
+      for (final file in files) {
+        final deck = Deck.fromJsonString(file.readAsStringSync());
+        expect(deck.iconSvg, isNotNull, reason: '${file.path} has no icon');
+        expect(deck.language, locale, reason: '${file.path} language');
+        for (final question in deck.questions) {
+          expect(question.fact, isNotNull, reason: question.text);
+        }
       }
     }
   });

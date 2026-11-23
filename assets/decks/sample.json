@@ -1,5 +1,6 @@
 {
   "name": "Sample deck",
+  "language": "pt-BR",
   "questions": [
     { "category": "Espaço", "text": "Quantos planetas tem o Sistema Solar?", "answer": "8 planetas", "fact": "Plutão foi reclassificado como planeta-anão em 2006." },
     { "category": "Espaço", "text": "Qual a distância média entre a Terra e a Lua?", "answer": "384 mil km", "fact": "A Lua se afasta da Terra cerca de 3,8 cm por ano." },

@@ -1,0 +1,91 @@
+{
+  "name": "World Records",
+  "language": "en-US",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 3h10v2h3v3a4 4 0 0 1-4 4h-.3A5 5 0 0 1 13 14.9V17h3v4H8v-4h3v-2.1A5 5 0 0 1 8.3 12H8a4 4 0 0 1-4-4V5h3zm0 4H6v1a2 2 0 0 0 1 1.7zm10 0v2.7A2 2 0 0 0 18 8V7z'/></svg>",
+  "questions": [
+    {
+      "category": "People",
+      "text": "How tall was Robert Wadlow, the tallest man in history? (m)",
+      "answer": "2.72 m",
+      "fact": "His shoes were about 47 cm long."
+    },
+    {
+      "category": "People",
+      "text": "How old was Jeanne Calment, the oldest person ever recorded?",
+      "answer": "122 years",
+      "fact": "She met Van Gogh when she was 13."
+    },
+    {
+      "category": "People",
+      "text": "What is the longest single stay in space by one person? (days)",
+      "answer": "437 days",
+      "fact": "Russia's Valeri Polyakov stayed on the Mir station from 1994 to 1995."
+    },
+    {
+      "category": "People",
+      "text": "What is the highest speed ever reached by humans? (km/h)",
+      "answer": "39,897 km/h",
+      "fact": "It was the Apollo 10 crew, on the way back from the Moon, in 1969."
+    },
+    {
+      "category": "Nature",
+      "text": "What is the highest temperature ever recorded on Earth? (°C)",
+      "answer": "56.7 °C",
+      "fact": "It was in Death Valley, in the United States, in 1913."
+    },
+    {
+      "category": "Nature",
+      "text": "What is the lowest natural temperature ever recorded? (°C)",
+      "answer": "−89.2 °C",
+      "fact": "It was at Russia's Vostok station, in Antarctica, in 1983."
+    },
+    {
+      "category": "Nature",
+      "text": "Approximately how tall is Hyperion, the tallest tree in the world? (m)",
+      "answer": "116 m",
+      "fact": "It is a redwood in California. Its exact location is kept secret."
+    },
+    {
+      "category": "Nature",
+      "text": "How long is the longest snake ever measured? (m)",
+      "answer": "7.67 m",
+      "fact": "It is a reticulated python called Medusa, in the United States."
+    },
+    {
+      "category": "Nature",
+      "text": "How tall is Angel Falls, the tallest waterfall in the world? (m)",
+      "answer": "979 m",
+      "fact": "It is in Venezuela. The water turns to mist before it reaches the ground."
+    },
+    {
+      "category": "Speed and height",
+      "text": "What is the land speed record for a car? (km/h)",
+      "answer": "1,228 km/h",
+      "fact": "Thrust SSC broke the sound barrier in 1997."
+    },
+    {
+      "category": "Speed and height",
+      "text": "From what altitude was the highest parachute jump made? (m)",
+      "answer": "41,419 m",
+      "fact": "Alan Eustace jumped in 2014, beating Felix Baumgartner."
+    },
+    {
+      "category": "Speed and height",
+      "text": "How tall is the biggest wave ever surfed? (m)",
+      "answer": "26.21 m",
+      "fact": "Germany's Sebastian Steudtner surfed it in Nazaré, Portugal, in 2020."
+    },
+    {
+      "category": "Speed and height",
+      "text": "Approximately at what altitude is La Rinconada, the highest city in the world? (m)",
+      "answer": "5,100 m",
+      "fact": "It is in Peru and grew around gold mines."
+    },
+    {
+      "category": "Speed and height",
+      "text": "How deep is the deepest hole ever dug? (m)",
+      "answer": "12,262 m",
+      "fact": "It is the Kola Superdeep Borehole, in Russia."
+    }
+  ]
+}

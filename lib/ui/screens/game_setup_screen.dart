@@ -68,6 +68,7 @@ class _GameSetupScreenState extends State<GameSetupScreen> {
           questions: questions,
           seen: widget.dependencies.seen,
           rounds: _controller.rounds,
+          sound: widget.dependencies.sound,
         ),
       ),
     );
