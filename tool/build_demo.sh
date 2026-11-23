@@ -6,8 +6,11 @@
 # set aside, so regular releases never change.
 #
 #   tool/build_demo.sh          -> both demos
-#   tool/build_demo.sh pt-BR    -> build/release/nem-a-pato-bullet-demo-pt-BR-X.Y.Z.apk
-#   tool/build_demo.sh en-US    -> build/release/nem-a-pato-bullet-demo-en-US-X.Y.Z.apk
+#   tool/build_demo.sh pt-BR    -> build/release/nem-a-pato-bullet-demo-pt-BR.apk
+#   tool/build_demo.sh en-US    -> build/release/nem-a-pato-bullet-demo-en-US.apk
+#
+# The file names carry no version, so the README can link to
+# releases/latest/download/<name> and the link never goes stale.
 set -euo pipefail
 
 [[ -f android/key.properties ]] ||
@@ -56,7 +59,7 @@ for locale in "${locales[@]}"; do
     --dart-define=DEMO_LANGUAGE="$language" \
     --android-project-arg=demo="$language"
 
-  apk="build/release/nem-a-pato-bullet-demo-$locale-$version.apk"
+  apk="build/release/nem-a-pato-bullet-demo-$locale.apk"
   cp build/app/outputs/flutter-apk/app-release.apk "$apk"
   echo
   echo "Demo $locale: ${#copied[@]} decks"
